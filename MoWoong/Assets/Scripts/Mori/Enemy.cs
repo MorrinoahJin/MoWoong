@@ -45,15 +45,15 @@ public class Enemy : MonoBehaviour
 
         if (enmeyMoveDirection == "Left")
         {
-            //¿ÀºêÁ§Æ® ¿ŞÂÊ ¹Ø¿¡ ¹Ù´ÚÀÌ ¾ø´ÂÁö È®ÀÎ
+            //ì˜¤ë¸Œì íŠ¸ ì™¼ìª½ ë°‘ì— ë°”ë‹¥ì´ ì—†ëŠ”ì§€ í™•ì¸
             rayPos = new Vector2(this.transform.position.x - .5f, this.transform.position.y);
             checkFloor = Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Wall"));
-            //¹Ù´Ú ÀÖÀ¸¸é ¿ŞÂÊÀ¸·Î ÀÌµ¿
+            //ë°”ë‹¥ ìˆìœ¼ë©´ ì™¼ìª½ìœ¼ë¡œ ì´ë™
             if (checkFloor.collider != null)
             {
                 this.transform.position = Vector2.MoveTowards(this.transform.position, rayPos, speed * Time.deltaTime);
             }
-            //¹Ù´ÚÀÌ ¾øÀ¸¸é ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿
+            //ë°”ë‹¥ì´ ì—†ìœ¼ë©´ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™
             else
                 enmeyMoveDirection = "Right";
 
@@ -88,12 +88,12 @@ public class Enemy : MonoBehaviour
         RaycastHit2D checkFloor;
         Vector2 rayPos = new Vector2();
 
-        //¸÷ÀÌ ÇÃ·¹ÀÌ¾î º¸´Ù ¿À¸¥ÂÊ¿¡ ÀÖÀ» ¶§ °ø°İÀ» ´çÇÏ¸é ¿À¸¥ÂÊÀ¸·Î ¹Ğ¸²
+        //ëª¹ì´ í”Œë ˆì´ì–´ ë³´ë‹¤ ì˜¤ë¥¸ìª½ì— ìˆì„ ë•Œ ê³µê²©ì„ ë‹¹í•˜ë©´ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ë°€ë¦¼
         if (transform.position.x >= playerPos.x)
         {
             rayPos = new Vector2(this.transform.position.x + 1f, this.transform.position.y);
             checkFloor = Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Wall"));
-            //¹Ù´Ú ÀÖÀ¸¸é ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿
+            //ë°”ë‹¥ ìˆìœ¼ë©´ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™
             if (checkFloor.collider != null)
             {
                 transform.position = new Vector2(this.transform.position.x + .66f, transform.position.y);
