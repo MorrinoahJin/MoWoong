@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PlayerMoving : MonoBehaviour
 {
-    public float playerSpeed = 5;
+    [SerializeField]
+    float playerSpeed = 6;
     //플레이어 상태(점프는 없음)
     [SerializeField]
     string playerState;  // Attack, SkillAttack, Idle, GoLeft, GoRight, Hited, Die
     //회피
     bool playerShiftOn;
+    float moveHorizontal;
 
     //점프
     Rigidbody2D rigid;
@@ -24,6 +26,7 @@ public class PlayerMoving : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         rigid = GetComponent<Rigidbody2D>();
         playerState = "Idle";
         jumpTIme = 0;
@@ -37,7 +40,7 @@ public class PlayerMoving : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        moveHorizontal = Input.GetAxisRaw("Horizontal");
         PlayerMove();
 
         if (Input.GetKey("f") || Input.GetMouseButton(0) && playerState != "Attack")
@@ -53,29 +56,26 @@ public class PlayerMoving : MonoBehaviour
 
     void FixedUpdate()
     {
-
+        //플레이어 이동
+        Vector3 move = new Vector3(moveHorizontal, 0f, 0f);
+        transform.position += move * playerSpeed * Time.deltaTime;
     }
 
     void PlayerMove()
     {
-        Vector2 leftPos = new Vector2(transform.position.x - 1, transform.position.y);
-        Vector2 rightPos = new Vector2(transform.position.x + 1, transform.position.y);
-
-
-        if (Input.GetKey("left") || Input.GetKey("a") && playerState == "Idle")
+        //플레이어 상태에 따른 이동 변경
+        if (moveHorizontal < 0 && playerState != "GoRight" && playerState != "GoDown" && !playerShiftOn)
         {
-            this.transform.position = Vector2.MoveTowards(this.transform.position, leftPos, playerSpeed * Time.deltaTime);
             playerState = "GoLeft";
-            if (Input.GetKeyDown("left shift") && playerState != "GoRight" && playerState != "GoDown" && !playerShiftOn)
+            if (Input.GetKeyDown("left shift"))
             {
                 StartCoroutine(ShiftGO());
             }
         }
-        else if (Input.GetKey("right") || Input.GetKey("d") && playerState == "Idle")
+        else if (moveHorizontal > 0 && playerState != "GoLeft" && playerState != "GoDown" && !playerShiftOn)
         {
-            this.transform.position = Vector2.MoveTowards(this.transform.position, rightPos, playerSpeed * Time.deltaTime);
             playerState = "GoRight";
-            if (Input.GetKeyDown("left shift") && playerState != "GoLeft" && playerState != "GoDown" && !playerShiftOn)
+            if (Input.GetKeyDown("left shift"))
             {
                 StartCoroutine(ShiftGO());
             }

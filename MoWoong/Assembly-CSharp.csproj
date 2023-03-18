@@ -56,11 +56,11 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Mori\Map.cs" />
-    <Compile Include="Assets\Scripts\Mori\CameraMoving.cs" />
-    <Compile Include="Assets\Scripts\Mori\TelePort.cs" />
-    <Compile Include="Assets\Scripts\Mori\Enemy.cs" />
-    <Compile Include="Assets\Scripts\Mori\PlayerMoving.cs" />
+    <Compile Include="Assets\Scripts\Mori\Map\Map.cs" />
+    <Compile Include="Assets\Scripts\Mori\Map\CameraMoving.cs" />
+    <Compile Include="Assets\Scripts\Mori\Map\TelePort.cs" />
+    <Compile Include="Assets\Scripts\Mori\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Mori\Player\PlayerMoving.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
