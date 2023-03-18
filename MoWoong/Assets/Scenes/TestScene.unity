@@ -1439,7 +1439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93985de54f7ce6849a67e2949790937c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 5
+  playerSpeed: 6
   playerState: 
   jumpTIme: 0
   attBoxObj: {fileID: 880054766}
