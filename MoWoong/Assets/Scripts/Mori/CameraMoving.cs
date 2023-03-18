@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraMoving : MonoBehaviour
 {
-    //¸Ê¿ÀºêÁ§Æ® ÁÂÇ¥¸¦ ¹Ş¾Æ¿À±â À§ÇØ ¸Ê ¼ö ¸¸Å­ º¯¼ö ÇÒ´ç
+    //ë§µì˜¤ë¸Œì íŠ¸ ì¢Œí‘œë¥¼ ë°›ì•„ì˜¤ê¸° ìœ„í•´ ë§µ ìˆ˜ ë§Œí¼ ë³€ìˆ˜ í• ë‹¹
     public GameObject[] cameraPoint = new GameObject[2];
 
     // Start is called before the first frame update
@@ -21,11 +21,11 @@ public class CameraMoving : MonoBehaviour
 
     void CamPoint()
     {
-        //¸Ê ÁÂÇ¥, ÇÃ·¹ÀÌ¾î À§Ä¡
+        //ë§µ ì¢Œí‘œ, í”Œë ˆì´ì–´ ìœ„ì¹˜
         float camX = cameraPoint[Map.mapNum].transform.position.x;
         Vector2 playerPos = GameObject.FindWithTag("Player").transform.position;
 
-        //ÀÏÁ¤ ¹üÀ§¸¦ ³Ñ¾î°¡¸é Ä«¸Ş¶ó°¡ ÇÃ·¹ÀÌ·¯¸¦ °è¼Ó µû¶ó°¡Áö ¾Ê±â ÇÏ±â À§ÇÑ ÇÔ¼ö
+        //ì¼ì • ë²”ìœ„ë¥¼ ë„˜ì–´ê°€ë©´ ì¹´ë©”ë¼ê°€ í”Œë ˆì´ëŸ¬ë¥¼ ê³„ì† ë”°ë¼ê°€ì§€ ì•Šê¸° í•˜ê¸° ìœ„í•œ í•¨ìˆ˜
         if (playerPos.x <= camX - 5)
         {
             this.transform.position = new Vector3(camX - 5, playerPos.y, -10);

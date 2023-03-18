@@ -5,17 +5,20 @@ using UnityEngine;
 public class PlayerMoving : MonoBehaviour
 {
     public float playerSpeed = 5;
+    //플레이어 상태(점프는 없음)
     [SerializeField]
-    string playerState;
+    string playerState;  // Attack, SkillAttack, Idle, GoLeft, GoRight, Hited, Die
+    //회피
     bool playerShiftOn;
 
-    //����
+    //점프
     Rigidbody2D rigid;
     float jumpForce = 27;
     [SerializeField]
     int jumpTIme;
     bool doJump;
 
+    //기본공격 범위 설정
     public GameObject attBoxObj;
     BoxCollider2D attBox;
     // Start is called before the first frame update
@@ -37,7 +40,7 @@ public class PlayerMoving : MonoBehaviour
 
         PlayerMove();
 
-        if (Input.GetKey("f") || Input.GetMouseButton(0) && playerState != "Attacks")
+        if (Input.GetKey("f") || Input.GetMouseButton(0) && playerState != "Attack")
         {
             StartCoroutine(PlayerAtt());
         }
@@ -108,7 +111,7 @@ public class PlayerMoving : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && jumpTIme < 2 && !doJump)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpTIme < 2 && !doJump && playerState != "Die" && playerState != "Hited")
         {
             jumpTIme += 1;
             StartCoroutine(DoJump());

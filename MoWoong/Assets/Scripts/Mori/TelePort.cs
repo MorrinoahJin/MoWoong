@@ -9,7 +9,7 @@ public class TelePort : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        //ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ÇÏ¸é ¿¬°áµÈ ÅÚ·¹Æ÷Æ® À§Ä¡·Î ÇÃ·¹ÀÌ¾î¸¦ ÀÌµ¿
+        //í”Œë ˆì´ì–´ì™€ ì¶©ëŒí•˜ë©´ ì—°ê²°ëœ í…”ë ˆí¬íŠ¸ ìœ„ì¹˜ë¡œ í”Œë ˆì´ì–´ë¥¼ ì´ë™
         if (col.tag == "Player" && !Map.moveMap)
         {
             StartCoroutine(PlayerMoveMap(col));
