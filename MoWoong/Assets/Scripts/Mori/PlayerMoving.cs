@@ -34,6 +34,7 @@ public class PlayerMoving : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         PlayerMove();
 
         if (Input.GetKey("f") || Input.GetMouseButton(0) && playerState != "Attacks")
@@ -43,8 +44,13 @@ public class PlayerMoving : MonoBehaviour
 
         if (playerState == "GoLeft")
             this.transform.localEulerAngles = new Vector3(0, 0, 0);
-        if(playerState == "GoRight")
+        if (playerState == "GoRight")
             this.transform.localEulerAngles = new Vector3(0, 180, 0);
+    }
+
+    void FixedUpdate()
+    {
+
     }
 
     void PlayerMove()
@@ -57,7 +63,7 @@ public class PlayerMoving : MonoBehaviour
         {
             this.transform.position = Vector2.MoveTowards(this.transform.position, leftPos, playerSpeed * Time.deltaTime);
             playerState = "GoLeft";
-            if(Input.GetKeyDown("left shift") && playerState != "GoRight" && playerState != "GoDown" && !playerShiftOn)
+            if (Input.GetKeyDown("left shift") && playerState != "GoRight" && playerState != "GoDown" && !playerShiftOn)
             {
                 StartCoroutine(ShiftGO());
             }
@@ -71,7 +77,7 @@ public class PlayerMoving : MonoBehaviour
                 StartCoroutine(ShiftGO());
             }
         }
-        else if(playerState != "Attack" && playerState != "SkillAttack")
+        else if (playerState != "Attack" && playerState != "SkillAttack")
         {
             playerState = "Idle";
         }
@@ -94,7 +100,7 @@ public class PlayerMoving : MonoBehaviour
         playerState = "Idle";
 
         yield return new WaitForSeconds(.1f);
-        rigid.constraints &=  ~RigidbodyConstraints2D.FreezePositionY;
+        rigid.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
 
         yield return new WaitForSeconds(.8f);
         playerShiftOn = false;
@@ -102,7 +108,7 @@ public class PlayerMoving : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) &&  jumpTIme < 2 && !doJump)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpTIme < 2 && !doJump)
         {
             jumpTIme += 1;
             StartCoroutine(DoJump());
@@ -124,17 +130,17 @@ public class PlayerMoving : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.tag == "Wall" && jumpTIme != 0)
+        if (collision.collider.tag == "Wall" && jumpTIme != 0)
         {
             jumpTIme = 0;
-            Debug.Log("chakji");
+            //Debug.Log("chakji");
         }
     }
 
     IEnumerator PlayerAtt()
     {
         playerState = "Attack";
-        
+
         Collider2D[] EnemyCollider = Physics2D.OverlapBoxAll(attBoxObj.transform.position, attBox.size, 0f);
 
         foreach (Collider2D collider in EnemyCollider)
@@ -149,5 +155,5 @@ public class PlayerMoving : MonoBehaviour
         yield return new WaitForSeconds(.66f);
         playerState = "Idle";
     }
-    
+
 }
