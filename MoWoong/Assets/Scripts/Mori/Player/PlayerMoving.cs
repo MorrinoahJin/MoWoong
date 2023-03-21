@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class PlayerMoving : MonoBehaviour
 {
+    Animator anim;
     [SerializeField]
-    float playerSpeed = 6;
+    float playerSpeed = 5;
     //플레이어 상태(점프는 없음)
     [SerializeField]
     string playerState;  // Attack, SkillAttack, Idle, GoLeft, GoRight, Hited, Die
+    int playerAnimNum;
     //회피
     bool playerShiftOn;
     float moveHorizontal;
@@ -24,12 +27,18 @@ public class PlayerMoving : MonoBehaviour
     public GameObject attBoxObj;
     BoxCollider2D attBox;
     // Start is called before the first frame update
+    void Awake()
+    {
+        anim = GetComponent<Animator>();
+       
+    }
     void Start()
     {
 
         rigid = GetComponent<Rigidbody2D>();
         playerState = "Idle";
         jumpTIme = 0;
+        playerAnimNum = 0;
         doJump = false;
 
         attBox = gameObject.AddComponent<BoxCollider2D>();
@@ -42,8 +51,9 @@ public class PlayerMoving : MonoBehaviour
     {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
         PlayerMove();
+       
 
-        if (Input.GetKey("f") || Input.GetMouseButton(0) && playerState != "Attack")
+        if ((Input.GetKey("f") || Input.GetMouseButton(0)) && playerState != "Attack")
         {
             StartCoroutine(PlayerAtt());
         }
@@ -54,28 +64,33 @@ public class PlayerMoving : MonoBehaviour
             this.transform.localEulerAngles = new Vector3(0, 180, 0);
     }
 
+
     void FixedUpdate()
     {
         //플레이어 이동
         Vector3 move = new Vector3(moveHorizontal, 0f, 0f);
+        if (playerState != "Attack")
         transform.position += move * playerSpeed * Time.deltaTime;
     }
 
     void PlayerMove()
     {
+       
         //플레이어 상태에 따른 이동 변경
-        if (moveHorizontal < 0 && playerState != "GoRight" && playerState != "GoDown" && !playerShiftOn)
+        if (moveHorizontal < 0 && playerState != "GoRight" && playerState != "GoDown" && playerState != "Attack")
         {
+            PlayerAnim("Move");
             playerState = "GoLeft";
-            if (Input.GetKeyDown("left shift"))
+            if (Input.GetKeyDown("left shift") && !playerShiftOn)
             {
                 StartCoroutine(ShiftGO());
             }
         }
-        else if (moveHorizontal > 0 && playerState != "GoLeft" && playerState != "GoDown" && !playerShiftOn)
+        else if (moveHorizontal > 0 && playerState != "GoLeft" && playerState != "GoDown"&& playerState != "Attack")
         {
+            PlayerAnim("Move");
             playerState = "GoRight";
-            if (Input.GetKeyDown("left shift"))
+            if (Input.GetKeyDown("left shift") && !playerShiftOn)
             {
                 StartCoroutine(ShiftGO());
             }
@@ -83,6 +98,7 @@ public class PlayerMoving : MonoBehaviour
         else if (playerState != "Attack" && playerState != "SkillAttack")
         {
             playerState = "Idle";
+            PlayerAnim("Idle");
         }
 
         Jump();
@@ -95,18 +111,21 @@ public class PlayerMoving : MonoBehaviour
         playerState = "ShiftGo";
 
         float speed = playerSpeed;
-        playerSpeed = speed * 5;
-
-        yield return new WaitForSeconds(.1f);
-
-        playerSpeed = speed;
-        playerState = "Idle";
+        playerSpeed = speed * 3;
 
         yield return new WaitForSeconds(.1f);
         rigid.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
-
-        yield return new WaitForSeconds(.8f);
+       
+        //애니메이션을 0.1 + 0.1초간 보여준다.
+        yield return new WaitForSeconds(.1f);         
+  
+        playerSpeed = speed;
+        playerState = "Idle";
+        
+        yield return new WaitForSeconds(2.8f); //재사용 대기시간
+       
         playerShiftOn = false;
+
     }
 
     void Jump()
@@ -143,7 +162,7 @@ public class PlayerMoving : MonoBehaviour
     IEnumerator PlayerAtt()
     {
         playerState = "Attack";
-
+        PlayerAnim("Attack");
         Collider2D[] EnemyCollider = Physics2D.OverlapBoxAll(attBoxObj.transform.position, attBox.size, 0f);
 
         foreach (Collider2D collider in EnemyCollider)
@@ -155,8 +174,45 @@ public class PlayerMoving : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(.66f);
+        yield return new WaitForSeconds(.4f);
         playerState = "Idle";
     }
+    
+    
+    void PlayerAnim(string playerDoAnim)
+    {
+        int nowAnimNum = 0;
+        if (playerDoAnim == "Idle")
+            nowAnimNum = 0;
+        else if (playerDoAnim == "Move")
+            nowAnimNum = 1;
+        else if (playerDoAnim == "Jump")
+            nowAnimNum = 2;
+        else if (playerDoAnim == "Attack")
+         nowAnimNum = 3;
+
+    if (nowAnimNum != playerAnimNum)
+    {
+        playerAnimNum = nowAnimNum;
+        PlayerAnimChange();
+    }
+
+
+
+    }
+    void PlayerAnimChange()
+    {
+    // 좌우 이동 애니메이션
+
+
+        if (playerAnimNum == 0 )
+            anim.SetTrigger("Idle");
+        else if (playerAnimNum == 1)
+            anim.SetTrigger("isRunning");
+        else if (playerAnimNum == 3)
+            anim.SetTrigger("isAttack");
+
+    }
+
 
 }

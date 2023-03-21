@@ -458,6 +458,7 @@ GameObject:
   - component: {fileID: 728794303}
   - component: {fileID: 728794302}
   - component: {fileID: 728794306}
+  - component: {fileID: 728794307}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -593,6 +594,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enmeyMoveDirection: 
   iDontCareHited: 0
+--- !u!95 &728794307
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728794301}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 622bc98dcb3608c47b842b0a6b7d1aff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &733457212
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,10 +1323,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1648556770}
+  - component: {fileID: 1648556773}
   - component: {fileID: 1648556769}
   - component: {fileID: 1648556772}
   - component: {fileID: 1648556771}
-  - component: {fileID: 1648556773}
+  - component: {fileID: 1648556774}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1355,7 +1378,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -1443,6 +1466,27 @@ MonoBehaviour:
   playerState: 
   jumpTIme: 0
   attBoxObj: {fileID: 880054766}
+--- !u!95 &1648556774
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648556768}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 38a4529fc8d99da41b17e9eef75e7fcd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1658780655
 GameObject:
   m_ObjectHideFlags: 0
