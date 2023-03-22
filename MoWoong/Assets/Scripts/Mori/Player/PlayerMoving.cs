@@ -16,6 +16,12 @@ public class PlayerMoving : MonoBehaviour
     bool playerShiftOn;
     float moveHorizontal;
 
+    //공격 콤보
+    
+    float attackInputTime = 0f;
+    int attackComboCount = 0;
+
+
     //점프
     Rigidbody2D rigid;
     float jumpForce = 27;
@@ -34,6 +40,7 @@ public class PlayerMoving : MonoBehaviour
     }
     void Start()
     {
+        UnityEngine.Debug.Log("Debug message");
 
         rigid = GetComponent<Rigidbody2D>();
         playerState = "Idle";
@@ -51,12 +58,18 @@ public class PlayerMoving : MonoBehaviour
     {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
         PlayerMove();
-       
 
-        if ((Input.GetKey("f") || Input.GetMouseButton(0)) && playerState != "Attack")
-        {
-            StartCoroutine(PlayerAtt());
-        }
+
+        if ((Input.GetKey("f") || Input.GetMouseButton(0)) && playerState != "Attack") {
+
+            float timeSinceLastAttack = Time.time - attackInputTime;
+            if (timeSinceLastAttack <= 1.0f && attackComboCount < 3)
+                attackComboCount++;
+            else
+                attackComboCount = 1;
+            attackInputTime = Time.time;
+            StartCoroutine(PlayerAtt(attackComboCount));
+        }             
 
         if (playerState == "GoLeft")
             this.transform.localEulerAngles = new Vector3(0, 0, 0);
@@ -159,10 +172,12 @@ public class PlayerMoving : MonoBehaviour
         }
     }
 
-    IEnumerator PlayerAtt()
+    IEnumerator PlayerAtt(int count)
     {
         playerState = "Attack";
-        PlayerAnim("Attack");
+        PlayerAnim("Attack");     
+        UnityEngine.Debug.Log("Attack Combo "+count);
+
         Collider2D[] EnemyCollider = Physics2D.OverlapBoxAll(attBoxObj.transform.position, attBox.size, 0f);
 
         foreach (Collider2D collider in EnemyCollider)
@@ -170,10 +185,9 @@ public class PlayerMoving : MonoBehaviour
             if (collider.CompareTag("Enemy"))
             {
                 collider.GetComponent<Enemy>().GetDamage();
-
+                
             }
         }
-
         yield return new WaitForSeconds(.4f);
         playerState = "Idle";
     }
@@ -181,38 +195,29 @@ public class PlayerMoving : MonoBehaviour
     
     void PlayerAnim(string playerDoAnim)
     {
-        int nowAnimNum = 0;
-        if (playerDoAnim == "Idle")
-            nowAnimNum = 0;
-        else if (playerDoAnim == "Move")
-            nowAnimNum = 1;
-        else if (playerDoAnim == "Jump")
-            nowAnimNum = 2;
-        else if (playerDoAnim == "Attack")
-         nowAnimNum = 3;
+          int nowAnimNum = 0;
+          if (playerDoAnim == "Idle")
+                nowAnimNum = 0;
+          else if (playerDoAnim == "Move")
+                nowAnimNum = 1;
+          else if (playerDoAnim == "Jump")
+                nowAnimNum = 2;
+          else if (playerDoAnim == "Attack")
+                nowAnimNum = 3;
 
-    if (nowAnimNum != playerAnimNum)
-    {
-        playerAnimNum = nowAnimNum;
-        PlayerAnimChange();
-    }
-
-
-
+          if (nowAnimNum != playerAnimNum)
+          {
+           playerAnimNum = nowAnimNum;
+           PlayerAnimChange();
+          }
     }
     void PlayerAnimChange()
-    {
-    // 좌우 이동 애니메이션
-
-
+    {   
         if (playerAnimNum == 0 )
             anim.SetTrigger("Idle");
         else if (playerAnimNum == 1)
             anim.SetTrigger("isRunning");
         else if (playerAnimNum == 3)
-            anim.SetTrigger("isAttack");
-
+            anim.SetTrigger("isAttack");            
     }
-
-
 }
