@@ -3,42 +3,44 @@ using UnityEngine;
 
 public enum EnemyState
 {
+    Chase,
     Attack,
     Move,
     Hited,
 }
-
 
 public class Enemy : MonoBehaviour
 {
     EnemyState currentState;
 
     SpriteRenderer sprite;
-    bool changeColor;
+    bool canGetDamage; //몹이 데미지를 받을 수 있는 상태인지 판별하는 변수
     
     [SerializeField]
-    string enmeyMoveDirection; // left or right
+    string enemyMoveDirection; // left or right
     
-    public bool iDontCareHited;
+    public bool iDontCareHited; //피격모션 유무를 제어하기 위한 변수
+
+    bool thinkTime; //이동상태를 결정중인지 확인하는 변수
+    bool playerInAttRange; //플레이어가 공격 범위 안에 들어왔는지 확인
+    bool playerInChaseRange; //플레이어가 탐지 범위 안에 들어 왔는지를 확인
+    bool attacking; //공격동작 중 인지 확인
     
-    bool thinkTime, attTime;
-    
-    float speed = 3f;
-    Vector2 playerPos;
-    float playerDistance;
-    float attDistance = 4f;
+    float speed = 3f; //몹의 이동속도
+    Vector2 playerPos; //플레이어의 위치
+    float playerDistance; //플레이어와의 거리
+    float ChaseDistance = 3f; //탐지 범위
+    float attDistance = 1f; //공격 범위
+
     // Start is called before the first frame update
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
-        changeColor = false;
+        canGetDamage = false;
+        attacking = false;
 
-        int num = Random.Range(0, 2);
-        if (num == 0)
-            enmeyMoveDirection = "Left";
-        else
-            enmeyMoveDirection = "Right";
-
+        // 몹의 기본상태 = 이동상태
+        currentState = EnemyState.Move;
     }
 
     // Update is called once per frame
@@ -46,17 +48,24 @@ public class Enemy : MonoBehaviour
     {
         switch (currentState)
         {
+            case EnemyState.Chase:
+                {
+                    if (!playerInAttRange)
+                        ChasePlayer();
+                    else
+                        ChangeState(EnemyState.Attack);
+                }
+                break;
             case EnemyState.Attack:
                 EnemyAttack();
                 break;
             case EnemyState.Move:
                 {
-                    if (!attTime)
+                    if (!playerInChaseRange)
                         EnemyMoving();
                     else
-                        ChangeState(EnemyState.Attack);
+                        ChangeState(EnemyState.Chase);
                 }
-                EnemyMoving();
                 break;
             case EnemyState.Hited:
                 GetDamage();
@@ -65,18 +74,30 @@ public class Enemy : MonoBehaviour
                 break;
         }
 
-        //공격 범위안에 들어오면 공격하게 함
+        //공격 범위안에 플레이어간 들어오면 공격하게 함
         playerPos = GameObject.FindWithTag("Player").transform.position;
         playerDistance = Vector2.Distance(playerPos, this.transform.position);
-        if (attDistance <= playerDistance)
-            attTime = true;
+        if(ChaseDistance <= playerDistance)
+        {
+            playerInChaseRange = true;
+            if (attDistance <= playerDistance)
+                playerInAttRange = true;
+            else
+                playerInAttRange = false;
+        }
         else
-            attTime = false;
-        
+            playerInChaseRange = false;
     }
+    //상태 변경하는 함수
     void ChangeState(EnemyState newState)
     {
         currentState = newState;
+    }
+
+    void ChasePlayer()
+    {
+        if (playerInAttRange)
+            ChangeState(EnemyState.Attack);
     }
 
     void EnemyMoving()
@@ -87,7 +108,7 @@ public class Enemy : MonoBehaviour
         if (!thinkTime)
             StartCoroutine(ThinkMove());
 
-        if (enmeyMoveDirection == "Left")
+        if (enemyMoveDirection == "Left")
         {
             //오브젝트 왼쪽 밑에 바닥이 없는지 확인
             rayPos = new Vector2(this.transform.position.x - .5f, this.transform.position.y);
@@ -99,10 +120,10 @@ public class Enemy : MonoBehaviour
             }
             //바닥이 없으면 오른쪽으로 이동
             else
-                enmeyMoveDirection = "Right";
+                enemyMoveDirection = "Right";
 
         }
-        else if(enmeyMoveDirection == "Right")
+        else if(enemyMoveDirection == "Right")
         {
             rayPos = new Vector2(this.transform.position.x + .5f, this.transform.position.y);
             checkFloor = Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Wall"));
@@ -111,9 +132,9 @@ public class Enemy : MonoBehaviour
                 this.transform.position = Vector2.MoveTowards(this.transform.position, rayPos, speed * Time.deltaTime);
             }
             else
-                enmeyMoveDirection = "Left";
+                enemyMoveDirection = "Left";
         }
-        else if(enmeyMoveDirection == "Center")
+        else if(enemyMoveDirection == "Center")
         {
             //idle애니메이션 실행
         }
@@ -126,13 +147,13 @@ public class Enemy : MonoBehaviour
         switch(num)
         {
             case 1:
-                enmeyMoveDirection = "Left";
+                enemyMoveDirection = "Left";
                 break;
             case 2:
-                enmeyMoveDirection = "Right";
+                enemyMoveDirection = "Right";
                 break;
             case 3:
-                enmeyMoveDirection = "Center";
+                enemyMoveDirection = "Center";
                 break;
         }
         yield return new WaitForSeconds(3f);
@@ -141,21 +162,24 @@ public class Enemy : MonoBehaviour
 
     IEnumerator EnemyAttack()
     {
+        attacking = true;
         //공격 애니메이션 실행
         yield return new WaitForSeconds(1f);
         //공격범위 안에 들어 와 있을 경우 데미지를 입힘
-        if (attTime)
+        if (playerInAttRange)
         {
-
+            //공격실행
+            Debug.Log("공격");
         }
         else
             ChangeState(EnemyState.Move);
-        
+
+        attacking = false;
     }
 
     public void GetDamage()
     {
-        if (!changeColor)
+        if (!canGetDamage)
         {
             //hp - damage;
             StartCoroutine(ChangeEnemyColor());
@@ -164,9 +188,12 @@ public class Enemy : MonoBehaviour
 
     IEnumerator ChangeEnemyColor()
     {
+        canGetDamage = true;
+        sprite.color = Color.red;
+
         //현재 이동방향을 저장
-        string direction = enmeyMoveDirection;
-        enmeyMoveDirection = "Null";
+        string direction = enemyMoveDirection;
+        enemyMoveDirection = "Null";
         Vector2 playerPos = GameObject.FindWithTag("Player").transform.position;
         RaycastHit2D checkFloor;
         Vector2 rayPos = new Vector2();
@@ -194,18 +221,15 @@ public class Enemy : MonoBehaviour
                     transform.position = new Vector2(this.transform.position.x - .66f, transform.position.y);
                 }
             }
-        }   
-        
-        changeColor = true;
-        sprite.color = Color.red;
+        }
 
         yield return new WaitForSeconds(.66f);
 
         sprite.color = Color.white;
-        changeColor = false;
+        canGetDamage = false;
 
         //상태변경
-        if (!attTime)
+        if (!playerInAttRange)
             ChangeState(EnemyState.Move);
         else
             ChangeState(EnemyState.Attack);
