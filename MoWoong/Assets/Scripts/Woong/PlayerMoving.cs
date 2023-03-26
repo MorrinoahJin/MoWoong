@@ -186,7 +186,7 @@ public class PlayerMoving : MonoBehaviour
     {
         playerState = "Attack";
         PlayerAnim("Attack1");     
-        UnityEngine.Debug.Log("Attack Combo "+count);
+        UnityEngine.Debug.Log("Attack Combo "+ count);
 
         Collider2D[] EnemyCollider = Physics2D.OverlapBoxAll(attBoxObj.transform.position, attBox.size, 0f);
 
