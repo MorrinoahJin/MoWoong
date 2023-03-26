@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerMoving : MonoBehaviour
 {
+    private SpriteRenderer spriteRenderer;
+
     Animator anim;
     [SerializeField]
     float playerSpeed = 5;
@@ -36,11 +38,12 @@ public class PlayerMoving : MonoBehaviour
     void Awake()
     {
         anim = GetComponent<Animator>();
-       
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
     void Start()
     {
-        UnityEngine.Debug.Log("Debug message");
+       // UnityEngine.Debug.Log("Debug message");
 
         rigid = GetComponent<Rigidbody2D>();
         playerState = "Idle";
@@ -76,7 +79,7 @@ public class PlayerMoving : MonoBehaviour
         if (playerState == "GoRight")
             this.transform.localEulerAngles = new Vector3(0, 180, 0);
     }
-
+   
 
     void FixedUpdate()
     {
@@ -92,16 +95,22 @@ public class PlayerMoving : MonoBehaviour
         //플레이어 상태에 따른 이동 변경
         if (moveHorizontal < 0 && playerState != "GoRight" && playerState != "GoDown" && playerState != "Attack")
         {
-            PlayerAnim("Move");
+            
+            //spriteRenderer.flipX = !spriteRenderer.flipX;
+            PlayerAnim("MoveRight");
             playerState = "GoLeft";
+           
             if (Input.GetKeyDown("left shift") && !playerShiftOn)
             {
                 StartCoroutine(ShiftGO());
+
             }
         }
         else if (moveHorizontal > 0 && playerState != "GoLeft" && playerState != "GoDown"&& playerState != "Attack")
         {
-            PlayerAnim("Move");
+            
+            
+            PlayerAnim("MoveRight");
             playerState = "GoRight";
             if (Input.GetKeyDown("left shift") && !playerShiftOn)
             {
@@ -112,6 +121,7 @@ public class PlayerMoving : MonoBehaviour
         {
             playerState = "Idle";
             PlayerAnim("Idle");
+
         }
 
         Jump();
@@ -175,7 +185,7 @@ public class PlayerMoving : MonoBehaviour
     IEnumerator PlayerAtt(int count)
     {
         playerState = "Attack";
-        PlayerAnim("Attack");     
+        PlayerAnim("Attack1");     
         UnityEngine.Debug.Log("Attack Combo "+count);
 
         Collider2D[] EnemyCollider = Physics2D.OverlapBoxAll(attBoxObj.transform.position, attBox.size, 0f);
@@ -188,8 +198,10 @@ public class PlayerMoving : MonoBehaviour
                 
             }
         }
-        yield return new WaitForSeconds(.4f);
+        yield return new WaitForSeconds(.8f);
         playerState = "Idle";
+       
+       
     }
     
     
@@ -198,12 +210,14 @@ public class PlayerMoving : MonoBehaviour
           int nowAnimNum = 0;
           if (playerDoAnim == "Idle")
                 nowAnimNum = 0;
-          else if (playerDoAnim == "Move")
+          else if (playerDoAnim == "MoveRight")
                 nowAnimNum = 1;
-          else if (playerDoAnim == "Jump")
+          else if (playerDoAnim == "MoveLeft")
                 nowAnimNum = 2;
-          else if (playerDoAnim == "Attack")
+          else if (playerDoAnim == "Jump")
                 nowAnimNum = 3;
+          else if (playerDoAnim == "Attack1")
+                nowAnimNum = 4;
 
           if (nowAnimNum != playerAnimNum)
           {
@@ -212,12 +226,21 @@ public class PlayerMoving : MonoBehaviour
           }
     }
     void PlayerAnimChange()
-    {   
-        if (playerAnimNum == 0 )
+    {
+        if (playerAnimNum == 0)
+        {
             anim.SetTrigger("Idle");
+        }
+
         else if (playerAnimNum == 1)
-            anim.SetTrigger("isRunning");
-        else if (playerAnimNum == 3)
-            anim.SetTrigger("isAttack");            
+        {
+            anim.SetTrigger("RunRight");            
+        }
+        else if (playerAnimNum == 2)
+        {
+            anim.SetTrigger("RunLeft");           
+        }
+        else if (playerAnimNum == 4)
+            anim.SetTrigger("FirstAttack");
     }
 }
