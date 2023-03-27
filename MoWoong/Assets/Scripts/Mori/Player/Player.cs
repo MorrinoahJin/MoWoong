@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -17,7 +18,7 @@ public class Player : MonoBehaviour
     //회피
     bool playerShiftOn;
     float moveHorizontal;
-
+    
     //공격 콤보
     int attackComboCount = 0;
     bool doNextAttack, checkAttack;
@@ -33,11 +34,20 @@ public class Player : MonoBehaviour
     BoxCollider2D attBox;
 
     //플레이어 스텟
-    static public float playerHp;
+    //static public float playerHp;
+    public float playerHp;
+
+    //플레이어 무적
+    bool invincibleMode = false;
+    
+
+    //플레이어 죽음관련
+    bool isDead = false;
+    bool isDieAnim = false;
     // Start is called before the first frame update
     void Awake()
     {
-        playerHp = 100;
+        //playerHp = 20;
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -60,14 +70,23 @@ public class Player : MonoBehaviour
     void Update()
     {
         //플레이어 컨트롤
-        if (playerHp <= 0)
+        //죽었을때 
+        /*
+        if (isDead&& !isDieAnim)
         {
-            playerState = "Die";
+            die();
         }
-        if (playerState != "Die")
+        */
+        //안 죽었을때
+        /*
+        if (!isDead)
         {
             //피격함수
-        }
+            //어찌저찌 맞아서 체력이 0이되면 isDead가 true됨
+            if(playerHp<=0)
+                isDead = true;
+            
+        }*/
         if (playerState != "Hited" && playerState != "Die")
         {
             Attack();
@@ -303,6 +322,8 @@ public class Player : MonoBehaviour
             nowAnimNum = 7;
         else if (playerDoAnim == "JumpEnd")
             nowAnimNum = 8;
+        else if (playerDoAnim == "Die")
+            nowAnimNum = 9;
 
         if (nowAnimNum != playerAnimNum)
         {
@@ -333,5 +354,57 @@ public class Player : MonoBehaviour
             anim.SetTrigger("JumpMiddle");
         else if (playerAnimNum == 8)
             anim.SetTrigger("JumpEnd");
+        else if (playerAnimNum == 9)
+            anim.SetTrigger("Die");
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            float damage = enemy.enemyAtkPower;
+            float nextDamageTime=0.5f;
+            if (!invincibleMode)
+            {
+                hit(damage);
+                StartCoroutine(BeInvincible(nextDamageTime));
+            }
+           
+        }
+    }
+    //피격 및 데미지 
+    void hit(float damage)
+    {
+        playerHp -= damage;
+        if(playerHp <= 0)
+        {
+            die();
+        }
+    }
+   
+    //무적
+    private IEnumerator BeInvincible(float invincibleTime)
+    {
+        invincibleMode = true;
+        yield return new WaitForSeconds(invincibleTime);
+        invincibleMode = false;
+    }
+    void die()
+    {
+       
+        isDieAnim = true;
+        UnityEngine.Debug.Log("플레이어가 죽었습니다.");
+        playerState = "Die";
+        PlayerAnim("Die");
+        //Invoke("StopScript", 2f);
+        //rigid.velocity = new Vector2(transform.position.x, 0); //죽으면 y좌표를 고정하게 하기
+        //GetComponent<Player>().enabled = false; //플레이어 키입력 제한하기
+
+    }
+    void StopScript()
+    {
+       //플레이어 사망시 스크립트 멈추기
+        enabled = false;
+        UnityEngine.Debug.Log("스크립트가 종료되었습니다.");
     }
 }
