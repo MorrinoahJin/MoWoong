@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     string enmeyMoveDirection; // left or right
     public bool iDontCareHited;
-    public float enemyAtkPower = 10;
+
     float speed = 3f;
     // Start is called before the first frame update
     void Start()
