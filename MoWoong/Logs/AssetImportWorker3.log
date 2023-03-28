@@ -1,0 +1,549 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.20f1 (577897200b8b) revision 5732503'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19044) 64bit Education' Language: 'ko' Physical Memory: 16333 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.20f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker3
+-projectPath
+C:/Users/jkw03/Desktop/MoWoong/MoWoong
+-logFile
+Logs/AssetImportWorker3.log
+-srvPort
+65141
+Successfully changed project path to: C:/Users/jkw03/Desktop/MoWoong/MoWoong
+C:/Users/jkw03/Desktop/MoWoong/MoWoong
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [12052] Host "[IP] 192.168.0.11 [Port] 0 [Flags] 2 [Guid] 1714499480 [EditorId] 1714499480 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-EIEDLBT) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [12052] Host "[IP] 192.168.0.11 [Port] 0 [Flags] 2 [Guid] 1714499480 [EditorId] 1714499480 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-EIEDLBT) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+Refreshing native plugins compatible for Editor in 60.50 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.20f1 (577897200b8b)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.20f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/jkw03/Desktop/MoWoong/MoWoong/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 2060 (ID=0x1f08)
+    Vendor:   NVIDIA
+    VRAM:     5980 MB
+    Driver:   31.0.15.1694
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.20f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.20f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.20f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56176
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.20f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.016056 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 49.34 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.769 seconds
+Domain Reload Profiling:
+	ReloadAssembly (770ms)
+		BeginReloadAssembly (126ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (490ms)
+			LoadAssemblies (121ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (123ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (32ms)
+			SetupLoadedEditorAssemblies (267ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (12ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (49ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (144ms)
+				ProcessInitializeOnLoadMethodAttributes (60ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.012764 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 48.88 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.206 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1207ms)
+		BeginReloadAssembly (171ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (7ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (21ms)
+		EndReloadAssembly (886ms)
+			LoadAssemblies (142ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (209ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (54ms)
+			SetupLoadedEditorAssemblies (444ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (7ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (49ms)
+				BeforeProcessingInitializeOnLoad (92ms)
+				ProcessInitializeOnLoadAttributes (233ms)
+				ProcessInitializeOnLoadMethodAttributes (40ms)
+				AfterProcessingInitializeOnLoad (21ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (13ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 0.54 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2138 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 30 unused Assets / (56.2 KB). Loaded Objects now: 2603.
+Memory consumption went from 100.4 MB to 100.3 MB.
+Total: 3.252100 ms (FindLiveObjects: 0.205400 ms CreateObjectMapping: 0.051700 ms MarkObjects: 2.918500 ms  DeleteObjects: 0.075500 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 170419.182849 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/ComboAtk/ComboAtk10.png
+  artifactKey: Guid(3a48a02eeb42c684c81ec9f032b6db3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/ComboAtk/ComboAtk10.png using Guid(3a48a02eeb42c684c81ec9f032b6db3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f13622ca69d547495b8039dbde6b80db') in 0.212978 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/ComboAtk/ComboAtk13.png
+  artifactKey: Guid(fb0a4340ba37ff64f89bdb0ecc372fb1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/ComboAtk/ComboAtk13.png using Guid(fb0a4340ba37ff64f89bdb0ecc372fb1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b95e3da5d8c4b538fc8aecbf7a2c1aa9') in 0.017001 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 19.180146 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk4.png
+  artifactKey: Guid(ff6787c2b3f0d464caea1787fd09335f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk4.png using Guid(ff6787c2b3f0d464caea1787fd09335f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56649013ae457ce503b7876c566324cb') in 0.032338 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk5.png
+  artifactKey: Guid(454068c27b6826d4d876b6ed36fb0d0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk5.png using Guid(454068c27b6826d4d876b6ed36fb0d0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '888e461d994167323c40f5333b2d1b44') in 0.021911 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk10.png
+  artifactKey: Guid(de3b73a41bda3ee4689c59666949ab86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk10.png using Guid(de3b73a41bda3ee4689c59666949ab86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd7ede00724c00c3ede7bb9db2104fd88') in 0.027901 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk7.png
+  artifactKey: Guid(667171858a649314385de8e0793b4b4c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk7.png using Guid(667171858a649314385de8e0793b4b4c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd06bfbdf3162e8d6bf12aa8a17382f72') in 0.021460 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 11.536717 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk5.png
+  artifactKey: Guid(454068c27b6826d4d876b6ed36fb0d0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk5.png using Guid(454068c27b6826d4d876b6ed36fb0d0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65dd5233fd79fc303a89ac4c6e10fc17') in 0.044828 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk11.png
+  artifactKey: Guid(32df0582cc09dce49b476d40fcd234de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk11.png using Guid(32df0582cc09dce49b476d40fcd234de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a093f896897f8fc29f2b1c8f798f9b64') in 0.038455 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk10.png
+  artifactKey: Guid(de3b73a41bda3ee4689c59666949ab86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk10.png using Guid(de3b73a41bda3ee4689c59666949ab86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f9e8477ac75ee0c9d21d749b7a483a00') in 0.029897 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk7.png
+  artifactKey: Guid(667171858a649314385de8e0793b4b4c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/FrontHeavyAtk/FrontHeavyAtk7.png using Guid(667171858a649314385de8e0793b4b4c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd975ce3a4041c3e3df83d4e865245c9') in 0.018364 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.049344 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/UpLightAtk/UpLightAtk4.png
+  artifactKey: Guid(74017d69fd0e96f4298e5ac96fe322f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/UpLightAtk/UpLightAtk4.png using Guid(74017d69fd0e96f4298e5ac96fe322f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '203d1799862a746bb1a3374f7f52879b') in 0.021667 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/UpLightAtk/UpLightAtk11.png
+  artifactKey: Guid(41bbc63ecde39374d9085042e4c7132f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/UpLightAtk/UpLightAtk11.png using Guid(41bbc63ecde39374d9085042e4c7132f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '554f356e47ec3bb7e1210a5700a16599') in 0.018391 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/UpLightAtk/UpLightAtk5.png
+  artifactKey: Guid(56a6bd8d84e6dd84aaebfbb9328e3514) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/UpLightAtk/UpLightAtk5.png using Guid(56a6bd8d84e6dd84aaebfbb9328e3514) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aeef05bce9bdd319d5c426c01cc8f01d') in 0.018307 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 10.981666 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/UpLightAtk/UpLightAtk4.png
+  artifactKey: Guid(74017d69fd0e96f4298e5ac96fe322f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/UpLightAtk/UpLightAtk4.png using Guid(74017d69fd0e96f4298e5ac96fe322f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '14b1e2572863fa4f30ea005e96868e43') in 0.018222 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/UpLightAtk/UpLightAtk8.png
+  artifactKey: Guid(bfc62c936b5c37943bae32c61ccbed3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/UpLightAtk/UpLightAtk8.png using Guid(bfc62c936b5c37943bae32c61ccbed3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b4120d381d7bfb35e9d7c19de4f4e78b') in 0.020386 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/UpLightAtk/UpLightAtk5.png
+  artifactKey: Guid(56a6bd8d84e6dd84aaebfbb9328e3514) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Attacks/UpLightAtk/UpLightAtk5.png using Guid(56a6bd8d84e6dd84aaebfbb9328e3514) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '054c7457d147423adece8c163f125d42') in 0.026752 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.670377 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/BreakRun/BreakRun4.png
+  artifactKey: Guid(2afe1eb551a04df49a29c8f95dd3b57d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/BreakRun/BreakRun4.png using Guid(2afe1eb551a04df49a29c8f95dd3b57d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ac3ec1331d1ed47becdc32783b1f40d5') in 0.025067 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/BreakRun/BreakRun7.png
+  artifactKey: Guid(224047a4b07efc344b475278d5d340bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/BreakRun/BreakRun7.png using Guid(224047a4b07efc344b475278d5d340bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '488621d11c3eb865a8de3d31398c7ec1') in 0.020936 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 12.332019 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/BreakRun/BreakRun5.png
+  artifactKey: Guid(325199aaa134f01409fb40fa8972172d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/BreakRun/BreakRun5.png using Guid(325199aaa134f01409fb40fa8972172d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a2c7aeff22852ca5184ae6c4393931c') in 0.020546 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/BreakRun/BreakRun7.png
+  artifactKey: Guid(224047a4b07efc344b475278d5d340bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/BreakRun/BreakRun7.png using Guid(224047a4b07efc344b475278d5d340bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c73904cacbee46230b8277adf0d0fc68') in 0.017250 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 10.158471 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/RunLeft4.png
+  artifactKey: Guid(9f4598b7d514a8a4290bb77a83ed0ab6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/RunLeft4.png using Guid(9f4598b7d514a8a4290bb77a83ed0ab6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b2642caa413cc8dd709a58dd96c03c4c') in 0.020913 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/RunLeft6.png
+  artifactKey: Guid(d29fc9241aa2e96459b382ad49dfb87a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/RunLeft6.png using Guid(d29fc9241aa2e96459b382ad49dfb87a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '97abaf3c2bd7a6dd8967d09dc9666c70') in 0.020331 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.229189 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/2/RunLeft(2)4.png
+  artifactKey: Guid(b31bbd1c81828684e9a235e9256bb802) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/2/RunLeft(2)4.png using Guid(b31bbd1c81828684e9a235e9256bb802) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3375e343f4abc5bcd1376aaa529406bd') in 0.019239 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/2/RunLeft(2)9.png
+  artifactKey: Guid(1a625da5896d55c429c046177b78e237) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/2/RunLeft(2)9.png using Guid(1a625da5896d55c429c046177b78e237) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '118f9b51c9d243bfdaa9c1a05ff59501') in 0.021284 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/2/RunLeft(2)6.png
+  artifactKey: Guid(7fc7bce8bac2e2542ae118ab6c4b32a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/2/RunLeft(2)6.png using Guid(7fc7bce8bac2e2542ae118ab6c4b32a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '91c79d0634a5e56c860b72ba511d3bef') in 0.017308 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 22.832490 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/RunLeft4.png
+  artifactKey: Guid(9f4598b7d514a8a4290bb77a83ed0ab6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/RunLeft4.png using Guid(9f4598b7d514a8a4290bb77a83ed0ab6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b7ee932247177a3ba70a1a5439f463c') in 0.037799 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/RunLeft9.png
+  artifactKey: Guid(6aa7a26bb6cc3f840816195a80ea4173) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/RunLeft9.png using Guid(6aa7a26bb6cc3f840816195a80ea4173) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '42d7f004bb1243dbc00ad6e3d044cbfe') in 0.030300 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/RunLeft10.png
+  artifactKey: Guid(291cfc7fb7d5ecb429621b88bd9839c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/RunLeft10.png using Guid(291cfc7fb7d5ecb429621b88bd9839c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd85bdd13d6ab4b2f18fad31826044039') in 0.031233 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 8.088184 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/2/RunLeft(2)4.png
+  artifactKey: Guid(b31bbd1c81828684e9a235e9256bb802) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/2/RunLeft(2)4.png using Guid(b31bbd1c81828684e9a235e9256bb802) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1b3c09acf719c79f5e0335720f03065b') in 0.025193 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/2/RunLeft(2)6.png
+  artifactKey: Guid(7fc7bce8bac2e2542ae118ab6c4b32a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Full/2/RunLeft(2)6.png using Guid(7fc7bce8bac2e2542ae118ab6c4b32a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c6f173ede709d4611dfc5dafb1735a23') in 0.018463 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.931076 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/1/RunningLeft4.png
+  artifactKey: Guid(58e8a1a4621da804d896956c899cbd4b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/1/RunningLeft4.png using Guid(58e8a1a4621da804d896956c899cbd4b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd66e6dc5da51d5280d971053a760963') in 0.023180 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/1/RunningLeft8.png
+  artifactKey: Guid(f8a391042a0dd5d4590a1a5e2d7500d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/1/RunningLeft8.png using Guid(f8a391042a0dd5d4590a1a5e2d7500d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '61f1e0fb28c90d662de3e89cbc819192') in 0.041500 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 7.734486 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/1/RunningLeft4.png
+  artifactKey: Guid(58e8a1a4621da804d896956c899cbd4b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/1/RunningLeft4.png using Guid(58e8a1a4621da804d896956c899cbd4b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8cd6b9c022a01af8b209fb3dafc8531c') in 0.024726 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/1/RunningLeft5.png
+  artifactKey: Guid(37ba2aa6a9091c648a37ddfc6fa811fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/1/RunningLeft5.png using Guid(37ba2aa6a9091c648a37ddfc6fa811fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a8c543c5540642588dd7007bb2d7500') in 0.011806 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.969516 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/2/RunningLeft(2)4.png
+  artifactKey: Guid(1d5fda4a003abbc4ab714b8b00804ea2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/2/RunningLeft(2)4.png using Guid(1d5fda4a003abbc4ab714b8b00804ea2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a6381ae0a7ee9575351a8c095f66065') in 0.025690 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/2/RunningLeft(2)7.png
+  artifactKey: Guid(926b947ad7d21d04fb2bc5ff6c540fe2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/2/RunningLeft(2)7.png using Guid(926b947ad7d21d04fb2bc5ff6c540fe2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '268a9110f4240d79b395b1928416fe0f') in 0.020937 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 8.023401 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/2/RunningLeft(2)4.png
+  artifactKey: Guid(1d5fda4a003abbc4ab714b8b00804ea2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/2/RunningLeft(2)4.png using Guid(1d5fda4a003abbc4ab714b8b00804ea2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b9fcf3297fd9c528c0fe29a3c8a8b358') in 0.018182 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/2/RunningLeft(2)8.png
+  artifactKey: Guid(35d45be3c2c246749a2a93d8048f6403) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunLeft/Running/2/RunningLeft(2)8.png using Guid(35d45be3c2c246749a2a93d8048f6403) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8d566c74e81edced248e3ce14b928c8') in 0.016894 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 85.676511 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Roll/Roll2.png
+  artifactKey: Guid(1bb3f6c8ed5472c4aa618e98a3f29230) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Roll/Roll2.png using Guid(1bb3f6c8ed5472c4aa618e98a3f29230) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57ec876896cd0cfcfb8e6ce49a0bc42f') in 0.026067 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.023097 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Roll/Roll4.png
+  artifactKey: Guid(8bae9f47b3e815747a9459cf5d82a690) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Roll/Roll4.png using Guid(8bae9f47b3e815747a9459cf5d82a690) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e99315aa174fa3d95f01b08de89f5b18') in 0.023578 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Roll/Roll8.png
+  artifactKey: Guid(b764916278c1b494a84073d974700307) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Roll/Roll8.png using Guid(b764916278c1b494a84073d974700307) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a48152834f8c621c404f2ec6bfba391f') in 0.020044 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Roll/Roll13.png
+  artifactKey: Guid(ec5fd984d7e8b1947908cb89a1027d32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Roll/Roll13.png using Guid(ec5fd984d7e8b1947908cb89a1027d32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63f3e4ea5dcee3e97e70d51a2a821c5a') in 0.027690 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Roll/Roll3.png
+  artifactKey: Guid(c99da6738e1007a4b9004bb5d9d48b35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Roll/Roll3.png using Guid(c99da6738e1007a4b9004bb5d9d48b35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '13660a17470c157d207b207ef11ab0f0') in 0.021591 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Roll/Roll10.png
+  artifactKey: Guid(5091581c4008b864bbdf8d85d8788b5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Roll/Roll10.png using Guid(5091581c4008b864bbdf8d85d8788b5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '283c88e5591c1f57584966d36228ceed') in 0.023323 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Roll/Roll7.png
+  artifactKey: Guid(416523682e216074cbe6b8b1fa9fa853) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Roll/Roll7.png using Guid(416523682e216074cbe6b8b1fa9fa853) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6996e36b35f3637917bebb9fb556154c') in 0.017807 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 7.543833 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/FX/BeginRun/RunDust3.png
+  artifactKey: Guid(169a45369747ffd48a2599088afe3e6c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/FX/BeginRun/RunDust3.png using Guid(169a45369747ffd48a2599088afe3e6c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b2179956b35fc23a8245070c2e7ea3c5') in 0.018716 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.060038 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/FX/RunningDust/Dust3.png
+  artifactKey: Guid(6df557ec5d0aa514c8097d1e9fd77074) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/FX/RunningDust/Dust3.png using Guid(6df557ec5d0aa514c8097d1e9fd77074) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '88c2ecff97bdc246c75ac90d3033d3c7') in 0.019535 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.895784 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight3.png
+  artifactKey: Guid(4db4fe82108005d429f1bc3ca1ef932a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight3.png using Guid(4db4fe82108005d429f1bc3ca1ef932a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f28e0d3d79439a97de043526ca5bdfaf') in 0.022071 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight8.png
+  artifactKey: Guid(48db63449f962294da17a4f283a4812d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight8.png using Guid(48db63449f962294da17a4f283a4812d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd66f3c4f03df1aa9fd4334125aa2bc88') in 0.024573 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight17.png
+  artifactKey: Guid(3cbddbe8bd4bd0646897730c6e407d88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight17.png using Guid(3cbddbe8bd4bd0646897730c6e407d88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f68c9e2272c5961cbf8230ff663a79d4') in 0.020029 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight5.png
+  artifactKey: Guid(f13eb46bf0f84144dbb3807beee14f1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight5.png using Guid(f13eb46bf0f84144dbb3807beee14f1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '736325fd16dcd784d934fcc2b22876b7') in 0.018004 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight14.png
+  artifactKey: Guid(bf37321fe6fe2d843a34d7c37fa6a26f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight14.png using Guid(bf37321fe6fe2d843a34d7c37fa6a26f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf1959f5e74221fe81ba28e2bed2a240') in 0.018427 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 12.854779 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight4.png
+  artifactKey: Guid(d590b6bbb2dd4504191593e32dc31091) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight4.png using Guid(d590b6bbb2dd4504191593e32dc31091) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8518d95520cb0a5231de4f1b015f0a65') in 0.031744 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight16.png
+  artifactKey: Guid(bc5209b2089856c49a01399e1a2b7a49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight16.png using Guid(bc5209b2089856c49a01399e1a2b7a49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '802414c17bc7f7c6f9c06b6daa12a241') in 0.016100 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight12.png
+  artifactKey: Guid(283ede94246484b44af72ac4dc25d040) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight12.png using Guid(283ede94246484b44af72ac4dc25d040) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '766411d738690f3fe5191b3b667570c4') in 0.015967 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight13.png
+  artifactKey: Guid(c6ac3fa0dd2c67447a6774f8761393cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Full/RunRight13.png using Guid(c6ac3fa0dd2c67447a6774f8761393cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'acb1c0faa202ef5597302fd1973ee19c') in 0.015319 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.467840 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Running/RunningRight3.png
+  artifactKey: Guid(6209faeee5e3b154d86aa9d78667d3bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Running/RunningRight3.png using Guid(6209faeee5e3b154d86aa9d78667d3bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f9a0f5c8c5db236aa2f096e0b0931ce5') in 0.018008 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Running/RunningRight5.png
+  artifactKey: Guid(66dd171f7347e2346baf499250d29ef6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Running/RunningRight5.png using Guid(66dd171f7347e2346baf499250d29ef6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '707b051cc0f2b73b71434ac19ccabd02') in 0.017853 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.874891 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/TurnLeft/1/TurnLeft3.png
+  artifactKey: Guid(d69b68293aac5244b86536429ab565ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/TurnLeft/1/TurnLeft3.png using Guid(d69b68293aac5244b86536429ab565ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '28939b5e1674c55d2e3a8b2ae1d4a26d') in 0.020259 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.095699 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/TurnLeft/2/TurnLeft(2)3.png
+  artifactKey: Guid(f979984bd4e363741b162e33f8450635) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/TurnLeft/2/TurnLeft(2)3.png using Guid(f979984bd4e363741b162e33f8450635) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2a6003ca1a8afa4a3ceb0e2c2863d14') in 0.027624 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.280185 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/ToRun/ToRun3.png
+  artifactKey: Guid(5c730f51fd4575445aa28ee29c50fe62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/ToRun/ToRun3.png using Guid(5c730f51fd4575445aa28ee29c50fe62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2782d232717a71a5c13665b86c9c32d0') in 0.022496 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 44.818384 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/TrickTurn/TrickTurn3.png
+  artifactKey: Guid(a7dd3ed127fedfa48bc70086afe99d47) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/TrickTurn/TrickTurn3.png using Guid(a7dd3ed127fedfa48bc70086afe99d47) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9eebc48c069957ca714ab315c65ef74a') in 0.030603 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 54.466845 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Running/RunningRight3.png
+  artifactKey: Guid(6209faeee5e3b154d86aa9d78667d3bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Running/RunningRight3.png using Guid(6209faeee5e3b154d86aa9d78667d3bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cca796b37fe01d5df17a6eaf164f3d1f') in 0.017634 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Running/RunningRight7.png
+  artifactKey: Guid(6a1d1d993cb10d045ad26be84325b778) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Character/PlayerCharacter/JoannaD'ArcIII-v1 (1)/Sprites/Run/RunRight/Running/RunningRight7.png using Guid(6a1d1d993cb10d045ad26be84325b778) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ce983195ef063cf6a3a8b3199b9dcb92') in 0.013636 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

@@ -64,6 +64,14 @@
     <Compile Include="Assets\Scripts\Woong\PlayerMoving.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Components\UnityAssets\Graphics\oak_Wood\readme.TXT" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Components\UnityAssets\Graphics\Character\PlayerCharacter\JoannaD&apos;ArcIII-v1 (1)\Sprites\License.txt" />
+    <None Include="Assets\Components\UnityAssets\Graphics\Character\PlayerCharacter\JoannaD&apos;ArcIII-v1 (1)\Sprites\Contact.txt" />
+    <None Include="Assets\Components\UnityAssets\Graphics\temporary storage\darkness Forest\about.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.20f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

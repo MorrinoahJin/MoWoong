@@ -9,6 +9,7 @@ public class PlayerMoving : MonoBehaviour
 
     Animator anim;
     [SerializeField]
+<<<<<<< Updated upstream:MoWoong/Assets/Scripts/Woong/PlayerMoving.cs
     float playerSpeed = 5;
     //플레이어 상태(점프는 없음)
     [SerializeField]
@@ -24,6 +25,18 @@ public class PlayerMoving : MonoBehaviour
     int attackComboCount = 0;
 
 
+=======
+    float playerSpeed = 6;
+   
+    //플레이어 상태(점프는 없음)
+    [SerializeField]
+    string playerState;  // Attack, SkillAttack, Idle, GoLeft, GoRight, Hited, Die
+    int playerStateNum = 0;  // player Animation을 위한 상태번호 지정
+    //회피
+    bool playerShiftOn;
+    float moveHorizontal;
+    Animator anim;
+>>>>>>> Stashed changes:MoWoong/Assets/Scripts/Mori/Player/PlayerMoving.cs
     //점프
     Rigidbody2D rigid;
     float jumpForce = 27;
@@ -35,11 +48,17 @@ public class PlayerMoving : MonoBehaviour
     public GameObject attBoxObj;
     BoxCollider2D attBox;
     // Start is called before the first frame update
+<<<<<<< Updated upstream:MoWoong/Assets/Scripts/Woong/PlayerMoving.cs
     void Awake()
     {
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+=======
+   void Awake()
+    {
+        anim= GetComponent<Animator>();
+>>>>>>> Stashed changes:MoWoong/Assets/Scripts/Mori/Player/PlayerMoving.cs
     }
     void Start()
     {
@@ -61,6 +80,8 @@ public class PlayerMoving : MonoBehaviour
     {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
         PlayerMove();
+       //PlayerAnim();
+
 
 
         if ((Input.GetKey("f") || Input.GetMouseButton(0)) && playerState != "Attack") {
@@ -102,6 +123,7 @@ public class PlayerMoving : MonoBehaviour
            
             if (Input.GetKeyDown("left shift") && !playerShiftOn)
             {
+                
                 StartCoroutine(ShiftGO());
 
             }
@@ -114,6 +136,7 @@ public class PlayerMoving : MonoBehaviour
             playerState = "GoRight";
             if (Input.GetKeyDown("left shift") && !playerShiftOn)
             {
+                
                 StartCoroutine(ShiftGO());
             }
         }
@@ -126,13 +149,25 @@ public class PlayerMoving : MonoBehaviour
 
         Jump();
     }
+    void PlayerStateNumber()
+    {
+        if (playerState == "Idle")
+            playerStateNum = 0;
+        else if (playerState == "GoRight" )
+            playerStateNum = 1;
+        else if (playerState == "Jump")
+            playerStateNum = 2;
+        else if (playerState == "Attack")
+            playerStateNum = 3;            
+    }
 
     IEnumerator ShiftGO()
     {
+      
         rigid.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         playerShiftOn = true;
         playerState = "ShiftGo";
-
+        
         float speed = playerSpeed;
         playerSpeed = speed * 3;
 
@@ -153,8 +188,10 @@ public class PlayerMoving : MonoBehaviour
 
     void Jump()
     {
+       
         if (Input.GetKeyDown(KeyCode.Space) && jumpTIme < 2 && !doJump && playerState != "Die" && playerState != "Hited")
         {
+            playerState = "Jump";
             jumpTIme += 1;
             StartCoroutine(DoJump());
         }
