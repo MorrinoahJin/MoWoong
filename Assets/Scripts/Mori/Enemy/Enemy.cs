@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
     float playerDistance; //플레이어와의 거리
     float ChaseDistance = 3f; //탐지 범위
     float attDistance = 1f; //공격 범위
+    public float enemyAtkPower = 0; //공격데미지
 
     // Start is called before the first frame update
     void Start()
