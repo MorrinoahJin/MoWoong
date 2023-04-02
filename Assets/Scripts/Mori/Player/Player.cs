@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
@@ -25,8 +26,9 @@ public class Player : MonoBehaviour
 
     //점프
     Rigidbody2D rigid;
-    float jumpForce = 27;
-    int jumpTIme;
+    float jumpForce = 22;
+    [SerializeField]
+    int jumpTime;
     bool chakJi;
 
     //기본공격 범위 설정
@@ -58,7 +60,7 @@ public class Player : MonoBehaviour
 
         rigid = GetComponent<Rigidbody2D>();
         playerState = "Idle";
-        jumpTIme = 0;
+        jumpTime = 0;
         playerAnimNum = 0;
 
         attBox = gameObject.AddComponent<BoxCollider2D>();
@@ -258,10 +260,10 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && jumpTIme < 2)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpTime < 2)
         {
             playerState = "Jump";
-            jumpTIme += 1;
+            jumpTime += 1;
             StartCoroutine(DoJump());
         }
     }
@@ -271,7 +273,7 @@ public class Player : MonoBehaviour
         PlayerAnim("JumpStart");
         yield return new WaitForSeconds(.06f);
 
-        if (jumpTIme == 0)
+        if (jumpTime == 0)
             rigid.velocity = new Vector2(0f, jumpForce);
         else
             rigid.velocity = new Vector2(0f, jumpForce * 0.66f);
@@ -282,9 +284,10 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Wall" && jumpTIme != 0)
+        if (collision.collider.tag == "Wall" && jumpTime != 0)
         {
-            jumpTIme = 0;
+            jumpTime = 0;
+            Debug.Log("착지");
             StartCoroutine(PlayerJumpEnd());
         }
     }
