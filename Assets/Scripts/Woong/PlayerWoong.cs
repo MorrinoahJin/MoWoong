@@ -58,14 +58,14 @@ public class PlayerWoong: MonoBehaviour
        
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rigid = GetComponent<Rigidbody2D>();
 
     }
     void Start()
     {
         // UnityEngine.Debug.Log("Debug message");
         playerLayer = LayerMask.NameToLayer("Player");
-        passableGroundLayer = LayerMask.NameToLayer("PassableGround");
-        rigid = GetComponent<Rigidbody2D>();
+        passableGroundLayer = LayerMask.NameToLayer("PassableGround");        
         playerState = "Idle";
         jumpCount = 0;
         maxJumpCount = 2;
@@ -106,12 +106,14 @@ public class PlayerWoong: MonoBehaviour
         }
         if (playerState != "Parrying" && playerState != "Attack" && playerState != "Hited" && playerState != "Die")
         {
+            Move();
             Jump();
             if(jumpCount!=0)
             {
                 ResetJumpCount();
+                //JumpControlloer();
             }
-            Move();
+            
             //플레이어 이동키 값을 받음
             moveHorizontal = Input.GetAxisRaw("Horizontal");
 
@@ -121,7 +123,7 @@ public class PlayerWoong: MonoBehaviour
             else if (moveHorizontal > 0)
                 this.transform.localEulerAngles = new Vector3(0, 180, 0);
         }
-        if (playerState != "GoRight" && playerState != "GoLeft" && playerState != "Jump" && playerState != "ShiftGo" && playerState != "Jump" && playerState != "Parrying" && playerState != "Attack" && playerState != "Hited" && playerState != "Die")
+        if (playerState != "GoRight" && playerState != "GoLeft" && playerState != "Jump" && playerState != "ShiftGo" && playerState != "Parrying" && playerState != "Attack" && playerState != "Hited" && playerState != "Die")
         {
             playerState = "Idle";
             PlayerAnim("Idle");
@@ -205,20 +207,21 @@ public class PlayerWoong: MonoBehaviour
     /*
     void JumpControlloer()
     {
-        if (rigid.velocity > 1)
+        rigid.velocity=new Vector2(rigid.velocity.x,rigid.velocity.y);
+        UnityEngine.Debug.Log(rigid.velocity);
+        if (rigid.velocity.y > 0)
         {
+            UnityEngine.Debug.Log("점프시작");
             PlayerAnim("JumpStart");
         }
-        else if (rigid.velocity < 1f || rigid.velocity > -1f)
+        else if (rigid.velocity.y < 0 )
         {
+            UnityEngine.Debug.Log("떨어진다잇");
             PlayerAnim("JumpMiddle");
-        }else if(rigid.velocity < -1f)
-        {
-            PlayerAnim("JumpEnd")
         }
-            
-    }
-    */
+       
+    }*/
+    
     void Move()
     {
         //플레이어 상태에 따른 이동 변경
@@ -282,7 +285,7 @@ public class PlayerWoong: MonoBehaviour
 
     void Jump()
     {
-       //
+       //아래점프 동작
         if (Input.GetKeyDown(KeyCode.Space)&& Input.GetKey(KeyCode.DownArrow))
         {           
             UnityEngine.Debug.Log("발판찾기");
@@ -290,6 +293,7 @@ public class PlayerWoong: MonoBehaviour
             StartCoroutine(DoJumpDown());
             Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, true);                            
         }
+        //위 점프 동작
         else if(Input.GetKeyDown(KeyCode.Space) &&jumpCount <maxJumpCount)
         {
             playerState = "Jump";
@@ -301,34 +305,33 @@ public class PlayerWoong: MonoBehaviour
         }
       
     }
-
+    //점프 및 2단점프
     IEnumerator DoJump()
     {
-        PlayerAnim("JumpStart");
+         PlayerAnim("JumpStart");
         
         yield return new WaitForSeconds(.06f);
      
         if (jumpCount == 0)
-            rigid.velocity = new Vector2(0f, jumpForce);
+            rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
         else if(jumpCount == 1)
-            rigid.velocity = new Vector2(0f, jumpForce * 0.66f);
+            rigid.velocity = new Vector2(rigid.velocity.x, jumpForce * 0.66f);
         yield return new WaitForSeconds(.4f);
 
         Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);
-        // yield return new WaitForSeconds(.13f);
+        yield return new WaitForSeconds(.13f);
         PlayerAnim("JumpMiddle");
         
     }
+    //아래 점프
     IEnumerator DoJumpDown()
     {
         PlayerAnim("JumpMiddle"); 
         UnityEngine.Debug.Log("발판통과");
-      //  ResetJumpCount();
-        yield return new WaitForSeconds(.2f);
-        Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);
-       
         StartCoroutine(PlayerJumpEnd());
-      
+        //  ResetJumpCount();
+        yield return new WaitForSeconds(.2f);
+        Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);                  
     }
 
     /*
@@ -345,7 +348,7 @@ public class PlayerWoong: MonoBehaviour
         }
     }
     */
-   
+   //레이를 플레이어 아래로 쏴서 점프를 초기화 해주는 함수
     void ResetJumpCount()
     {       
         Vector2 rayPos = new Vector2(this.transform.position.x, this.transform.position.y);
@@ -357,15 +360,16 @@ public class PlayerWoong: MonoBehaviour
         {
             UnityEngine.Debug.Log("땅밟음!!! 점프카운트초기화");
             jumpCount = 0;
-           
+            StartCoroutine(PlayerJumpEnd());
+            
+           // PlayerAnim("JumpEnd");
         }
     }
     IEnumerator PlayerJumpEnd()
-    {
-        
+    {        
         UnityEngine.Debug.Log("착지");
         rigid.velocity = new Vector2(0f, 0f);
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.2f);
         PlayerAnim("Idle");
         playerState = "Idle";
     }
