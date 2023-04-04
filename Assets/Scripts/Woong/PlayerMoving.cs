@@ -194,7 +194,6 @@ public class PlayerMoving : MonoBehaviour
         {
             if (collider.CompareTag("Enemy"))
             {
-                collider.GetComponent<Enemy>().GetDamage();
                 
             }
         }
