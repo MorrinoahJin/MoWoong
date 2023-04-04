@@ -59,9 +59,10 @@
     <Compile Include="Assets\Scripts\Mori\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Mori\Map\Map.cs" />
     <Compile Include="Assets\Scripts\Mori\Map\CameraMoving.cs" />
+    <Compile Include="Assets\Scripts\Woong\EnemyWoong.cs" />
     <Compile Include="Assets\Scripts\Mori\Map\TelePort.cs" />
     <Compile Include="Assets\Scripts\Mori\Enemy\Enemy.cs" />
-    <Compile Include="Assets\Scripts\Woong\PlayerMoving.cs" />
+    <Compile Include="Assets\Scripts\Woong\PlayerWoong.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Components\UnityAssets\Graphics\oak_Wood\readme.TXT" />
