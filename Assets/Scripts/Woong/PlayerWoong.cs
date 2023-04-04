@@ -30,7 +30,7 @@ public class PlayerWoong: MonoBehaviour
 
     //점프
     Rigidbody2D rigid;
-    float jumpForce=23;
+    float jumpForce=16;
     public int jumpCount;
     public int maxJumpCount;
     bool chakJi;
