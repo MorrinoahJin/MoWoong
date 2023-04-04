@@ -1380,7 +1380,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2631436221483915647, guid: 10ac4c4e7ae8108438593703eef87294, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 10ac4c4e7ae8108438593703eef87294, type: 3}
 --- !u!1 &1299423376
 GameObject:
@@ -1812,6 +1813,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1767121293 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1327940703831895745, guid: 10ac4c4e7ae8108438593703eef87294, type: 3}
+  m_PrefabInstance: {fileID: 1121063342}
+  m_PrefabAsset: {fileID: 0}
+--- !u!70 &1767121301
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767121293}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.9, y: 1.3}
+  m_Direction: 0
 --- !u!1 &1779727141
 GameObject:
   m_ObjectHideFlags: 0

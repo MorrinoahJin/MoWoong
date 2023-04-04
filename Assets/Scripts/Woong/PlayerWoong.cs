@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Diagnostics;
 using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -28,8 +30,9 @@ public class PlayerWoong: MonoBehaviour
 
     //점프
     Rigidbody2D rigid;
-    float jumpForce = 27;
-    int jumpTIme;
+    float jumpForce=23;
+    public int jumpCount;
+    public int maxJumpCount;
     bool chakJi;
 
     //기본공격 범위 설정
@@ -45,9 +48,10 @@ public class PlayerWoong: MonoBehaviour
     //플레이어 피격시 색변경 
     bool HitedColor;
 
-    //플레이어 죽음관련
+    //플레이어 죽음/피격관련
     bool isDead = false;
     bool isDieAnim = false;
+    bool ishited = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -63,8 +67,11 @@ public class PlayerWoong: MonoBehaviour
         passableGroundLayer = LayerMask.NameToLayer("PassableGround");
         rigid = GetComponent<Rigidbody2D>();
         playerState = "Idle";
-        jumpTIme = 0;
+        jumpCount = 0;
+        maxJumpCount = 2;
         playerAnimNum = 0;
+       
+
 
         attBox = gameObject.AddComponent<BoxCollider2D>();
         attBox.size = new Vector2(2f, 1f);
@@ -75,10 +82,17 @@ public class PlayerWoong: MonoBehaviour
    
     void Update()
     {
+        //UnityEngine.Debug.Log(playerHp);
+        if (playerState != "Die")
+        {
+           
+            ishited = true;
+          
+        }
         if (playerState != "Hited" && playerState != "Die")
         {
             Attack();
-
+            ishited = true;
             //콤보 공격 체크
             if (checkAttack)
             {
@@ -93,6 +107,10 @@ public class PlayerWoong: MonoBehaviour
         if (playerState != "Parrying" && playerState != "Attack" && playerState != "Hited" && playerState != "Die")
         {
             Jump();
+            if(jumpCount!=0)
+            {
+                ResetJumpCount();
+            }
             Move();
             //플레이어 이동키 값을 받음
             moveHorizontal = Input.GetAxisRaw("Horizontal");
@@ -108,6 +126,7 @@ public class PlayerWoong: MonoBehaviour
             playerState = "Idle";
             PlayerAnim("Idle");
         }
+       
     }
 
     void Attack()
@@ -122,7 +141,7 @@ public class PlayerWoong: MonoBehaviour
         doNextAttack = false;
         playerState = "Attack";
 
-        Debug.Log("attack");
+        
 
         attackComboCount += 1;
 
@@ -183,7 +202,23 @@ public class PlayerWoong: MonoBehaviour
             transform.position += move * playerSpeed * Time.deltaTime;
         }
     }
-
+    /*
+    void JumpControlloer()
+    {
+        if (rigid.velocity > 1)
+        {
+            PlayerAnim("JumpStart");
+        }
+        else if (rigid.velocity < 1f || rigid.velocity > -1f)
+        {
+            PlayerAnim("JumpMiddle");
+        }else if(rigid.velocity < -1f)
+        {
+            PlayerAnim("JumpEnd")
+        }
+            
+    }
+    */
     void Move()
     {
         //플레이어 상태에 따른 이동 변경
@@ -255,12 +290,14 @@ public class PlayerWoong: MonoBehaviour
             StartCoroutine(DoJumpDown());
             Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, true);                            
         }
-        else if(Input.GetKeyDown(KeyCode.Space) &&jumpTIme < 2)
+        else if(Input.GetKeyDown(KeyCode.Space) &&jumpCount <maxJumpCount)
         {
             playerState = "Jump";
-            jumpTIme += 1;
+            jumpCount += 1;
             StartCoroutine(DoJump());
             Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, true);
+          
+            
         }
       
     }
@@ -268,43 +305,65 @@ public class PlayerWoong: MonoBehaviour
     IEnumerator DoJump()
     {
         PlayerAnim("JumpStart");
-    
+        
         yield return new WaitForSeconds(.06f);
-
-        if (jumpTIme == 0)
+     
+        if (jumpCount == 0)
             rigid.velocity = new Vector2(0f, jumpForce);
-        else
+        else if(jumpCount == 1)
             rigid.velocity = new Vector2(0f, jumpForce * 0.66f);
         yield return new WaitForSeconds(.4f);
 
         Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);
         // yield return new WaitForSeconds(.13f);
         PlayerAnim("JumpMiddle");
+        
     }
     IEnumerator DoJumpDown()
     {
         PlayerAnim("JumpMiddle"); 
-        UnityEngine.Debug.Log("발판통과");       
+        UnityEngine.Debug.Log("발판통과");
+      //  ResetJumpCount();
         yield return new WaitForSeconds(.2f);
         Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);
+       
         StartCoroutine(PlayerJumpEnd());
+      
     }
 
-
+    /*
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Wall" && jumpTIme != 0)
+        RaycastHit2D checkGround;
+        Vector2 rayPos = new Vector2();
+        rayPos = new Vector2(this.transform.position.x, this.transform.position.y);
+        checkGround= Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Ground"));
+        if (collision.collider.tag == "Ground" && jumpTIme != 0)
         {
             jumpTIme = 0;
             StartCoroutine(PlayerJumpEnd());
         }
     }
+    */
+   
+    void ResetJumpCount()
+    {       
+        Vector2 rayPos = new Vector2(this.transform.position.x, this.transform.position.y);
+        RaycastHit2D checkGround =Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Ground","PassableGround"));         
 
+        UnityEngine.Debug.DrawRay(rayPos, Vector2.down, Color.red, 1f);
+
+        if (checkGround.collider != null)
+        {
+            UnityEngine.Debug.Log("땅밟음!!! 점프카운트초기화");
+            jumpCount = 0;
+           
+        }
+    }
     IEnumerator PlayerJumpEnd()
     {
         
         UnityEngine.Debug.Log("착지");
-        PlayerAnim("Idle");
         rigid.velocity = new Vector2(0f, 0f);
         yield return new WaitForSeconds(.1f);
         PlayerAnim("Idle");
@@ -378,6 +437,7 @@ public class PlayerWoong: MonoBehaviour
             anim.SetTrigger("FloorDash");
       
     }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
@@ -388,39 +448,45 @@ public class PlayerWoong: MonoBehaviour
             //충돌 시 플레이어 피격 애니메이션 시간
             float HitAnimTime = 0.2f;
             if (!invincibleMode)
-            {
-               
                 StartCoroutine(Hit(damage,HitAnimTime));              
-            }
-
+            
         }
     }
     //피격 및 데미지 
-
+    /*
+    void TakeDamage(float damage)
+    {
+        flaot HitAnimTime = 0.2f;
+        if (!invincibleMode)
+            StartCoroutine(Hit(damage, HitAnimTime));
+    }
+    */
     private IEnumerator Hit(float damage, float AnimTime)
     {
-        float invincibleTime = 0.6f;
-        if (playerHp > 0)
-        {                           
-            HitedColor = true;
-            spriteRenderer.color = Color.red;
-            playerState = "Hited";
-            PlayerAnim("Hited");
-            playerHp -= damage;
-            yield return new WaitForSeconds(AnimTime);
-            spriteRenderer.color = Color.white;
-            HitedColor = false;
-            //애니메이션이 끝나면 다시 idle상태로 돌아오게끔     
-            playerState = "Idle";
-            PlayerAnim("Idle");
-            //피격 후 재 피격판정까지 무적 시간   
-            StartCoroutine(BeInvincible(invincibleTime));
-                                                     
+        if (ishited==true)
+        {
+            float invincibleTime = 0.6f;
+            if (playerHp > 0)
+            {
+                HitedColor = true;
+                spriteRenderer.color = Color.red;
+                playerState = "Hited";
+                PlayerAnim("Hited");
+                playerHp -= damage;
+                yield return new WaitForSeconds(AnimTime);
+                spriteRenderer.color = Color.white;
+                HitedColor = false;
+                //애니메이션이 끝나면 다시 idle상태로 돌아오게끔     
+                playerState = "Idle";
+                PlayerAnim("Idle");
+                //피격 후 재 피격판정까지 무적 시간   
+                StartCoroutine(BeInvincible(invincibleTime));
+
+            }
+            else
+                die();
         }
-        else
-            die();     
     }
-    
     //무적
     private IEnumerator BeInvincible(float invincibleTime)
     {
@@ -438,7 +504,7 @@ public class PlayerWoong: MonoBehaviour
         //Invoke("StopScript", 2f);
         //rigid.velocity = new Vector2(transform.position.x, 0); //죽으면 y좌표를 고정하게 하기
         //GetComponent<Player>().enabled = false; //플레이어 키입력 제한하기
-
+        ishited = false;
     }
     void StopScript()
     {

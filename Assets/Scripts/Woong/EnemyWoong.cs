@@ -47,7 +47,7 @@ public class EnemyWoong : MonoBehaviour
         {
             //오브젝트 왼쪽 밑에 바닥이 없는지 확인
             rayPos = new Vector2(this.transform.position.x - .5f, this.transform.position.y);
-            checkFloor = Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Wall"));
+            checkFloor = Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Ground"));
             //바닥 있으면 왼쪽으로 이동
             if (checkFloor.collider != null)
             {
@@ -61,7 +61,7 @@ public class EnemyWoong : MonoBehaviour
         else if(enmeyMoveDirection == "Right")
         {
             rayPos = new Vector2(this.transform.position.x + .5f, this.transform.position.y);
-            checkFloor = Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Wall"));
+            checkFloor = Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Ground"));
             if (checkFloor.collider != null)
             {
                 this.transform.position = Vector2.MoveTowards(this.transform.position, rayPos, speed * Time.deltaTime);
@@ -92,7 +92,7 @@ public class EnemyWoong : MonoBehaviour
         if (transform.position.x >= playerPos.x)
         {
             rayPos = new Vector2(this.transform.position.x + 1f, this.transform.position.y);
-            checkFloor = Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Wall"));
+            checkFloor = Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Ground"));
             //바닥 있으면 오른쪽으로 이동
             if (checkFloor.collider != null)
             {
@@ -102,7 +102,7 @@ public class EnemyWoong : MonoBehaviour
         else
         {
             rayPos = new Vector2(this.transform.position.x - 1f, this.transform.position.y);
-            checkFloor = Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Wall"));
+            checkFloor = Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Ground"));
             if (checkFloor.collider != null)
             {
                 transform.position = new Vector2(this.transform.position.x - .66f, transform.position.y);
