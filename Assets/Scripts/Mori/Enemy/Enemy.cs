@@ -62,14 +62,19 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (hp <= 0)
+        {
             ChangeState(EnemyState.Die);
+        }
 
         switch (currentState)
         {
             case EnemyState.Stop:
                 break;
             case EnemyState.Die:
+                {
                     DoAnim("Die");
+                    Destroy(this.gameObject, 2f);
+                }
                 break;
             case EnemyState.Hited:
                 break;
@@ -269,7 +274,7 @@ public class Enemy : MonoBehaviour
     //피격함수
     public void GetDamage(float damage)
     {
-        if (!canGetDamage)
+        if (!canGetDamage && currentState != EnemyState.Die)
         {
             ChangeState(EnemyState.Hited); //스테이트 변경
             hp -= damage;
