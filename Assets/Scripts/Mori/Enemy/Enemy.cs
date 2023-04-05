@@ -3,6 +3,7 @@ using UnityEngine;
 
 public enum EnemyState
 {
+    Stop,
     Die,
     Chase,
     Attack,
@@ -26,7 +27,6 @@ public class Enemy : MonoBehaviour
     bool playerInAttRange; //플레이어가 공격 범위 안에 들어왔는지 확인
     bool playerInChaseRange; //플레이어가 탐지 범위 안에 들어 왔는지를 확인
     bool attacking; //공격동작 중 인지 확인
-
     RaycastHit2D checkFloor, checkLeftSide, checkRightSide; //바닥확인, 왼쪽, 오른쪽에 벽이 위치해 있는지를 확인
     Vector2 rayPos; //checkFloor레이를 쏠 위치
 
@@ -34,20 +34,17 @@ public class Enemy : MonoBehaviour
 
     //종류
     public bool IsLongRangeAtt; //원거리 공격을 하는 몹인지를 판별
+    public bool isFly; //날아다니는 몹인지 ,y축이 고정되어있는 몹인지를 판별하는 변수
     public GameObject bullet; //발사체
 
     //스탯
-    float speed = 2f; //몹의 이동속도
     Vector2 playerPos; //플레이어의 위치
-    [SerializeField]
-    float playerDistance; //플레이어와의 거리
-    float ChaseDistance = 3f; //탐지 범위
-    float attDistance = 1f; //공격 범위
-    [SerializeField]
-    int previousAnimNum;
-    public float enemyAtkPower = 0; //공격데미지
-    float hp = 100;
-    public float attTime, damageTime, hitedTime, dieTime;
+    float playerDistance, playerDistanceY; //플레이어와의 거리
+    float ChaseDistance = 4f; //탐지 범위
+    int previousAnimNum; //작동되는 애니메이션 넘버
+    public float enemyAtkPower, attDistance, speed; //공격데미지 , 공격사거리, 이동속도
+    public float hp;
+    public float attTime, damageTime, hitedTime, dieTime; //공격시간, 데미지를 입히는 시간, 피격시간, 죽을 때 시간
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +66,8 @@ public class Enemy : MonoBehaviour
 
         switch (currentState)
         {
+            case EnemyState.Stop:
+                break;
             case EnemyState.Die:
                     DoAnim("Die");
                 break;
@@ -86,6 +85,7 @@ public class Enemy : MonoBehaviour
                         ChasePlayer();
                     else
                         ChangeState(EnemyState.Attack);
+
                 }
                 break;
             case EnemyState.Move:
@@ -103,7 +103,17 @@ public class Enemy : MonoBehaviour
         //공격 범위안에 플레이어간 들어오면 공격하게 함
         playerPos = GameObject.FindWithTag("Player").transform.position;
         playerDistance = Vector2.Distance(playerPos, this.transform.position);
-        if(ChaseDistance >= playerDistance)
+        //날아다니는 몬스터가 아닌 경우 y축이 다를 때 공격을 추격상태가 되지않는다.
+        if(!isFly)
+        {
+            //y축끼리의 좌표를 구해서 y축이 멀어지면 
+            playerDistanceY = Mathf.Abs(playerPos.y - transform.position.y);
+            if (playerDistanceY > 1)
+                playerDistance = 100; //몹 인식거리에 플레이어가 들어오지 않게 변경
+        }
+
+
+        if (ChaseDistance >= playerDistance)
         {
             playerInChaseRange = true;
             if (attDistance >= playerDistance)
@@ -129,10 +139,18 @@ public class Enemy : MonoBehaviour
     //플레이어가 공격 범위 안에 들어와 있을 때 공격 상태로 변경
     void ChasePlayer()
     {
+        DoAnim("Move");
         Vector2 targetPos = new Vector2(playerPos.x, this.transform.position.y);
+
         RaycastHit2D LeftSide = Physics2D.Raycast(transform.position, Vector2.left, 1f, LayerMask.GetMask("Ground")), RightSide = Physics2D.Raycast(transform.position, Vector2.left, 1f, LayerMask.GetMask("Ground"));
-        if(LeftSide.collider == null & RightSide.collider == null)
+
+        Vector2 leftBottumPos = new Vector2(transform.position.x - .5f, this.transform.position.y), rightBottumPos = new Vector2(transform.position.x + .5f, this.transform.position.y);
+
+        RaycastHit2D checkLeftFloor = Physics2D.Raycast(leftBottumPos, Vector2.down, 1f, LayerMask.GetMask("Ground")), checkRightFloor = Physics2D.Raycast(rightBottumPos, Vector2.down, 1f, LayerMask.GetMask("Ground"));
+
+        if (LeftSide.collider == null && RightSide.collider == null && checkLeftFloor.collider != null && checkRightFloor.collider != null)
             transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+           
 
         if (!playerInChaseRange)
             ChangeState(EnemyState.Move);
@@ -193,20 +211,25 @@ public class Enemy : MonoBehaviour
     IEnumerator ThinkMove()
     {
         thinkTime = true;
-        int num = Random.Range(1,4);
+        int num = Random.Range(1,9);
         switch(num)
         {
             case 1:
+            case 2:
+            case 3:
                 enemyMoveDirection = "Left";
                 break;
-            case 2:
+            case 4:
+            case 5:
+            case 6:
                 enemyMoveDirection = "Right";
                 break;
-            case 3:
+            case 7:
+            case 8:
                 enemyMoveDirection = "Center";
                 break;
         }
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         thinkTime = false;
     }
     //공격함수
@@ -226,6 +249,7 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(attTime-damageTime);
 
             ChangeState(EnemyState.Move);
+            DoAnim("Move");
             attacking = false;
         }
         else //원거리 공격
@@ -322,14 +346,13 @@ public class Enemy : MonoBehaviour
             currentAnimNum = 4;
 
         if (currentAnimNum != previousAnimNum)
-        {
             ChangeAnim(currentAnimNum);
-            previousAnimNum = currentAnimNum;
-        }
     }
 
     void ChangeAnim(int animNum)
     {
+        previousAnimNum = animNum;
+
         if (animNum == 0)
             anim.SetTrigger("Idle");
         else if (animNum == 1)

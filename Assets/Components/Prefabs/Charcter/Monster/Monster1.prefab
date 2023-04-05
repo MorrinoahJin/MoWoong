@@ -172,9 +172,11 @@ MonoBehaviour:
   iDontCareHited: 0
   IsLongRangeAtt: 0
   bullet: {fileID: 0}
-  playerDistance: 0
   previousAnimNum: 0
   enemyAtkPower: 10
+  attDistance: 1
+  speed: 1.5
+  hp: 100
   attTime: 0.8
   damageTime: 0.6
   hitedTime: 0.66
