@@ -1,10 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Diagnostics;
-using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
-using UnityEngine.Playables;
+
 
 public class PlayerWoong: MonoBehaviour
 {
@@ -70,7 +66,7 @@ public class PlayerWoong: MonoBehaviour
         jumpCount = 0;
         maxJumpCount = 2;
         playerAnimNum = 0;
-       
+      
 
 
         attBox = gameObject.AddComponent<BoxCollider2D>();
@@ -162,7 +158,8 @@ public class PlayerWoong: MonoBehaviour
             if (collider.CompareTag("Enemy"))
             {
                 //공격코드
-
+                Enemy enemy = collider.GetComponent<Enemy>();
+                enemy.GetDamage(playerAtkPower);
             }
         }
 
@@ -367,7 +364,7 @@ public class PlayerWoong: MonoBehaviour
     }
     IEnumerator PlayerJumpEnd()
     {        
-        UnityEngine.Debug.Log("착지");
+        Debug.Log("착지");
         rigid.velocity = new Vector2(0f, 0f);
         yield return new WaitForSeconds(.2f);
         PlayerAnim("Idle");
@@ -441,7 +438,7 @@ public class PlayerWoong: MonoBehaviour
             anim.SetTrigger("FloorDash");
       
     }
-    
+    /*
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
@@ -455,18 +452,21 @@ public class PlayerWoong: MonoBehaviour
                 StartCoroutine(Hit(damage,HitAnimTime));              
             
         }
-    }
+    }*/
     //피격 및 데미지 
-    /*
-    void TakeDamage(float damage)
+    
+    public void TakeDamage(float damage)
     {
-        flaot HitAnimTime = 0.2f;
+        Debug.Log(playerHp);
+        float HitAnimTime = 0.2f;
         if (!invincibleMode)
             StartCoroutine(Hit(damage, HitAnimTime));
     }
-    */
+    
+    
     private IEnumerator Hit(float damage, float AnimTime)
     {
+        Debug.Log("플레이어가 데미지를 입었습니다.");
         if (ishited==true)
         {
             float invincibleTime = 0.6f;
@@ -491,6 +491,7 @@ public class PlayerWoong: MonoBehaviour
                 die();
         }
     }
+    
     //무적
     private IEnumerator BeInvincible(float invincibleTime)
     {
@@ -500,11 +501,13 @@ public class PlayerWoong: MonoBehaviour
     }
     void die()
     {
-
         isDieAnim = true;
-        UnityEngine.Debug.Log("플레이어가 죽었습니다.");
         playerState = "Die";
         PlayerAnim("Die");
+       
+        UnityEngine.Debug.Log("플레이어가 죽었습니다.");
+       
+      
         //Invoke("StopScript", 2f);
         //rigid.velocity = new Vector2(transform.position.x, 0); //죽으면 y좌표를 고정하게 하기
         //GetComponent<Player>().enabled = false; //플레이어 키입력 제한하기
