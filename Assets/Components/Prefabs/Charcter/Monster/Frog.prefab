@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8161873427407053204}
   - component: {fileID: 7062795186520355388}
   - component: {fileID: 4105652713271984604}
+  - component: {fileID: -3288309307821513618}
   m_Layer: 0
   m_Name: Frog
   m_TagString: Untagged
@@ -122,7 +123,6 @@ MonoBehaviour:
   currentState: 0
   iDontCareHited: 0
   IsLongRangeAtt: 0
-  isFly: 0
   bullet: {fileID: 0}
   enemyAtkPower: 10
   attDistance: 2
@@ -132,3 +132,29 @@ MonoBehaviour:
   damageTime: 0.6
   hitedTime: 0.66
   dieTime: 2
+--- !u!61 &-3288309307821513618
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9010642349934493256}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.6, y: 0.96}
+    newSize: {x: 1.6, y: 0.96}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.33, y: 0.33}
+  m_EdgeRadius: 0
