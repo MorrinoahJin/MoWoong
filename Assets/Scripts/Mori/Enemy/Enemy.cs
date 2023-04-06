@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
     bool playerInAttRange; //플레이어가 공격 범위 안에 들어왔는지 확인
     bool playerInChaseRange; //플레이어가 탐지 범위 안에 들어 왔는지를 확인
     bool attacking; //공격동작 중 인지 확인
+    bool isStop; //모든 동작을 중지 시키는 변수
     RaycastHit2D checkFloor, checkLeftSide, checkRightSide; //바닥확인, 왼쪽, 오른쪽에 벽이 위치해 있는지를 확인
     Vector2 rayPos; //checkFloor레이를 쏠 위치
 
@@ -34,7 +35,6 @@ public class Enemy : MonoBehaviour
 
     //종류
     public bool IsLongRangeAtt; //원거리 공격을 하는 몹인지를 판별
-    public bool isFly; //날아다니는 몹인지 ,y축이 고정되어있는 몹인지를 판별하는 변수
     public GameObject bullet; //발사체
 
     //스탯
@@ -64,7 +64,14 @@ public class Enemy : MonoBehaviour
         if (hp <= 0)
         {
             ChangeState(EnemyState.Die);
+            enemyMoveDirection = "Center";
         }
+
+        if(isStop)
+        {
+            ChangeState(EnemyState.Stop);
+        }
+
 
         switch (currentState)
         {
@@ -108,15 +115,12 @@ public class Enemy : MonoBehaviour
         //공격 범위안에 플레이어간 들어오면 공격하게 함
         playerPos = GameObject.FindWithTag("Player").transform.position;
         playerDistance = Vector2.Distance(playerPos, this.transform.position);
-        //날아다니는 몬스터가 아닌 경우 y축이 다를 때 공격을 추격상태가 되지않는다.
-        if(!isFly)
-        {
-            //y축끼리의 좌표를 구해서 y축이 멀어지면 
-            playerDistanceY = Mathf.Abs(playerPos.y - transform.position.y);
-            if (playerDistanceY > 1)
-                playerDistance = 100; //몹 인식거리에 플레이어가 들어오지 않게 변경
-        }
+        //y축이 다를 때 공격을 추격상태가 되지않는다.
 
+        //y축끼리의 좌표를 구해서 y축이 멀어지면 
+        playerDistanceY = Mathf.Abs(playerPos.y - transform.position.y);
+        if (playerDistanceY > 1)
+            playerDistance = 100; //몹 인식거리에 플레이어가 들어오지 않게 변경
 
         if (ChaseDistance >= playerDistance)
         {
@@ -128,7 +132,7 @@ public class Enemy : MonoBehaviour
             else
                 playerInAttRange = false;
 
-            if(transform.position.x > playerPos.x) //오른쪽에 위치해 있을 때 좌주 반전
+            if(transform.position.x > playerPos.x) //오른쪽에 위치해 있을 때 좌우 반전
                 transform.localEulerAngles = new Vector3(0, 0, 0); //좌우 반전
             else
                 transform.localEulerAngles = new Vector3(0, 180, 0); //좌우 반전
@@ -296,6 +300,7 @@ public class Enemy : MonoBehaviour
         RaycastHit2D checkFloor;
         Vector2 rayPos = new Vector2();
 
+        isStop = true;
         //피격모션이 있는 몹일 경우
         if (!iDontCareHited)
         {
@@ -323,6 +328,7 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(hitedTime - .33f); //피격모션 실행시간
         }
         yield return new WaitForSeconds(.33f);
+        isStop = false;
         //피격모션 끝, 변수 초기화
         sprite.color = Color.white;
         canGetDamage = false;
@@ -333,7 +339,6 @@ public class Enemy : MonoBehaviour
         else
             ChangeState(EnemyState.Move);
     }
-
 
     void DoAnim(string animName)
     {
