@@ -28,7 +28,7 @@ public class MobTrap : MonoBehaviour
             yield return new WaitForSeconds(bulletTime * attSpeed);
             if (hp > 0)
             {
-                Debug.Log("발사");
+                //Debug.Log("발사");
             }
             else
                 anim.SetTrigger("Die");

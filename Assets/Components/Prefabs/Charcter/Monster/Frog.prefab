@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3288309307821513618}
   m_Layer: 0
   m_Name: Frog
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   enemyAtkPower: 10
   attDistance: 2
   speed: 2
-  hp: 150
+  hp: 50
   attTime: 0.8
   damageTime: 0.6
   hitedTime: 0.66

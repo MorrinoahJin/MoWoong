@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3419144744257084986}
   m_Layer: 0
   m_Name: Monster1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   enemyAtkPower: 10
   attDistance: 1
   speed: 1.5
-  hp: 100
+  hp: 30
   attTime: 0.8
   damageTime: 0.6
   hitedTime: 0.66

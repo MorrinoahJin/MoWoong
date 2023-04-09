@@ -252,7 +252,7 @@ public class Enemy : MonoBehaviour
             //공격범위 안에 들어 와 있을 경우 데미지를 입힘 아닐 경우 이동 실행
             if (playerInAttRange)
             {
-                //공격실행
+                GameObject.FindWithTag("Player").GetComponent<PlayerWoong>().TakeDamage(enemyAtkPower);
                 Debug.Log("공격");
             }
             yield return new WaitForSeconds(attTime-damageTime);
@@ -296,11 +296,8 @@ public class Enemy : MonoBehaviour
         //현재 이동방향을 저장
         string direction = enemyMoveDirection;
         enemyMoveDirection = "Null";
-        Vector2 playerPos = GameObject.FindWithTag("Player").transform.position;
-        RaycastHit2D checkFloor;
-        Vector2 rayPos = new Vector2();
-
         isStop = true;
+
         //피격모션이 있는 몹일 경우
         if (!iDontCareHited)
         {
@@ -309,20 +306,24 @@ public class Enemy : MonoBehaviour
             if (transform.position.x >= playerPos.x)
             {
                 rayPos = new Vector2(this.transform.position.x + 1f, this.transform.position.y);
-                checkFloor = Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Wall"));
+                checkFloor = Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Ground"));
+                checkLeftSide = Physics2D.Raycast(transform.position, Vector2.left, 1f, LayerMask.GetMask("Ground"));
                 //바닥 있으면 오른쪽으로 이동
-                if (checkFloor.collider != null)
+                if (checkFloor.collider != null && checkLeftSide.collider == null)
                 {
-                    transform.position = new Vector2(this.transform.position.x + .66f, transform.position.y);
+                    transform.position = new Vector2(this.transform.position.x + .33f, transform.position.y);
+                    Debug.Log("오른쪽 피격");
                 }
             }
             else //몹이 플레이어보다 왼쪽에 있을 경우
             {
                 rayPos = new Vector2(this.transform.position.x - 1f, this.transform.position.y);
-                checkFloor = Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Wall"));
-                if (checkFloor.collider != null)
+                checkFloor = Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Ground"));
+                checkRightSide = Physics2D.Raycast(transform.position, Vector2.right, 1f, LayerMask.GetMask("Ground"));
+                if (checkFloor.collider != null && checkRightSide.collider == null)
                 {
-                    transform.position = new Vector2(this.transform.position.x - .66f, transform.position.y);
+                    transform.position = new Vector2(this.transform.position.x - .33f, transform.position.y);
+                    Debug.Log("왼쪽 피격");
                 }
             }
             yield return new WaitForSeconds(hitedTime - .33f); //피격모션 실행시간
@@ -350,7 +351,7 @@ public class Enemy : MonoBehaviour
             currentAnimNum = 1;
         else if (animName == "Attack")
             currentAnimNum = 2;
-        else if (animName == "Hit")
+        else if (animName == "Hited")
             currentAnimNum = 3;
         else if (animName == "Die")
             currentAnimNum = 4;
@@ -370,7 +371,7 @@ public class Enemy : MonoBehaviour
         else if(animNum == 2)
             anim.SetTrigger("Attack");
         else if (animNum == 3)
-            anim.SetTrigger("Hit");
+            anim.SetTrigger("Hited");
         else if (animNum == 4)
             anim.SetTrigger("Die");
     }
