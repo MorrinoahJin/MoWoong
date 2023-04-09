@@ -1,23 +1,23 @@
 Using pre-set license
 Built from '2021.3/staging' branch; Version is '2021.3.20f1 (577897200b8b) revision 5732503'; Using compiler version '192829333'; Build Type 'Release'
-OS: 'Windows 10  (10.0.19045) 64bit Professional' Language: 'ko' Physical Memory: 16061 MB
+OS: 'Windows 11  (10.0.22621) 64bit Core' Language: 'ko' Physical Memory: 15776 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
 
 COMMAND LINE ARGUMENTS:
-C:\Program Files\Unity 2021.3.20f1\Editor\Unity.exe
+C:\Program Files\Unity\Hub\Editor\2021.3.20f1\Editor\Unity.exe
 -adb2
 -batchMode
 -noUpm
 -name
 AssetImportWorker1
 -projectPath
-C:/Users/rxg89/Desktop/Study/UnityProject/MoWoong
+C:/Users/정기웅/Desktop/MoWoong
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-63368
-Successfully changed project path to: C:/Users/rxg89/Desktop/Study/UnityProject/MoWoong
-C:/Users/rxg89/Desktop/Study/UnityProject/MoWoong
+61894
+Successfully changed project path to: C:/Users/정기웅/Desktop/MoWoong
+C:/Users/정기웅/Desktop/MoWoong
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
     "memorysetup-bucket-allocator-granularity=16"
     "memorysetup-bucket-allocator-bucket-count=8"
@@ -47,107 +47,107 @@ C:/Users/rxg89/Desktop/Study/UnityProject/MoWoong
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [1120] Host "[IP] 192.168.145.1 [Port] 0 [Flags] 2 [Guid] 1930752414 [EditorId] 1930752414 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-DQHTLQR) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [26044] Host "[IP] 172.16.0.73 [Port] 0 [Flags] 2 [Guid] 2366375149 [EditorId] 2366375149 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-5EE71HT) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [1120] Host "[IP] 192.168.145.1 [Port] 0 [Flags] 2 [Guid] 1930752414 [EditorId] 1930752414 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-DQHTLQR) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [26044] Host "[IP] 172.16.0.73 [Port] 0 [Flags] 2 [Guid] 2366375149 [EditorId] 2366375149 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-5EE71HT) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 197.96 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 115.57 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.20f1 (577897200b8b)
-[Subsystems] Discovering subsystems at path C:/Program Files/Unity 2021.3.20f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path C:/Users/rxg89/Desktop/Study/UnityProject/MoWoong/Assets
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.20f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/정기웅/Desktop/MoWoong/Assets
 GfxDevice: creating device client; threaded=0; jobified=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce RTX 3050 Ti Laptop GPU (ID=0x25a0)
+    Renderer: NVIDIA GeForce RTX 3060 Laptop GPU (ID=0x2520)
     Vendor:   NVIDIA
-    VRAM:     3990 MB
+    VRAM:     6023 MB
     Driver:   30.0.15.1278
 Initialize mono
-Mono path[0] = 'C:/Program Files/Unity 2021.3.20f1/Editor/Data/Managed'
-Mono path[1] = 'C:/Program Files/Unity 2021.3.20f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
-Mono config path = 'C:/Program Files/Unity 2021.3.20f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56208
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.20f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.20f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.20f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56040
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
-Register platform support module: C:/Program Files/Unity 2021.3.20f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.012908 seconds.
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.20f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.009289 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 201.57 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 68.51 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.392 seconds
+- Completed reload, in  0.869 seconds
 Domain Reload Profiling:
-	ReloadAssembly (2394ms)
-		BeginReloadAssembly (345ms)
+	ReloadAssembly (869ms)
+		BeginReloadAssembly (191ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (1623ms)
-			LoadAssemblies (339ms)
+		EndReloadAssembly (540ms)
+			LoadAssemblies (184ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (406ms)
+			SetupTypeCache (131ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (110ms)
-			SetupLoadedEditorAssemblies (915ms)
+			RebuildScriptCaches (32ms)
+			SetupLoadedEditorAssemblies (308ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (22ms)
+				InitializePlatformSupportModulesInManaged (11ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (202ms)
-				BeforeProcessingInitializeOnLoad (6ms)
-				ProcessInitializeOnLoadAttributes (484ms)
-				ProcessInitializeOnLoadMethodAttributes (201ms)
+				RefreshPlugins (69ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (158ms)
+				ProcessInitializeOnLoadMethodAttributes (69ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.017005 seconds.
+Registered in 0.010404 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 231.98 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 90.18 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  3.825 seconds
+- Completed reload, in  1.559 seconds
 Domain Reload Profiling:
-	ReloadAssembly (3828ms)
-		BeginReloadAssembly (454ms)
+	ReloadAssembly (1560ms)
+		BeginReloadAssembly (150ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (26ms)
+			DisableScriptedObjects (6ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (56ms)
-		EndReloadAssembly (2872ms)
-			LoadAssemblies (333ms)
+			CreateAndSetChildDomain (22ms)
+		EndReloadAssembly (1286ms)
+			LoadAssemblies (135ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (730ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (195ms)
-			SetupLoadedEditorAssemblies (1518ms)
+			SetupTypeCache (398ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (79ms)
+			SetupLoadedEditorAssemblies (557ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (19ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (232ms)
-				BeforeProcessingInitializeOnLoad (262ms)
-				ProcessInitializeOnLoadAttributes (831ms)
-				ProcessInitializeOnLoadMethodAttributes (144ms)
-				AfterProcessingInitializeOnLoad (28ms)
-				EditorAssembliesLoaded (1ms)
+				InitializePlatformSupportModulesInManaged (8ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (90ms)
+				BeforeProcessingInitializeOnLoad (135ms)
+				ProcessInitializeOnLoadAttributes (271ms)
+				ProcessInitializeOnLoadMethodAttributes (40ms)
+				AfterProcessingInitializeOnLoad (12ms)
+				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (22ms)
+			AwakeInstancesAfterBackupRestoration (18ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.12 seconds
-Refreshing native plugins compatible for Editor in 1.02 ms, found 3 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.11 seconds
+Refreshing native plugins compatible for Editor in 1.67 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2192 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 30 unused Assets / (56.2 KB). Loaded Objects now: 2658.
+Unloading 2190 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 30 unused Assets / (56.2 KB). Loaded Objects now: 2656.
 Memory consumption went from 106.2 MB to 106.1 MB.
-Total: 6.476800 ms (FindLiveObjects: 0.247800 ms CreateObjectMapping: 0.094900 ms MarkObjects: 5.983400 ms  DeleteObjects: 0.148900 ms)
+Total: 8.652400 ms (FindLiveObjects: 0.442100 ms CreateObjectMapping: 0.175200 ms MarkObjects: 7.865900 ms  DeleteObjects: 0.167100 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -159,3 +159,183 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 188606.706771 seconds.
+  path: Assets/Components/UnityAssets/Graphics/Player/DashFx.png
+  artifactKey: Guid(eb63adc01e7d17241bc1b7724c4e9a9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/Player/DashFx.png using Guid(eb63adc01e7d17241bc1b7724c4e9a9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bba6ea2d41238da3974fa947951891c2') in 0.297075 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.012803 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.06 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.023 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2025ms)
+		BeginReloadAssembly (282ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (13ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (56ms)
+		EndReloadAssembly (1539ms)
+			LoadAssemblies (214ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (402ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (87ms)
+			SetupLoadedEditorAssemblies (730ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (16ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (2ms)
+				BeforeProcessingInitializeOnLoad (150ms)
+				ProcessInitializeOnLoadAttributes (454ms)
+				ProcessInitializeOnLoadMethodAttributes (81ms)
+				AfterProcessingInitializeOnLoad (25ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (42ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 6.22 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2166 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 17 unused Assets / (24.6 KB). Loaded Objects now: 2662.
+Memory consumption went from 103.5 MB to 103.5 MB.
+Total: 8.000300 ms (FindLiveObjects: 0.383600 ms CreateObjectMapping: 0.135400 ms MarkObjects: 7.427100 ms  DeleteObjects: 0.052400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 549.385040 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/attack1_2.png
+  artifactKey: Guid(a2f4f4fc6d7ef7b4d9fa3f10ab2ea605) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/attack1_2.png using Guid(a2f4f4fc6d7ef7b4d9fa3f10ab2ea605) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f52bd503b17c8cce66e4e6d254128c37') in 0.182314 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/attack2_4.png
+  artifactKey: Guid(58937c3383e5ea6479caa6ae20721ef2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/attack2_4.png using Guid(58937c3383e5ea6479caa6ae20721ef2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6cbaae1c0a0043e38df7d38200b648e2') in 0.029664 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000059 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/dead_near_6.png
+  artifactKey: Guid(e39e6ec38e7b83a429c6a58ae48238a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/dead_near_6.png using Guid(e39e6ec38e7b83a429c6a58ae48238a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd24bca21075155d5b8f0396e69dece31') in 0.030371 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/run_2.png
+  artifactKey: Guid(571cf7e1f3cb1004c9bd392a4ba8effb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/run_2.png using Guid(571cf7e1f3cb1004c9bd392a4ba8effb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7cf9b55b9515cb68c82fb695824fdaae') in 0.027015 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/attack2_6.png
+  artifactKey: Guid(a1c7675334dad6c4f956b2e1784b6987) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/attack2_6.png using Guid(a1c7675334dad6c4f956b2e1784b6987) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '27d426f3bb504082385f26747b8054bb') in 0.030111 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/attack1_3.png
+  artifactKey: Guid(13432bf4af10b0e48a179414edd65e5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/attack1_3.png using Guid(13432bf4af10b0e48a179414edd65e5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'de850018156b20b8f76a23841ea7eb9b') in 0.028126 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/corpse_2.png
+  artifactKey: Guid(b08c2e3859dc73740a2def8e7d08d81f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/corpse_2.png using Guid(b08c2e3859dc73740a2def8e7d08d81f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '10dcef019affa7e6a0221e457d77d630') in 0.026249 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/dead_far_5.png
+  artifactKey: Guid(52df3eeb7370ab84db574584d66dacb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/dead_far_5.png using Guid(52df3eeb7370ab84db574584d66dacb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '29117007989846675e4b0bfcc4fbf98b') in 0.028072 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/attack2_5.png
+  artifactKey: Guid(7fd2d5cbd58310e4c9d7de36d24e029c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/attack2_5.png using Guid(7fd2d5cbd58310e4c9d7de36d24e029c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f13baa4a4d504acc016c1b066385922') in 0.028396 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/dead_far_2.png
+  artifactKey: Guid(781b0592f510b514aac03a3490b4a8b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/dead_far_2.png using Guid(781b0592f510b514aac03a3490b4a8b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea3ac8b182b46fde855d4109c3abda4f') in 0.026610 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000054 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/run_5.png
+  artifactKey: Guid(878f2fe40abb5ae478737490809acfe5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/run_5.png using Guid(878f2fe40abb5ae478737490809acfe5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6410b970b41a52cc738902c04352d8a9') in 0.026231 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/dead_near_4.png
+  artifactKey: Guid(dd058aaef6c43f74e8307a5f4e13de45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/dead_near_4.png using Guid(dd058aaef6c43f74e8307a5f4e13de45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77e59e5a0dfb434221a14d46d986e180') in 0.028202 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/hit_2.png
+  artifactKey: Guid(e580ee5a55e373e479debf1969dd931b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/hit_2.png using Guid(e580ee5a55e373e479debf1969dd931b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bd1a8514b7575a37df66a8fc66cd480c') in 0.026758 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/ready_2.png
+  artifactKey: Guid(f77ec1ad9c5134440a1d69370b876144) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/ready_2.png using Guid(f77ec1ad9c5134440a1d69370b876144) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c49bb7635806bf0c28b67d13bdfe8c55') in 0.027471 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/run_1.png
+  artifactKey: Guid(73dcc7f155f20e742966bd695ecb7230) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/run_1.png using Guid(73dcc7f155f20e742966bd695ecb7230) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f77d5cf4d19a23bd39dc2b7942cf05b7') in 0.027398 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/dead_far_4.png
+  artifactKey: Guid(bb89718b10cc85a428dc09ed20bbabee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/dead_far_4.png using Guid(bb89718b10cc85a428dc09ed20bbabee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '905b3c200ed78bf898cf28064f613908') in 0.025181 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/corpse_1.png
+  artifactKey: Guid(23bd5af5979fc974aa773073895b2808) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/corpse_1.png using Guid(23bd5af5979fc974aa773073895b2808) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5246ac152bb40ba811a341c8f7742483') in 0.027651 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/attack1_4.png
+  artifactKey: Guid(c9b40e05001b8ef48bc16746c276e935) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/attack1_4.png using Guid(c9b40e05001b8ef48bc16746c276e935) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6608b9f768601f7cc48f8b4f760c8bc5') in 0.025937 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/run_4.png
+  artifactKey: Guid(0491c061016c7b74892ccea6d7bca7c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/run_4.png using Guid(0491c061016c7b74892ccea6d7bca7c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b9e6712783256a5bda373abfd6c0e270') in 0.028071 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Components/UnityAssets/Graphics/skeleton_sword/reborn_3.png
+  artifactKey: Guid(d2d3278248863a64f8556cd2e7c9792f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Components/UnityAssets/Graphics/skeleton_sword/reborn_3.png using Guid(d2d3278248863a64f8556cd2e7c9792f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4859369735d0652b6901b0f2f7b45844') in 0.023640 seconds 
