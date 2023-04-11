@@ -28,6 +28,7 @@ public class MobTrap : MonoBehaviour
             yield return new WaitForSeconds(bulletTime * attSpeed);
             if (hp > 0)
             {
+                Instantiate(bullet, transform.position, Quaternion.identity);
                 //Debug.Log("발사");
             }
             else

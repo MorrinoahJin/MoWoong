@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 9010642349934493256}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -125,11 +125,11 @@ MonoBehaviour:
   IsLongRangeAtt: 0
   bullet: {fileID: 0}
   enemyAtkPower: 10
-  attDistance: 2
+  attDistance: 2.5
   speed: 2
   hp: 50
   attTime: 0.8
-  damageTime: 0.6
+  damageTime: 0.4
   hitedTime: 0.66
   dieTime: 2
 --- !u!61 &-3288309307821513618
