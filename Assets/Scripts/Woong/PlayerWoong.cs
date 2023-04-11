@@ -26,10 +26,13 @@ public class PlayerWoong: MonoBehaviour
 
     //점프
     Rigidbody2D rigid;
+    [SerializeField]
     float jumpForce=16;
     public int jumpCount;
     public int maxJumpCount;
     bool chakJi;
+    [SerializeField]
+    bool isGround=true;
 
     //기본공격 범위 설정
     public GameObject attBoxObj;
@@ -66,7 +69,7 @@ public class PlayerWoong: MonoBehaviour
         jumpCount = 0;
         maxJumpCount = 2;
         playerAnimNum = 0;
-      
+        
 
 
         attBox = gameObject.AddComponent<BoxCollider2D>();
@@ -102,12 +105,12 @@ public class PlayerWoong: MonoBehaviour
         }
         if (playerState != "Parrying" && playerState != "Attack" && playerState != "Hited" && playerState != "Die")
         {
-            Move();
             Jump();
-            if(jumpCount!=0)
+            Move();
+           
+            if(isGround==false&&jumpCount!=0)
             {
-                ResetJumpCount();
-                //JumpControlloer();
+                CheckGround();            
             }
             
             //플레이어 이동키 값을 받음
@@ -121,8 +124,11 @@ public class PlayerWoong: MonoBehaviour
         }
         if (playerState != "GoRight" && playerState != "GoLeft" && playerState != "Jump" && playerState != "ShiftGo" && playerState != "Parrying" && playerState != "Attack" && playerState != "Hited" && playerState != "Die")
         {
-            playerState = "Idle";
-            PlayerAnim("Idle");
+           
+                playerState = "Idle";
+                PlayerAnim("Idle");
+          
+          
         }
        
     }
@@ -201,23 +207,7 @@ public class PlayerWoong: MonoBehaviour
             transform.position += move * playerSpeed * Time.deltaTime;
         }
     }
-    /*
-    void JumpControlloer()
-    {
-        rigid.velocity=new Vector2(rigid.velocity.x,rigid.velocity.y);
-        UnityEngine.Debug.Log(rigid.velocity);
-        if (rigid.velocity.y > 0)
-        {
-            UnityEngine.Debug.Log("점프시작");
-            PlayerAnim("JumpStart");
-        }
-        else if (rigid.velocity.y < 0 )
-        {
-            UnityEngine.Debug.Log("떨어진다잇");
-            PlayerAnim("JumpMiddle");
-        }
-       
-    }*/
+ 
     
     void Move()
     {
@@ -248,10 +238,15 @@ public class PlayerWoong: MonoBehaviour
                 StartCoroutine(ShiftGO());
             }
         }
-        else
+        else 
         {
-            playerState = "Idle";
-            PlayerAnim("Idle");
+            if(isGround==true)
+            {
+               
+                playerState = "Idle";
+                PlayerAnim("Idle");
+            }
+           
         }
     }
     //대쉬관련
@@ -272,7 +267,10 @@ public class PlayerWoong: MonoBehaviour
         yield return new WaitForSeconds(.2f);
 
         playerSpeed = speed;
-        playerState = "Idle";
+      
+            playerState = "Idle";
+            PlayerAnim("Idle");
+       
 
         yield return new WaitForSeconds(1.8f); //재사용 대기시간
 
@@ -282,23 +280,25 @@ public class PlayerWoong: MonoBehaviour
 
     void Jump()
     {
-       //아래점프 동작
+        UnityEngine.Debug.Log(rigid.velocity);
+        //아래점프 동작
         if (Input.GetKeyDown(KeyCode.Space)&& Input.GetKey(KeyCode.DownArrow))
-        {           
-            UnityEngine.Debug.Log("발판찾기");
+        {
+            isGround = false;
             playerState = "Jump";
             StartCoroutine(DoJumpDown());
+            CheckGround();
             Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, true);                            
         }
         //위 점프 동작
-        else if(Input.GetKeyDown(KeyCode.Space) &&jumpCount <maxJumpCount)
+        if(Input.GetKeyDown(KeyCode.Space) &&jumpCount <maxJumpCount)
         {
+            isGround = false;
             playerState = "Jump";
             jumpCount += 1;
             StartCoroutine(DoJump());
-            Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, true);
-          
-            
+            CheckGround();
+            Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, true);                     
         }
       
     }
@@ -307,13 +307,16 @@ public class PlayerWoong: MonoBehaviour
     {
          PlayerAnim("JumpStart");
         
-        yield return new WaitForSeconds(.06f);
+        yield return new WaitForSeconds(.0f);
      
         if (jumpCount == 0)
             rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
         else if(jumpCount == 1)
             rigid.velocity = new Vector2(rigid.velocity.x, jumpForce * 0.66f);
-        yield return new WaitForSeconds(.4f);
+
+        yield return new WaitForSeconds(0.1f);
+        
+        yield return new WaitForSeconds(.35f);
 
         Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);
         yield return new WaitForSeconds(.13f);
@@ -324,51 +327,41 @@ public class PlayerWoong: MonoBehaviour
     IEnumerator DoJumpDown()
     {
         PlayerAnim("JumpMiddle"); 
-        UnityEngine.Debug.Log("발판통과");
+        
         StartCoroutine(PlayerJumpEnd());
         //  ResetJumpCount();
         yield return new WaitForSeconds(.2f);
-        Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);                  
+        Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);     //벨로시티 y 가 마이너스 면 펄스로 변경 예정             
     }
 
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        RaycastHit2D checkGround;
-        Vector2 rayPos = new Vector2();
-        rayPos = new Vector2(this.transform.position.x, this.transform.position.y);
-        checkGround= Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Ground"));
-        if (collision.collider.tag == "Ground" && jumpTIme != 0)
-        {
-            jumpTIme = 0;
-            StartCoroutine(PlayerJumpEnd());
-        }
-    }
-    */
+    
    //레이를 플레이어 아래로 쏴서 점프를 초기화 해주는 함수
-    void ResetJumpCount()
-    {       
+    void CheckGround()
+    {                
         Vector2 rayPos = new Vector2(this.transform.position.x, this.transform.position.y);
-        RaycastHit2D checkGround =Physics2D.Raycast(rayPos, Vector2.down, 1f, LayerMask.GetMask("Ground","PassableGround"));         
-
-        UnityEngine.Debug.DrawRay(rayPos, Vector2.down, Color.red, 1f);
-
+        RaycastHit2D checkGround = Physics2D.Raycast(rayPos, Vector2.down, 0.8f, LayerMask.GetMask("Ground", "PassableGround"));
+       
         if (checkGround.collider != null)
         {
-            UnityEngine.Debug.Log("땅밟음!!! 점프카운트초기화");
-            jumpCount = 0;
-            StartCoroutine(PlayerJumpEnd());
-            
-           // PlayerAnim("JumpEnd");
-        }
+                UnityEngine.Debug.DrawRay(rayPos, Vector2.down, Color.red, 1f);
+                
+
+                //StartCoroutine(PlayerJumpEnd());
+                jumpCount = 0;
+                
+                            
+                if(rigid.velocity.y<0)
+                StartCoroutine(PlayerJumpEnd());
+                //PlayerAnim("JumpEnd");
+        }                        
     }
     IEnumerator PlayerJumpEnd()
-    {        
-        Debug.Log("착지");
-        rigid.velocity = new Vector2(0f, 0f);
-        yield return new WaitForSeconds(.2f);
-        PlayerAnim("Idle");
+    {       
+        isGround = true;
+        rigid.velocity = new Vector2(0f, 0f);        
+        yield return new WaitForSeconds(.1f);      
         playerState = "Idle";
+        PlayerAnim("Idle");     
     }
 
     void PlayerAnim(string playerDoAnim)
@@ -409,11 +402,13 @@ public class PlayerWoong: MonoBehaviour
     }
     void PlayerAnimChange()
     {
-        if (playerAnimNum == 0)
-            anim.SetTrigger("Idle");
+        if (playerAnimNum == 0)    
+            anim.SetTrigger("Idle");    
         //이동
-        else if (playerAnimNum == 1)
-            anim.SetTrigger("RunRight");
+        else if (playerAnimNum == 1) {
+            if (jumpCount == 0)
+                anim.SetTrigger("RunRight");
+        }
         else if (playerAnimNum == 2)
             anim.SetTrigger("RunLeft");
         //공격
@@ -519,4 +514,21 @@ public class PlayerWoong: MonoBehaviour
         enabled = false;
         UnityEngine.Debug.Log("스크립트가 종료되었습니다.");
     }
+    /*
+ void JumpControlloer()
+ {
+     rigid.velocity=new Vector2(rigid.velocity.x,rigid.velocity.y);
+     UnityEngine.Debug.Log(rigid.velocity);
+     if (rigid.velocity.y > 0)
+     {
+         UnityEngine.Debug.Log("점프시작");
+         PlayerAnim("JumpStart");
+     }
+     else if (rigid.velocity.y < 0 )
+     {
+         UnityEngine.Debug.Log("떨어진다잇");
+         PlayerAnim("JumpMiddle");
+     }
+
+ }*/
 }
