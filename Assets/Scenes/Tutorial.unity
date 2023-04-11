@@ -804,6 +804,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5448918105367694013, guid: 10ac4c4e7ae8108438593703eef87294, type: 3}
+      propertyPath: jumpForce
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10ac4c4e7ae8108438593703eef87294, type: 3}
 --- !u!1 &330240166
@@ -1633,9 +1637,9 @@ Transform:
   - {fileID: 2108690355}
   - {fileID: 2100964113}
   - {fileID: 416357637}
-  - {fileID: 1479806572}
   - {fileID: 1958708456}
   - {fileID: 1564563915}
+  - {fileID: 1479806572}
   - {fileID: 851911869}
   - {fileID: 208923386}
   m_Father: {fileID: 0}
