@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
@@ -120,7 +116,7 @@ public class Player : MonoBehaviour
         if (playerState != "GoRight" && playerState != "GoLeft" && playerState != "Jump" && playerState != "ShiftGo" && playerState != "Jump" && playerState != "Parrying" && playerState != "Attack" && playerState != "Hited" && playerState != "Die")
         {
             playerState = "Idle";
-            PlayerAnim("Idle");
+            DoAnim("Idle");
         }
     }
 
@@ -142,11 +138,11 @@ public class Player : MonoBehaviour
 
         //공격콤보에 따라 다른 애니메이션 실행
         if (attackComboCount == 1)
-            PlayerAnim("Attack1");
+            DoAnim("Attack1");
         else if (attackComboCount == 2)
-            PlayerAnim("Attack2");
+            DoAnim("Attack2");
         else
-            PlayerAnim("Attack3");
+            DoAnim("Attack3");
 
         Collider2D[] EnemyCollider = Physics2D.OverlapBoxAll(attBoxObj.transform.position, attBox.size, 0f);
 
@@ -205,7 +201,7 @@ public class Player : MonoBehaviour
         {
             if(playerState != "Jump")
             {
-                PlayerAnim("MoveRight");
+                DoAnim("MoveRight");
                 playerState = "GoLeft";
             }
 
@@ -219,7 +215,7 @@ public class Player : MonoBehaviour
         {
             if (playerState != "Jump")
             {
-                PlayerAnim("MoveRight");
+                DoAnim("MoveRight");
                 playerState = "GoRight";
             }
             if (Input.GetKeyDown("left shift") && !playerShiftOn)
@@ -230,7 +226,7 @@ public class Player : MonoBehaviour
         else
         {
             playerState = "Idle";
-            PlayerAnim("Idle");
+            DoAnim("Idle");
         }
     }
 
@@ -270,7 +266,7 @@ public class Player : MonoBehaviour
 
     IEnumerator DoJump()
     {
-        PlayerAnim("JumpStart");
+        DoAnim("JumpStart");
         yield return new WaitForSeconds(.06f);
 
         if (jumpTime == 0)
@@ -279,7 +275,7 @@ public class Player : MonoBehaviour
             rigid.velocity = new Vector2(0f, jumpForce * 0.66f);
 
         yield return new WaitForSeconds(.27f);
-        PlayerAnim("JumpMiddle");
+        DoAnim("JumpMiddle");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -294,14 +290,14 @@ public class Player : MonoBehaviour
 
     IEnumerator PlayerJumpEnd()
     {
-        PlayerAnim("Idle");
+        DoAnim("Idle");
         rigid.velocity = new Vector2(0f, 0f);
         yield return new WaitForSeconds(.1f);
-        PlayerAnim("Idle");
+        DoAnim("Idle");
         playerState = "Idle";
     }
 
-    void PlayerAnim(string playerDoAnim)
+    void DoAnim(string playerDoAnim)
     {
         int nowAnimNum = 0;
         if (playerDoAnim == "Idle")
@@ -398,16 +394,10 @@ public class Player : MonoBehaviour
         isDieAnim = true;
         UnityEngine.Debug.Log("플레이어가 죽었습니다.");
         playerState = "Die";
-        PlayerAnim("Die");
+        DoAnim("Die");
         //Invoke("StopScript", 2f);
         //rigid.velocity = new Vector2(transform.position.x, 0); //죽으면 y좌표를 고정하게 하기
         //GetComponent<Player>().enabled = false; //플레이어 키입력 제한하기
 
-    }
-    void StopScript()
-    {
-       //플레이어 사망시 스크립트 멈추기
-        enabled = false;
-        UnityEngine.Debug.Log("스크립트가 종료되었습니다.");
     }
 }
