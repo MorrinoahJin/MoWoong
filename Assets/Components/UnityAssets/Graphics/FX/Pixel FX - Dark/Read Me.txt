@@ -1,0 +1,132 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+LICENSE
+
+- You can use this asset in any game project, personal or commercial
+- DO NOT resell or redistribute AS A GAME ASSET, it has to be part of a project
+- Modify to suit your needs
+- You are NOT allowed to turn any of my assets to an NFT.
+- Credit not necessary but appreciated, if you do you can link to my ITCH profile
+ITCH.IO LINK: https://admurin.itch.io/
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FX DETAILS
+
+Buff
+
+- Animations: 1
+- Frames: 16
+- Loop: No 
+- Details
+	- This buff will imbue your armor with lightning attributes which may render you immune to lighting skills. Up to you.
+	- The last frame (the lightning bolt over the head) is meant to follow the player around to indicate when the skill is active and when it expires.
+
+
+Demon Ritual
+
+- Animations: 4
+- Frames: 35
+- Loop: Yes 
+- Details: 
+	- The demon acts as a turret since it can not move.
+	- You can add health to it if you want or you can just make it disappear after X amount of seconds.
+	- The Demon hits all the enemies in front of him with its dark ray. You can loop it to make it infinite if you want.
+	- One suggestion is to to make the screen shake when the spawn animation begins and right around the middle you can play a mighty roar. This roar can be used to put fear in your enemy decreasing their defense.
+	- The demon comes with 4 animations
+			1. Spawn
+			2. Idle
+			3. Attack (Start/Loop/End)
+			4. Looped Dark Ray Extension
+	
+
+Dark I
+
+- Animations: 1
+- Frames: 14
+- Loop: Yes 
+- Details:
+	- This is the first dark attack. It may be slow but when it hits it deals high damage. 
+	- This attack only affects one enemy.
+
+
+Dark II
+
+- Animations: 1
+- Frames: 15
+- Loop: Yes
+- Details: 
+	- This attack can deal damage to all the enemies in its path or just one. 
+	- There is possibility for this skill to also deal some poison de-buffs.
+
+
+Dark III
+
+- Animations: 4
+- Frames: 52
+- Loop: Yes 
+- Details: 
+	- This attack will summon hands and they will reach out to the enemies and hit them. 
+	- Each hand is looped and can be used to cover the whole map if you want to!
+
+
+Seeker
+
+- Animations: 1
+- Frames: 32
+- Loop: No 
+- Details: 
+	- Sometimes offering your vision to the dark pays off (that is why the preview goes black). 
+	- This skill allows the player to discover hidden chests that would not be found without dark powers. 
+	- The seeker should last for some time and will follow the player around and can look in 4 directions.
+	- Another way that you can use this skill is by again, trading your vision for a damage boost, the map goes black and then you have enemies remain the original colors (as I did with the chests).
+	- Alternatively, the seeker casts rays at the enemies or increases drop rate of enemies upon defeat.
+
+
+Doom
+
+- Animations: 2
+- Frames: 34
+- Loop: Yes
+- Details: 
+	- This skill places a debuff on all the enemies in your sight.
+	- I had a few ideas with this debuff. Don't forget to recolor the affected enemies!
+			1. You can make it deal damage per second
+			2. You summon the skull and it gives you a XX% chance to apply the debuff when you attack
+			3. It deals no damage but it decreases the enemy defenses drastically.
+
+
+Sorrow
+
+- Animations: 1
+- Frames: 17
+- Loop: Yes 
+- Details:
+	- Shower your enemies in darkness for as long as this skill lasts.
+	- You can also activate the debuff animation found under the Doom skill to amplify the damage that this skill does.
+	- The preview shows all skeletons being hit at the same time but you can also use the Appear and Dissapear animations. 
+			1. A way to use those would be by only summoning 1 skull on top of an enemy and once it is defeated the Disappear animation will play,
+			2. The skull will teleport on top of another enemy and the Appear animation will play leading to the loop. 
+			3. This gets repeated until all enemies are defeated.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+MAKE SURE YOU READ THE DETAILS THERE ARE A FEW IDEAS ON HOW TO USE THE SKILLS.
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+If you have any other questions you can check my discord where I will answer and help you use my assets. 
+DISCORD LINK: https://discord.com/invite/jmf4pzv5Fj
+
+If you want to support me you can check out my Patreon. This allows me to focus on making more assets and releasing them for free assets!
+PATREON LINK: https://www.patreon.com/admurin
+
+
+Don't forget to leave a review and check my other assets!
+
+Thank you.
+Admurin
