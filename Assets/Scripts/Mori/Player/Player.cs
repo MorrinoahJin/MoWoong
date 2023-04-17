@@ -28,8 +28,7 @@ public class Player : MonoBehaviour
     bool chakJi;
 
     //기본공격 범위 설정
-    public GameObject attBoxObj;
-    BoxCollider2D attBox;
+    public Vector2 attBoxPos, attBoxSize;
 
     //플레이어 스텟
     //static public float playerHp;
@@ -59,9 +58,6 @@ public class Player : MonoBehaviour
         jumpTime = 0;
         playerAnimNum = 0;
 
-        attBox = gameObject.AddComponent<BoxCollider2D>();
-        attBox.size = new Vector2(2f, 1f);
-        attBox.isTrigger = true;
     }
 
     // Update is called once per frame
@@ -144,7 +140,7 @@ public class Player : MonoBehaviour
         else
             DoAnim("Attack3");
 
-        Collider2D[] EnemyCollider = Physics2D.OverlapBoxAll(attBoxObj.transform.position, attBox.size, 0f);
+        Collider2D[] EnemyCollider = Physics2D.OverlapBoxAll(attBoxPos, attBoxSize, 0f);
 
         foreach (Collider2D collider in EnemyCollider)
         {
@@ -181,6 +177,12 @@ public class Player : MonoBehaviour
             attackComboCount = 0;
             playerState = "Idle";
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(attBoxPos, attBoxSize);
     }
 
     //플레이어 이동 처리

@@ -124,8 +124,9 @@ MonoBehaviour:
   iDontCareHited: 0
   IsLongRangeAtt: 0
   bullet: {fileID: 0}
-  enemyAtkPower: 10
+  ChaseDistance: 4
   attDistance: 2.5
+  enemyAtkPower: 10
   speed: 2
   hp: 50
   attTime: 0.8

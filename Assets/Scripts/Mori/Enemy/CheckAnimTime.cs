@@ -47,7 +47,7 @@ public class CheckAnimTime : MonoBehaviour
             if (stateInfo.normalizedTime >= 1.0f)
             {
                 attackTime = false;
-                Debug.Log(attackAnimTime);
+                Debug.Log("공격시간" + attackAnimTime);
             }
         }
         if (hitedTime)
@@ -57,7 +57,7 @@ public class CheckAnimTime : MonoBehaviour
             if (stateInfo.normalizedTime >= 1.0f)
             {
                 hitedTime = false;
-                Debug.Log(hitedAnimTIme);
+                Debug.Log("피격시간" + hitedAnimTIme);
             }
         }
         if (dieTime)
@@ -67,7 +67,7 @@ public class CheckAnimTime : MonoBehaviour
             if (stateInfo.normalizedTime >= 1.0f)
             {
                 dieTime = false;
-                Debug.Log(DieAnimTime);
+                Debug.Log("죽음시간"+DieAnimTime);
             }
         }
     }

@@ -40,9 +40,9 @@ public class Enemy : MonoBehaviour
     //스탯
     Vector2 playerPos; //플레이어의 위치
     float playerDistance, playerDistanceY; //플레이어와의 거리
-    float ChaseDistance = 4f; //탐지 범위
+    public float ChaseDistance; //탐지 범위
     int previousAnimNum; //작동되는 애니메이션 넘버
-    public float enemyAtkPower, attDistance, speed; //공격데미지 , 공격사거리, 이동속도
+    public float attDistance, enemyAtkPower, speed; //공격데미지 , 공격사거리, 이동속도
     public float hp;
     public float attTime, damageTime, hitedTime, dieTime; //공격시간, 데미지를 입히는 시간, 피격시간, 죽을 때 시간
 
