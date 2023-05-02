@@ -392,7 +392,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1000
+  m_SortingOrder: 120
   m_Sprite: {fileID: -2067823105, guid: 37fc785f88af083479f393fce0a598ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_FlipX: 0
@@ -4021,7 +4021,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10000
+  m_SortingOrder: 120
   m_Sprite: {fileID: -1276555358, guid: 37fc785f88af083479f393fce0a598ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -67981,7 +67981,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 32767
+  m_SortingOrder: 120
   m_Sprite: {fileID: 1985094120, guid: 37fc785f88af083479f393fce0a598ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -68626,7 +68626,7 @@ Canvas:
   m_GameObject: {fileID: 1514197699}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 826996942}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -68636,7 +68636,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10000
   m_TargetDisplay: 0
 --- !u!224 &1514197703
 RectTransform:
@@ -69353,7 +69353,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 32767
+  m_SortingOrder: 120
   m_Sprite: {fileID: 1985094120, guid: 37fc785f88af083479f393fce0a598ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -69465,7 +69465,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1745217668}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -73579,7 +73579,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 32767
+  m_SortingOrder: 120
   m_Sprite: {fileID: 1985094120, guid: 37fc785f88af083479f393fce0a598ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
