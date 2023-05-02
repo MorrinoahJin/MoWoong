@@ -11,7 +11,7 @@ public class TutorialMapController : MonoBehaviour
     bool camMove, timeControl;
     public float camSpeed, timeSpeed;
     Camera cam;
-    int playerInBossStageCount, playerHpZeroCount;
+    public int playerInBossStageCount, playerHpZeroCount;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +39,7 @@ public class TutorialMapController : MonoBehaviour
             StartCoroutine(PlayerDieFX());
         }
 
-
+        
         //Debug.Log(Time.timeScale);
     }
 
@@ -76,7 +76,7 @@ public class TutorialMapController : MonoBehaviour
             cam.transform.position = Vector3.Lerp(cam.transform.position, camPos[1], camSpeed);
     }
 
-    IEnumerator PlayerDieFX()
+    IEnumerator PlayerDieFX()   
     {
         yield return new WaitForSeconds(.33f);
         CameraMoving.cameraMovingStop = true;
