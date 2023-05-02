@@ -44,7 +44,7 @@ public class Skill2Bullet : MonoBehaviour
         {
             anim.SetTrigger("Hited");
             if(col.tag == "Player")
-                col.GetComponent<PlayerWoong>().TakeDamage(damage);
+                col.GetComponent<PlayerWoong>().TakeDamage(damage, transform.position);
             Destroy(gameObject, .66f);
             isHited = true;
         }

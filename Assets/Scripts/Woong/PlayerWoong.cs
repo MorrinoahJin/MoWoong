@@ -171,6 +171,11 @@ public class PlayerWoong : MonoBehaviour
                 Enemy enemy = collider.GetComponent<Enemy>();
                 enemy.GetDamage(playerAtkPower);
             }
+            if (collider.CompareTag("TutorialBoss"))
+            {
+                //공격코드
+                collider.GetComponent<TutorialBoss>().GetDamage(playerAtkPower);
+            }
         }
     }
     IEnumerator PlayerAttack()

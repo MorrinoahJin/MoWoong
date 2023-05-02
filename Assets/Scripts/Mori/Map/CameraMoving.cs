@@ -81,7 +81,10 @@ public class CameraMoving : MonoBehaviour
     }
     void justFollowCam()
     {
-        this.transform.position = defaultCamPos;
+        if (transform.position.y > -7.5f)
+            this.transform.position = defaultCamPos;
+        else
+            this.transform.position = new Vector3(transform.position.x, -7.5f, transform.position.z);
     }
     void CamZoomInOut()
     {

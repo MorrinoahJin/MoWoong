@@ -253,7 +253,7 @@ public class Enemy : MonoBehaviour
             //공격범위 안에 들어 와 있을 경우 데미지를 입힘 아닐 경우 이동 실행
             if (playerInAttRange)
             {
-                GameObject.FindWithTag("Player").GetComponent<PlayerWoong>().TakeDamage(enemyAtkPower);
+                GameObject.FindWithTag("Player").GetComponent<PlayerWoong>().TakeDamage(enemyAtkPower, transform.position);
                 Debug.Log("공격");
             }
             yield return new WaitForSeconds(attTime-damageTime);

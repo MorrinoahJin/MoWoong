@@ -14,6 +14,7 @@ public enum BossState
 
 public class TutorialBoss : MonoBehaviour
 {
+    SpriteRenderer sprite;
     BossState currentState;
     Animator anim;
     int doNum, animNum;
@@ -27,6 +28,7 @@ public class TutorialBoss : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
+        sprite = GetComponent<SpriteRenderer>();
         animNum = 0;
         attBoxSize = new Vector2(11f, 5f);
 
@@ -161,7 +163,7 @@ public class TutorialBoss : MonoBehaviour
             if (collider.CompareTag("Player"))
             {
                 Debug.Log("데미지 계산");
-                collider.GetComponent<PlayerWoong>().TakeDamage(AttPower);
+                collider.GetComponent<PlayerWoong>().TakeDamage(AttPower, transform.position);
             }
         }
     }
@@ -207,6 +209,18 @@ public class TutorialBoss : MonoBehaviour
             anim.SetTrigger("Idle");
         else if (animNum == 4)
             anim.SetTrigger("Die");
+    }
 
+    public void GetDamage(float damage)
+    {
+        StartCoroutine(ChangeEnemyColor());
+
+    }
+
+    IEnumerator ChangeEnemyColor()
+    {
+        sprite.color = new Color(1, 0.2f, 0.2f, 1);
+        yield return new WaitForSeconds(.33f);
+        sprite.color = new Color(1, 1, 1, 1);
     }
 }

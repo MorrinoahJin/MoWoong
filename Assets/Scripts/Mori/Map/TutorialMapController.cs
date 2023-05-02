@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialMapController : MonoBehaviour
 {
@@ -8,14 +9,16 @@ public class TutorialMapController : MonoBehaviour
     Vector3[] camPos = new Vector3[2];
     Vector3 playerPos;
     public float BossPosX;
-    bool camMove, timeControl;
+    bool camMove, timeControl, playerDie;
     public float camSpeed, timeSpeed;
     Camera cam;
-    public int playerInBossStageCount, playerHpZeroCount;
+    int playerInBossStageCount, playerHpZeroCount;
 
     // Start is called before the first frame update
     void Start()
     {
+        CameraMoving.cameraMovingStop = false;
+        CameraMoving.camZoomIn = false;
         cam = Camera.main;
         playerInBossStageCount = 0;
     }
@@ -39,7 +42,17 @@ public class TutorialMapController : MonoBehaviour
             StartCoroutine(PlayerDieFX());
         }
 
-        
+        if (PlayerWoong.playerHp <= 0)
+        {
+            if (playerInBossStageCount == 0 && !playerDie)
+            {
+                StartCoroutine(PlayerDie());
+            }
+            else
+            {
+
+            }
+        }
         //Debug.Log(Time.timeScale);
     }
 
@@ -95,6 +108,22 @@ public class TutorialMapController : MonoBehaviour
             Time.timeScale = Mathf.Lerp(Time.timeScale, 0.25f, timeSpeed);
         else
             Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, timeSpeed);
-    }   
+   }
+
+    IEnumerator PlayerDie()
+    {
+        playerDie = true;
+        if (playerInBossStageCount == 0)
+        {
+            yield return new WaitForSeconds(3.5f);
+            GameObject.Find("Main Camera").GetComponent<CameraMoving>().StartFadeInOut();
+            yield return new WaitForSeconds(1.5f);
+            SceneManager.LoadScene("Tutorial");
+        }
+        else
+        {
+
+        }
+    }
 
 }

@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            collision.GetComponent<PlayerWoong>().TakeDamage(attPower);
+            collision.GetComponent<PlayerWoong>().TakeDamage(attPower, transform.position);
             Destroy(gameObject, .01f);
         }
         else if (collision.tag == "Wall")
