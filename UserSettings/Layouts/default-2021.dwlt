@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 85
+  controlID: 67
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 140
+  controlID: 167
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 60
+  controlID: 141
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -704,9 +704,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 101.598114, y: -0.07801275, z: -0.313933}
+    m_Target: {x: 54.775944, y: -6.2215915, z: 0.0024542212}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0}
+    m_Value: {x: 54.775944, y: -6.2215915, z: 0.0024542212}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -757,9 +757,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 24.945688
+    m_Target: 1.2148277
     speed: 2
-    m_Value: 0.26870057
+    m_Value: 1.2148277
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -878,14 +878,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 1
+    - e00: 0.46380955
       e01: 0
       e02: 0
-      e03: 0
+      e03: 121.67619
       e10: 0
-      e11: 1
+      e11: 0.46380955
       e12: 0
-      e13: 0
+      e13: 24.847618
       e20: 0
       e21: 0
       e22: 1
@@ -910,14 +910,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 1
+    - e00: 0.6151579
       e01: 0
       e02: 0
-      e03: 0
+      e03: -15.757874
       e10: 0
-      e11: 1
+      e11: 0.6151579
       e12: 0
-      e13: 0
+      e13: 45.45053
       e20: 0
       e21: 0
       e22: 1
@@ -926,14 +926,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.7050505
+    - e00: 0.59030306
       e01: 0
       e02: 0
-      e03: 7.9494934
+      e03: 9.096954
       e10: 0
-      e11: 0.7050505
+      e11: 0.59030306
       e12: 0
-      e13: 99.34343
+      e13: 64.06061
       e20: 0
       e21: 0
       e22: 1
@@ -1009,11 +1009,11 @@ MonoBehaviour:
     - e00: 0.5264865
       e01: 0
       e02: 0
-      e03: 72.91351
+      e03: 73.708115
       e10: 0
       e11: 0.5264865
       e12: 0
-      e13: 19.708107
+      e13: 20.000565
       e20: 0
       e21: 0
       e22: 1
@@ -1023,9 +1023,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: b42c91dcb1128174d899395db1fef55b, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 1d2a3d7308a029c4996d276ed995d84f, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -3712375507176914467, guid: b42c91dcb1128174d899395db1fef55b, type: 2}
+  - m_Target: {fileID: 4721731734253301904, guid: 1d2a3d7308a029c4996d276ed995d84f, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -1070,23 +1070,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 2afbffff50510000
+      m_SelectedIDs: 14fbffff
+      m_LastClickedID: -1260
+      m_ExpandedIDs: 2afbfffff850000050510000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: TutorialBoss
+        m_OriginalName: TutorialBoss
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 20728
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 10}
       m_SearchString: 
@@ -1209,7 +1209,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Components/Prefabs/Charcter/Monster/Bullet
+    - Assets/Components/Prefabs/Charcter/Monster
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 0
