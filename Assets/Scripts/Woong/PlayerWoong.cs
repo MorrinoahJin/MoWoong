@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 using UnityEngine;
 
 
-public class PlayerWoong: MonoBehaviour
+public class PlayerWoong : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
 
     Animator anim;
     [SerializeField]
     float playerSpeed = 5;
-    int playerLayer,passableGroundLayer;
-   
+    int playerLayer, passableGroundLayer;
+
     //플레이어 상태(점프는 없음)
     [SerializeField]
     string playerState;  // Attack, SkillAttack, Idle, GoLeft, GoRight, Hited, Die
@@ -29,12 +32,12 @@ public class PlayerWoong: MonoBehaviour
     //점프
     Rigidbody2D rigid;
     [SerializeField]
-    float jumpForce=16;
+    float jumpForce = 16;
     public int jumpCount;
     public int maxJumpCount;
     bool chakJi;
     [SerializeField]
-    bool isGround=true;
+    bool isGround = true;
 
     //기본공격 범위 설정
     public GameObject attBoxObj;
@@ -42,7 +45,7 @@ public class PlayerWoong: MonoBehaviour
 
     //플레이어 스텟
     //static public float playerHp;
-    public float playerHp;
+    static public float playerHp;
 
     //플레이어 무적
     bool invincibleMode = false;
@@ -56,7 +59,7 @@ public class PlayerWoong: MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-       
+
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
@@ -66,38 +69,48 @@ public class PlayerWoong: MonoBehaviour
     {
         // UnityEngine.Debug.Log("Debug message");
         playerLayer = LayerMask.NameToLayer("Player");
-        passableGroundLayer = LayerMask.NameToLayer("PassableGround");        
+        passableGroundLayer = LayerMask.NameToLayer("PassableGround");
         playerState = "Idle";
         jumpCount = 0;
         maxJumpCount = 2;
         playerAnimNum = 0;
-        
+
 
 
         attBox = gameObject.AddComponent<BoxCollider2D>();
         attBox.size = new Vector2(2f, 1f);
         attBox.isTrigger = true;
-        HitedColor = false; 
+        HitedColor = false;
     }
 
-   
+
     void Update()
     {
         Vector2 rayPos = new Vector2(this.transform.position.x, this.transform.position.y);
         RaycastHit2D checkGround = Physics2D.Raycast(rayPos, Vector2.down, 0.8f, LayerMask.GetMask("Ground", "PassableGround"));
         Debug.DrawRay(rayPos, Vector2.down, Color.red, 0.8f);
 
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> main
         if (playerState != "Die")
         {
-           
+
             ishited = true;
-          
+
         }
         if (playerState != "Hited" && playerState != "Die")
+<<<<<<< HEAD
         {   
             if(isGround==true) { Attack(); }
         
+=======
+        {
+            if (isGround == true) { Attack(); }
+
+>>>>>>> main
             ishited = true;
             //콤보 공격 체크
             if (checkAttack)
@@ -114,12 +127,21 @@ public class PlayerWoong: MonoBehaviour
         {
             Jump();
             Move();
+<<<<<<< HEAD
             if (checkGround.collider != null&&jumpCount!=0)
             {
                 CheckGround();
             }
             
             
+=======
+            if (checkGround.collider != null && jumpCount != 0)
+            {
+                CheckGround();
+            }
+
+
+>>>>>>> main
             //플레이어 이동키 값을 받음
             moveHorizontal = Input.GetAxisRaw("Horizontal");
 
@@ -131,39 +153,27 @@ public class PlayerWoong: MonoBehaviour
         }
         if (playerState != "GoRight" && playerState != "GoLeft" && playerState != "Jump" && playerState != "ShiftGo" && playerState != "Parrying" && playerState != "Attack" && playerState != "Hited" && playerState != "Die")
         {
-           
-                playerState = "Idle";
-                PlayerAnim("Idle");
-          
-          
+
+            playerState = "Idle";
+            PlayerAnim("Idle");
+
+
         }
-       
+
     }
 
     void Attack()
     {
-        if ((Input.GetKey("f") || Input.GetMouseButton(0)) && playerState != "Attack")
+        if (isGround == false && (Input.GetKey("f") || Input.GetMouseButton(0)) && playerState != "Attack")
+            StartCoroutine(PlayerAttackAir());
+        else if (isGround == true && (Input.GetKey("f") || Input.GetMouseButton(0)) && playerState != "Attack")
             StartCoroutine(PlayerAttack());
     }
 
-    IEnumerator PlayerAttack()
+    //애니메이션 이벤트 함수호출
+    void checkAtk()
     {
-        checkAttack = false;
-        doNextAttack = false;
-        playerState = "Attack";
-
-        
-
-        attackComboCount += 1;
-
-        //공격콤보에 따라 다른 애니메이션 실행
-        if (attackComboCount == 1)
-            PlayerAnim("Attack1");
-        else if (attackComboCount == 2)
-            PlayerAnim("Attack2");
-        else
-            PlayerAnim("Attack3");
-
+        UnityEngine.Debug.Log("이벤트 공격 호출");
         Collider2D[] EnemyCollider = Physics2D.OverlapBoxAll(attBoxObj.transform.position, attBox.size, 0f);
 
         foreach (Collider2D collider in EnemyCollider)
@@ -175,6 +185,26 @@ public class PlayerWoong: MonoBehaviour
                 enemy.GetDamage(playerAtkPower);
             }
         }
+    }
+    IEnumerator PlayerAttack()
+    {
+        checkAttack = false;
+        doNextAttack = false;
+        playerState = "Attack";
+
+
+
+        attackComboCount += 1;
+
+        //공격콤보에 따라 다른 애니메이션 실행
+        if (attackComboCount == 1)
+            PlayerAnim("Attack1");
+        else if (attackComboCount == 2)
+            PlayerAnim("Attack2");
+        else
+            PlayerAnim("Attack3");
+
+
 
         //공격애니메이션 끝나는 시간, 마지막 콤보 이후 콤보카운트 초기화
         if (attackComboCount == 1)
@@ -203,6 +233,49 @@ public class PlayerWoong: MonoBehaviour
             playerState = "Idle";
         }
     }
+    IEnumerator PlayerAttackAir()
+    {
+        checkAttack = false;
+        doNextAttack = false;
+        playerState = "Attack";
+
+
+
+        attackComboCount += 1;
+
+        //공격콤보에 따라 다른 애니메이션 실행
+        if (attackComboCount == 1)
+            PlayerAnim("Attack1");
+        else
+            PlayerAnim("Attack2");
+
+        //공격애니메이션 끝나는 시간, 마지막 콤보 이후 콤보카운트 초기화
+        if (attackComboCount == 1)
+            yield return new WaitForSeconds(.4f);
+        else
+        {
+            yield return new WaitForSeconds(.5f);
+            attackComboCount = 0;
+        }
+        yield return new WaitForSeconds(.05f);
+
+
+        //공격키를 입력했는지 확인하고 입력했으면 PlayerAttack함수 실행해서 다음 공격 실행
+        checkAttack = true;
+        yield return new WaitForSeconds(.5f);
+        if (doNextAttack)
+        {
+            StartCoroutine(PlayerAttack());
+            if (attackComboCount == 2)
+                attackComboCount = 0;
+        }
+        else
+        {
+            checkAttack = false;
+            attackComboCount = 0;
+            playerState = "Idle";
+        }
+    }
 
     //플레이어 이동 처리
     void FixedUpdate()
@@ -214,8 +287,8 @@ public class PlayerWoong: MonoBehaviour
             transform.position += move * playerSpeed * Time.deltaTime;
         }
     }
- 
-    
+
+
     void Move()
     {
         //플레이어 상태에 따른 이동 변경
@@ -245,15 +318,15 @@ public class PlayerWoong: MonoBehaviour
                 StartCoroutine(ShiftGO());
             }
         }
-        else 
+        else
         {
-            if(isGround==true)
+            if (isGround == true)
             {
-               
+
                 playerState = "Idle";
                 PlayerAnim("Idle");
             }
-           
+
         }
     }
     //대쉬관련
@@ -263,7 +336,7 @@ public class PlayerWoong: MonoBehaviour
         playerShiftOn = true;
         playerState = "ShiftGo";
         PlayerAnim("ShiftGo");
-        
+
         float speed = playerSpeed;
         playerSpeed = speed * 3;
 
@@ -274,10 +347,10 @@ public class PlayerWoong: MonoBehaviour
         yield return new WaitForSeconds(.2f);
 
         playerSpeed = speed;
-      
-            playerState = "Idle";
-            PlayerAnim("Idle");
-       
+
+        playerState = "Idle";
+        PlayerAnim("Idle");
+
 
         yield return new WaitForSeconds(1.8f); //재사용 대기시간
 
@@ -289,10 +362,11 @@ public class PlayerWoong: MonoBehaviour
     {
         //UnityEngine.Debug.Log(rigid.velocity);
         //아래점프 동작
-        if (Input.GetKeyDown(KeyCode.Space)&& Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.Space) && Input.GetKey(KeyCode.DownArrow))
         {
             isGround = false;
             playerState = "Jump";
+<<<<<<< HEAD
             StartCoroutine(DoJumpDown());            
             Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, true);                            
         }
@@ -304,16 +378,29 @@ public class PlayerWoong: MonoBehaviour
            
             StartCoroutine(DoJump());           
             Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, true);                     
+=======
+            StartCoroutine(DoJumpDown());
+            Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, true);
         }
-      
+        //위 점프 동작
+        else if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumpCount)
+        {
+            isGround = false;
+            playerState = "Jump";
+
+            StartCoroutine(DoJump());
+            Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, true);
+>>>>>>> main
+        }
+
     }
     //점프 및 2단점프
     IEnumerator DoJump()
     {
-         PlayerAnim("JumpStart");
-        
+        PlayerAnim("JumpStart");
+
         yield return new WaitForSeconds(.0f);
-     
+
         if (jumpCount == 0)
         {
             rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
@@ -324,14 +411,22 @@ public class PlayerWoong: MonoBehaviour
 
             Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);
             yield return new WaitForSeconds(.13f);
+<<<<<<< HEAD
            
         }
            
         else if(jumpCount != 0 )
+=======
+
+        }
+
+        else if (jumpCount != 0)
+>>>>>>> main
         {
             rigid.velocity = new Vector2(rigid.velocity.x, jumpForce * 0.66f);
             jumpCount += 1;
             yield return new WaitForSeconds(0.1f);
+<<<<<<< HEAD
 
             yield return new WaitForSeconds(.35f);
             Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);
@@ -342,18 +437,31 @@ public class PlayerWoong: MonoBehaviour
 
       
         
+=======
+
+            yield return new WaitForSeconds(.35f);
+            Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);
+            yield return new WaitForSeconds(.13f);
+            PlayerAnim("JumpMiddle");
+        }
+
+
+
+
+>>>>>>> main
     }
     //아래 점프
     IEnumerator DoJumpDown()
     {
-        PlayerAnim("JumpMiddle"); 
-        
+        PlayerAnim("JumpMiddle");
+
         StartCoroutine(PlayerJumpEnd());
         //  ResetJumpCount();
         yield return new WaitForSeconds(.2f);
         Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);     //벨로시티 y 가 마이너스 면 펄스로 변경 예정             
     }
 
+<<<<<<< HEAD
     
    //레이를 플레이어 아래로 쏴서 점프를 초기화 해주는 함수
     void CheckGround()
@@ -364,6 +472,18 @@ public class PlayerWoong: MonoBehaviour
             jumpCount = 0;
             Debug.Log("아래로내려갑니다.");
 
+=======
+
+    //레이를 플레이어 아래로 쏴서 점프를 초기화 해주는 함수
+    void CheckGround()
+    {
+        if (rigid.velocity.y < 0)
+        {
+            //PlayerAnim("JumpMiddle");
+            jumpCount = 0;
+            Debug.Log("아래로내려갑니다.");
+
+>>>>>>> main
             StartCoroutine(PlayerJumpEnd());
             //PlayerAnim("JumpEnd");
         }
@@ -371,9 +491,15 @@ public class PlayerWoong: MonoBehaviour
     IEnumerator PlayerJumpEnd()
     {
 
+<<<<<<< HEAD
         
         rigid.velocity = new Vector2(0f, 0f);        
         yield return new WaitForSeconds(.1f);      
+=======
+
+        rigid.velocity = new Vector2(0f, 0f);
+        yield return new WaitForSeconds(.1f);
+>>>>>>> main
         playerState = "Idle";
         PlayerAnim("Idle");
         isGround = true;
@@ -396,19 +522,25 @@ public class PlayerWoong: MonoBehaviour
             nowAnimNum = 4;
         else if (playerDoAnim == "Attack3")
             nowAnimNum = 5;
+        else if (playerDoAnim == "AirAttack1")
+            nowAnimNum = 6;
+        else if (playerDoAnim == "AirAttack2")
+            nowAnimNum = 7;
         //점프
         else if (playerDoAnim == "JumpStart")
-            nowAnimNum = 6;
-        else if (playerDoAnim == "JumpMiddle")
-            nowAnimNum = 7;
-        else if (playerDoAnim == "JumpEnd")
             nowAnimNum = 8;
-        else if (playerDoAnim == "Die")
+        else if (playerDoAnim == "JumpMiddle")
             nowAnimNum = 9;
-        else if (playerDoAnim == "Hited")
+        else if (playerDoAnim == "JumpEnd")
             nowAnimNum = 10;
-        else if (playerDoAnim == "ShiftGo")
+        else if (playerDoAnim == "Die")
             nowAnimNum = 11;
+        else if (playerDoAnim == "Hited")
+            nowAnimNum = 12;
+        else if (playerDoAnim == "ShiftGo")
+            nowAnimNum = 13;
+
+
         if (nowAnimNum != playerAnimNum)
         {
             playerAnimNum = nowAnimNum;
@@ -417,10 +549,11 @@ public class PlayerWoong: MonoBehaviour
     }
     void PlayerAnimChange()
     {
-        if (playerAnimNum == 0)    
-            anim.SetTrigger("Idle");    
+        if (playerAnimNum == 0)
+            anim.SetTrigger("Idle");
         //이동
-        else if (playerAnimNum == 1) {
+        else if (playerAnimNum == 1)
+        {
             if (jumpCount == 0)
                 anim.SetTrigger("RunRight");
         }
@@ -433,20 +566,25 @@ public class PlayerWoong: MonoBehaviour
             anim.SetTrigger("SecondAttack");
         else if (playerAnimNum == 5)
             anim.SetTrigger("LastAttack");
-        //점프
         else if (playerAnimNum == 6)
-            anim.SetTrigger("JumpStart");
+            anim.SetTrigger("AirAttack1");
         else if (playerAnimNum == 7)
-            anim.SetTrigger("JumpMiddle");
+            anim.SetTrigger("AirAttack2");
+        //점프
         else if (playerAnimNum == 8)
-            anim.SetTrigger("JumpEnd");
+            anim.SetTrigger("JumpStart");
         else if (playerAnimNum == 9)
-            anim.SetTrigger("Die");
+            anim.SetTrigger("JumpMiddle");
         else if (playerAnimNum == 10)
-            anim.SetTrigger("Hit");
+            anim.SetTrigger("JumpEnd");
         else if (playerAnimNum == 11)
+            anim.SetTrigger("Die");
+        else if (playerAnimNum == 12)
+            anim.SetTrigger("Hit");
+        else if (playerAnimNum == 13)
             anim.SetTrigger("FloorDash");
-      
+
+
     }
     /*
     private void OnTriggerEnter2D(Collider2D other)
@@ -464,7 +602,7 @@ public class PlayerWoong: MonoBehaviour
         }
     }*/
     //피격 및 데미지 
-    
+
     public void TakeDamage(float damage)
     {
         Debug.Log(playerHp);
@@ -472,12 +610,12 @@ public class PlayerWoong: MonoBehaviour
         if (!invincibleMode)
             StartCoroutine(Hit(damage, HitAnimTime));
     }
-    
-    
+
+
     private IEnumerator Hit(float damage, float AnimTime)
     {
         Debug.Log("플레이어가 데미지를 입었습니다.");
-        if (ishited==true)
+        if (ishited == true)
         {
             float invincibleTime = 0.6f;
             if (playerHp > 0)
@@ -501,7 +639,7 @@ public class PlayerWoong: MonoBehaviour
                 die();
         }
     }
-    
+
     //무적
     private IEnumerator BeInvincible(float invincibleTime)
     {
@@ -514,10 +652,10 @@ public class PlayerWoong: MonoBehaviour
         isDieAnim = true;
         playerState = "Die";
         PlayerAnim("Die");
-       
+
         UnityEngine.Debug.Log("플레이어가 죽었습니다.");
-       
-      
+
+
         //Invoke("StopScript", 2f);
         //rigid.velocity = new Vector2(transform.position.x, 0); //죽으면 y좌표를 고정하게 하기
         //GetComponent<Player>().enabled = false; //플레이어 키입력 제한하기
@@ -548,6 +686,10 @@ public class PlayerWoong: MonoBehaviour
  }*/
     void MirrorImage()
     {
+<<<<<<< HEAD
        // GameObject PlayerMirror = Instantiate();
+=======
+        // GameObject PlayerMirror = Instantiate();
+>>>>>>> main
     }
 }
