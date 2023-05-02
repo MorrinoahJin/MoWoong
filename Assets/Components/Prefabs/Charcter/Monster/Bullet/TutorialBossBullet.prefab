@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6790331549411284779}
   m_Layer: 0
   m_Name: TutorialBossBullet
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+  damage: 10
 --- !u!61 &-6790331549411284779
 BoxCollider2D:
   m_ObjectHideFlags: 0

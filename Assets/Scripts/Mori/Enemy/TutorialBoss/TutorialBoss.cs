@@ -55,7 +55,7 @@ public class TutorialBoss : MonoBehaviour
         doNum = Random.Range(1, 7);
         switch (doNum)
         {
-            
+            /*
             case 1:
             case 2:
             case 3:
@@ -64,8 +64,8 @@ public class TutorialBoss : MonoBehaviour
             case 6:
                 currentState = BossState.Attack2;
                 break;
-            
-            /*
+            */
+
             case 1:
                 currentState = BossState.Idle;
                 break;
@@ -80,7 +80,6 @@ public class TutorialBoss : MonoBehaviour
             case 6:
                 currentState = BossState.Attack2;
                 break;
-            */
         }
 
         doAnim("Idle");
