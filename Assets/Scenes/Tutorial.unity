@@ -1051,11 +1051,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5448918105367694015, guid: 10ac4c4e7ae8108438593703eef87294, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 95.3
+      value: 46.2
       objectReference: {fileID: 0}
     - target: {fileID: 5448918105367694015, guid: 10ac4c4e7ae8108438593703eef87294, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.08
+      value: 3.5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5448918105367694002, guid: 10ac4c4e7ae8108438593703eef87294, type: 3}
@@ -2939,8 +2939,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d76ed72314c9dde43bf5f2d27ffb9777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossObj: {fileID: 182328542}
   BossPosX: 117
   camSpeed: 0.0033
+  timeSpeed: 0.0033
 --- !u!1 &922192143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3458,7 +3460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1243062327953605510, guid: 635dcfd64c93d944da28490428069878, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1800026766737661476, guid: 635dcfd64c93d944da28490428069878, type: 3}
       propertyPath: m_Color.b
@@ -72982,7 +72984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2005992528
 RectTransform:
   m_ObjectHideFlags: 0
@@ -73048,9 +73050,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 826996944}
-        m_TargetAssemblyTypeName: CameraMoving, Assembly-CSharp
-        m_MethodName: StartFadeInOut
+      - m_Target: {fileID: 919099709}
+        m_TargetAssemblyTypeName: TutorialMapController, Assembly-CSharp
+        m_MethodName: TimeController
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

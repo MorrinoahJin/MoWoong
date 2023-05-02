@@ -25,13 +25,13 @@ public class TutorialBoss : MonoBehaviour
     public GameObject Attack2Skill, Attack2SkillPos;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         animNum = 0;
         attBoxSize = new Vector2(11f, 5f);
 
         anim = GetComponent<Animator>();
-        StartCoroutine(Idle());
+        StartCoroutine(IdleStart());
     }
 
     void Update()
@@ -44,36 +44,43 @@ public class TutorialBoss : MonoBehaviour
         }
     }
 
+    IEnumerator IdleStart()
+    {
+        yield return new WaitForSeconds(6f);
+        StartCoroutine(Idle());
+    }
+
     IEnumerator Idle()
     {
         doNum = Random.Range(1, 7);
         switch (doNum)
         {
+            
             case 1:
             case 2:
             case 3:
             case 4:
             case 5:
             case 6:
+                currentState = BossState.Attack2;
+                break;
+            
+            /*
+            case 1:
+                currentState = BossState.Idle;
+                break;
+            case 2:
+            case 3:
                 currentState = BossState.Attack1;
                 break;
-
-                /*
-                case 1:
-                    currentState = BossState.Idle;
-                    break;
-                case 2:
-                case 3:
-                    currentState = BossState.Attack1;
-                    break;
-                case 4:
-                    currentState = BossState.SpawnMob;
-                    break;
-                case 5:
-                case 6:
-                    currentState = BossState.Attack2;
-                    break;
-                */
+            case 4:
+                currentState = BossState.SpawnMob;
+                break;
+            case 5:
+            case 6:
+                currentState = BossState.Attack2;
+                break;
+            */
         }
 
         doAnim("Idle");

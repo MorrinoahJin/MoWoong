@@ -41,7 +41,7 @@ public class PlayerWoong : MonoBehaviour
 
     //플레이어 스텟
     //static public float playerHp;
-    public float playerHp;
+    static public float playerHp;
 
     //플레이어 무적
     bool invincibleMode = false;
