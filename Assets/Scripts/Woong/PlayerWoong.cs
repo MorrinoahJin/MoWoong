@@ -542,6 +542,7 @@ public class PlayerWoong : MonoBehaviour
         Debug.Log("플레이어가 데미지를 입었습니다.");
         if (ishited == true)
         {
+            playerHp -= damage;
             float invincibleTime = 0.6f;
             if (playerHp > 0)
             {
@@ -549,7 +550,6 @@ public class PlayerWoong : MonoBehaviour
                 spriteRenderer.color = Color.red;
                 playerState = "Hited";
                 PlayerAnim("Hited");
-                playerHp -= damage;
                 yield return new WaitForSeconds(AnimTime);
                 spriteRenderer.color = Color.white;
                 HitedColor = false;
