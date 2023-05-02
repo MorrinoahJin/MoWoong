@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ComboAttack1
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: df89bde60f96aed4b92c35b1a9dfdbcd, type: 3}
+    - {fileID: 2800000, guid: 4fe93873df55167468a92358791e51f9, type: 3}
+    - {fileID: 2800000, guid: cf5aa75aa81e1a94c978030729d32b0a, type: 3}
+    - {fileID: 2800000, guid: c5841796b6faf79458f770ff3b1a1fa4, type: 3}
+    - {fileID: 2800000, guid: e5d9729fac752824fb86d6c79641c0ae, type: 3}
+    - {fileID: 2800000, guid: 3e73d291baf59f3448440704e8162546, type: 3}
+    - {fileID: 2800000, guid: 62bf2b69fe8471a44a90cc960ed0a526, type: 3}
+    - {fileID: 2800000, guid: 35d1eee7cd683e145a3094870c9b1368, type: 3}
+    - {fileID: 2800000, guid: cb7d9a847646b78459aa9f9250726c47, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites: []
+  m_PackedSpriteNamesToIndex: []
+  m_RenderDataMap: {}
+  m_Tag: ComboAttack1
+  m_IsVariant: 0
