@@ -551,7 +551,7 @@ public class PlayerWoong : MonoBehaviour
         if (!invincibleMode)
             StartCoroutine(Hit(damage, hitAnimTime));
     }
-     
+    /* 
     public void TakeDamage(float damage)
     {
         Debug.Log(playerHp);
@@ -559,6 +559,7 @@ public class PlayerWoong : MonoBehaviour
         if (!invincibleMode)
             StartCoroutine(Hit(damage, hitAnimTime));
     }
+    */
     private IEnumerator KnockBack(float dir)
     {
         isKnockBack = true;
