@@ -14,6 +14,12 @@ public class Skill2Bullet : MonoBehaviour
         anim = GetComponent<Animator>();
         playerPos = GameObject.FindWithTag("Player").transform.position;
         StartCoroutine(DestroyObj());
+
+        if (transform.position.x > playerPos.x)
+            transform.localEulerAngles = new Vector3(0, 180, 0);
+        else
+            transform.localEulerAngles = new Vector3(0, 0, 0);
+
     }
 
     // Update is called once per frame
@@ -22,11 +28,13 @@ public class Skill2Bullet : MonoBehaviour
         if(!isHited)
         {
             transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
+        }
 
-            if (transform.position.x > playerPos.x)
-                transform.localEulerAngles = new Vector3(0, 180, 0);
-            else
-                transform.localEulerAngles = new Vector3(0, 0, 0);
+        Vector3 thisPos = transform.position;
+        if (playerPos == thisPos)
+        {
+            anim.SetTrigger("Hited");
+            Destroy(gameObject, .66f);
         }
     }
 
@@ -35,7 +43,7 @@ public class Skill2Bullet : MonoBehaviour
         if (col.tag == "Player" || col.tag == "Wall")
         {
             anim.SetTrigger("Hited");
-            Destroy(gameObject, 1f);
+            Destroy(gameObject, .66f);
             isHited = true;
         }
     }

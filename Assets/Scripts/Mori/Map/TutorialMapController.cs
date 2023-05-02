@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class TutorialMapController : MonoBehaviour
 {
+    public GameObject bossObj;
     Vector3[] camPos = new Vector3[2];
     Vector3 playerPos;
     public float BossPosX;
-    bool camMove;
-    public float camSpeed;
+    bool camMove, timeControl;
+    public float camSpeed, timeSpeed;
     Camera cam;
-    int count;
+    int playerInBossStageCount, playerHpZeroCount;
+
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
-        count = 0;
+        playerInBossStageCount = 0;
     }
 
     // Update is called once per frame
@@ -26,13 +28,27 @@ public class TutorialMapController : MonoBehaviour
         camPos[0] = new Vector3(BossPosX, playerPos.y + 2, -10);
 
         CameraMoveToBoss();
+        TimeController();
+
+        if (PlayerWoong.playerHp >= 100)
+            playerHpZeroCount = 0;
+
+        if (PlayerWoong.playerHp <= 0 && playerHpZeroCount == 0)
+        {
+            playerHpZeroCount += 1;
+            StartCoroutine(PlayerDieFX());
+        }
+
+
+        Debug.Log(Time.timeScale);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player" && count == 0)
+        if(collision.tag == "Player" && playerInBossStageCount == 0)
         {
-            count += 1;
+            playerInBossStageCount += 1;
+            bossObj.SetActive(true);
             StartCoroutine(CameraControllAndZoom());
         }
     }
@@ -59,4 +75,26 @@ public class TutorialMapController : MonoBehaviour
         else
             cam.transform.position = Vector3.Lerp(cam.transform.position, camPos[1], camSpeed);
     }
+
+    IEnumerator PlayerDieFX()
+    {
+        yield return new WaitForSeconds(.33f);
+        CameraMoving.cameraMovingStop = true;
+        CameraMoving.camZoomIn = true;
+        timeControl = true;
+        yield return new WaitForSeconds(2f);
+        timeControl = false;
+        yield return new WaitForSeconds(1.5f);
+        CameraMoving.cameraMovingStop = false;
+        CameraMoving.camZoomIn = false; 
+    }
+
+   void TimeController()
+   {
+        if (timeControl)
+            Time.timeScale = Mathf.Lerp(Time.timeScale, 0.25f, timeSpeed);
+        else
+            Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, timeSpeed);
+    }   
+
 }
