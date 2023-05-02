@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 
 
@@ -12,6 +13,8 @@ public class PlayerWoong : MonoBehaviour
     float playerSpeed = 5;
     int playerLayer, passableGroundLayer;
 
+    Vector2 atkSize;
+        
     //플레이어 상태(점프는 없음)
     [SerializeField]
     string playerState;  // Attack, SkillAttack, Idle, GoLeft, GoRight, Hited, Die
@@ -41,6 +44,7 @@ public class PlayerWoong : MonoBehaviour
 
     //플레이어 스텟
     //static public float playerHp;
+    [SerializeField]
     static public float playerHp;
 
     //플레이어 무적
@@ -70,13 +74,10 @@ public class PlayerWoong : MonoBehaviour
         jumpCount = 0;
         maxJumpCount = 2;
         playerAnimNum = 0;
+        playerHp = 100;
+        
+        atkSize= new Vector2(2f, 1f);
 
-
-
-        attBox = gameObject.AddComponent<BoxCollider2D>();
-        attBox.size = new Vector2(2f, 1f);
-        attBox.isTrigger = true;
-        HitedColor = false;
     }
 
 
@@ -151,8 +152,8 @@ public class PlayerWoong : MonoBehaviour
     void checkAtk()
     {
         UnityEngine.Debug.Log("이벤트 공격 호출");
-        Collider2D[] EnemyCollider = Physics2D.OverlapBoxAll(attBoxObj.transform.position, attBox.size, 0f);
-
+        Collider2D[] EnemyCollider = Physics2D.OverlapBoxAll(attBoxObj.transform.position, atkSize, 0f);
+        
         foreach (Collider2D collider in EnemyCollider)
         {
             if (collider.CompareTag("Enemy"))
