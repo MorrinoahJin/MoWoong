@@ -11,7 +11,7 @@ public class TutorialMapController : MonoBehaviour
     bool camMove, timeControl;
     public float camSpeed, timeSpeed;
     Camera cam;
-    int playerInBossStageCount, playerHpZeroCount;
+    public int playerInBossStageCount, playerHpZeroCount;
 
     // Start is called before the first frame update
     void Start()

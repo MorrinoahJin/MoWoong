@@ -1069,7 +1069,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3985619337498136110, guid: 50aea700a217e27409b04c582be823da, type: 3}
       propertyPath: enemyAtkPower
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5205481461496503282, guid: 50aea700a217e27409b04c582be823da, type: 3}
       propertyPath: m_Color.b
@@ -1663,7 +1663,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3985619337498136110, guid: 50aea700a217e27409b04c582be823da, type: 3}
       propertyPath: enemyAtkPower
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5205481461496503282, guid: 50aea700a217e27409b04c582be823da, type: 3}
       propertyPath: m_Color.b
@@ -2329,7 +2329,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3985619337498136110, guid: 50aea700a217e27409b04c582be823da, type: 3}
       propertyPath: enemyAtkPower
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5205481461496503282, guid: 50aea700a217e27409b04c582be823da, type: 3}
       propertyPath: m_Color.b
@@ -68161,7 +68161,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3985619337498136110, guid: 50aea700a217e27409b04c582be823da, type: 3}
       propertyPath: enemyAtkPower
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5205481461496503282, guid: 50aea700a217e27409b04c582be823da, type: 3}
       propertyPath: m_Color.b
