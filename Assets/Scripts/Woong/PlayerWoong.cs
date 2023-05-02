@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class PlayerWoong : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    private Slider hpBar;
 
     Animator anim;
     [SerializeField]
@@ -31,7 +35,7 @@ public class PlayerWoong : MonoBehaviour
     //점프
     Rigidbody2D rigid;
     [SerializeField]
-    float jumpForce = 16;
+    float jumpForce = 21;
     public int jumpCount;
     public int maxJumpCount;
     bool chakJi;
@@ -46,6 +50,7 @@ public class PlayerWoong : MonoBehaviour
     //static public float playerHp;
     [SerializeField]
     static public float playerHp;
+    static public float playerMaxHp=100;
 
     //플레이어 무적
     bool invincibleMode = false;
@@ -53,6 +58,7 @@ public class PlayerWoong : MonoBehaviour
     bool HitedColor;
 
     //플레이어 죽음/피격관련
+    bool isKnockBack = false;
     bool isDead = false;
     bool isDieAnim = false;
     bool ishited = false;
@@ -74,12 +80,15 @@ public class PlayerWoong : MonoBehaviour
         jumpCount = 0;
         maxJumpCount = 2;
         playerAnimNum = 0;
-        playerHp = 100;
-        
+        playerHp = playerMaxHp;
+        hpBar.value = (float)playerHp / (float)playerMaxHp;
         atkSize= new Vector2(2f, 1f);
 
     }
-
+    void HpBar()
+    {
+        hpBar.value = (float)playerHp / (float)playerMaxHp;
+    }
 
     void Update()
     {
@@ -87,7 +96,7 @@ public class PlayerWoong : MonoBehaviour
         RaycastHit2D checkGround = Physics2D.Raycast(rayPos, Vector2.down, 0.8f, LayerMask.GetMask("Ground", "PassableGround"));
         Debug.DrawRay(rayPos, Vector2.down, Color.red, 0.8f);
 
-
+        HpBar();
         if (playerState != "Die")
         {
 
@@ -372,9 +381,9 @@ public class PlayerWoong : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             Debug.Log("1단점프 내려가는 애니메이션 실행");
             PlayerAnim("JumpMiddle");
-
+            yield return new WaitForSeconds(.23f);
             Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);
-            yield return new WaitForSeconds(.13f);
+           
 
         }
 
@@ -401,7 +410,7 @@ public class PlayerWoong : MonoBehaviour
 
         StartCoroutine(PlayerJumpEnd());
         //  ResetJumpCount();
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.3f);
         Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);     //벨로시티 y 가 마이너스 면 펄스로 변경 예정             
     }
 
@@ -527,15 +536,44 @@ public class PlayerWoong : MonoBehaviour
         }
     }*/
     //피격 및 데미지 
-
+    
+    public void TakeDamage(float damage,Vector3 pos)
+    {
+        Debug.Log(playerHp);
+        float hitAnimTime = 0.2f;
+        float knockBackDirection = transform.position.x - pos.x;
+        if (knockBackDirection < 0)
+            knockBackDirection = 1;
+        else
+            knockBackDirection = -1;
+        if (!isKnockBack)
+            StartCoroutine(KnockBack(knockBackDirection));
+        if (!invincibleMode)
+            StartCoroutine(Hit(damage, hitAnimTime));
+    }
+     
     public void TakeDamage(float damage)
     {
         Debug.Log(playerHp);
-        float HitAnimTime = 0.2f;
+        float hitAnimTime = 0.2f;
         if (!invincibleMode)
-            StartCoroutine(Hit(damage, HitAnimTime));
+            StartCoroutine(Hit(damage, hitAnimTime));
     }
+    private IEnumerator KnockBack(float dir)
+    {
+        isKnockBack = true;
 
+        if (transform.rotation.y == 0)
+        {
+            transform.Translate(Vector2.left * playerSpeed * Time.deltaTime * dir);
+        }
+        else
+            transform.Translate(Vector2.left * playerSpeed * Time.deltaTime * .6f * dir);
+
+        yield return new WaitForSeconds(0.2f);
+
+        isKnockBack = false;
+    }
 
     private IEnumerator Hit(float damage, float AnimTime)
     {
@@ -547,11 +585,13 @@ public class PlayerWoong : MonoBehaviour
             if (playerHp > 0)
             {
                 HitedColor = true;
-                spriteRenderer.color = Color.red;
+                spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+                //spriteRenderer.color = Color.red;
                 playerState = "Hited";
                 PlayerAnim("Hited");
                 yield return new WaitForSeconds(AnimTime);
-                spriteRenderer.color = Color.white;
+                spriteRenderer.color = new Color(1, 1, 1, 1);
+                //spriteRenderer.color = Color.white;
                 HitedColor = false;
                 //애니메이션이 끝나면 다시 idle상태로 돌아오게끔     
                 playerState = "Idle";
@@ -564,7 +604,12 @@ public class PlayerWoong : MonoBehaviour
                 die();
         }
     }
-
+    public void hpzero()
+    {
+        playerHp = 0;
+        UnityEngine.Debug.Log("PlayerHp Zero.");
+        die();
+    }
     //무적
     private IEnumerator BeInvincible(float invincibleTime)
     {
