@@ -92,4 +92,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.5
+    functionName: checkAtk
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: aa13c3ce2dd913b44b8c5043da5395d2, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
