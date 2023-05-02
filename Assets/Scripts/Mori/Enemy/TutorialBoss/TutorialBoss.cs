@@ -67,8 +67,6 @@ public class TutorialBoss : MonoBehaviour
             */
 
             case 1:
-                currentState = BossState.Idle;
-                break;
             case 2:
             case 3:
                 currentState = BossState.Attack1;

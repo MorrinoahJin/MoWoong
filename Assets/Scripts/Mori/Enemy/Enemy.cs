@@ -312,7 +312,7 @@ public class Enemy : MonoBehaviour
                 //바닥 있으면 오른쪽으로 이동
                 if (checkFloor.collider != null && checkLeftSide.collider == null)
                 {
-                    transform.position = new Vector2(this.transform.position.x + .33f, transform.position.y);
+                    transform.position = new Vector2(this.transform.position.x + .66f, transform.position.y);
                     Debug.Log("오른쪽 피격");
                 }
             }
@@ -323,7 +323,7 @@ public class Enemy : MonoBehaviour
                 checkRightSide = Physics2D.Raycast(transform.position, Vector2.right, 1f, LayerMask.GetMask("Ground"));
                 if (checkFloor.collider != null && checkRightSide.collider == null)
                 {
-                    transform.position = new Vector2(this.transform.position.x - .33f, transform.position.y);
+                    transform.position = new Vector2(this.transform.position.x - .66f, transform.position.y);
                     Debug.Log("왼쪽 피격");
                 }
             }
