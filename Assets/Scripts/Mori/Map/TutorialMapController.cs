@@ -39,8 +39,8 @@ public class TutorialMapController : MonoBehaviour
             StartCoroutine(PlayerDieFX());
         }
 
-
-        Debug.Log(Time.timeScale);
+        
+        //Debug.Log(Time.timeScale);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -76,7 +76,7 @@ public class TutorialMapController : MonoBehaviour
             cam.transform.position = Vector3.Lerp(cam.transform.position, camPos[1], camSpeed);
     }
 
-    IEnumerator PlayerDieFX()
+    IEnumerator PlayerDieFX()   
     {
         yield return new WaitForSeconds(.33f);
         CameraMoving.cameraMovingStop = true;

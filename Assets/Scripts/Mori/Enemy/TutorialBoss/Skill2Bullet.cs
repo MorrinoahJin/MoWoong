@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Skill2Bullet : MonoBehaviour
 {
-    public float speed;
+    public float speed, damage;
     Animator anim;
     Vector3 playerPos;
     bool isHited;
@@ -43,6 +43,8 @@ public class Skill2Bullet : MonoBehaviour
         if (col.tag == "Player" || col.tag == "Wall")
         {
             anim.SetTrigger("Hited");
+            if(col.tag == "Player")
+                col.GetComponent<PlayerWoong>().TakeDamage(damage);
             Destroy(gameObject, .66f);
             isHited = true;
         }
