@@ -60,8 +60,8 @@ public class Enemy : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (hp <= 0)
+    {   
+        if (hp <= 0 && currentState != EnemyState.Die)
         {
             ChangeState(EnemyState.Die);
             enemyMoveDirection = "Center";
@@ -250,17 +250,26 @@ public class Enemy : MonoBehaviour
         {
             ChangeAnim(2);
             yield return new WaitForSeconds(damageTime);
-            //공격범위 안에 들어 와 있을 경우 데미지를 입힘 아닐 경우 이동 실행
-            if (playerInAttRange)
+            //만약 공격상태중에 피격상태가 되거나 죽었을 때, 공격모션 취쇠
+            if (currentState != EnemyState.Attack)
             {
-                GameObject.FindWithTag("Player").GetComponent<PlayerWoong>().TakeDamage(enemyAtkPower, transform.position);
-                Debug.Log("공격");
+                attacking = false;
+                DoAnim("Idle");
             }
-            yield return new WaitForSeconds(attTime-damageTime);
+            else //계속 공격 상태일 때 공격모션 계속행동
+            {
+                //공격범위 안에 들어 와 있을 경우 데미지를 입힘 아닐 경우 이동 실행
+                if (playerInAttRange)
+                {
+                    GameObject.FindWithTag("Player").GetComponent<PlayerWoong>().TakeDamage(enemyAtkPower, transform.position);
+                    Debug.Log("공격");
+                }
+                yield return new WaitForSeconds(attTime - damageTime);
 
-            ChangeState(EnemyState.Move);
-            DoAnim("Move");
-            attacking = false;
+                ChangeState(EnemyState.Move);
+                DoAnim("Move");
+                attacking = false;
+            }
         }
         else //원거리 공격
             StartCoroutine(LongRangeAttack());
@@ -281,11 +290,16 @@ public class Enemy : MonoBehaviour
     {
         if (!canGetDamage && currentState != EnemyState.Die)
         {
-            ChangeState(EnemyState.Hited); //스테이트 변경
+            ChangeState(EnemyState.Stop); //스테이트 변경
             hp -= damage;
             StartCoroutine(ChangeEnemyColor());
-            if (hp < 0)
+            /*
+            if (hp <= 0)
+            {
                 ChangeState(EnemyState.Die);
+                enemyMoveDirection = "Center";
+            }
+            */
         }
     }
     //피격처리 함수
@@ -329,7 +343,7 @@ public class Enemy : MonoBehaviour
             }
             yield return new WaitForSeconds(hitedTime - .33f); //피격모션 실행시간
         }
-        yield return new WaitForSeconds(.33f);
+        yield return new WaitForSeconds(.66f);
         isStop = false;
         //피격모션 끝, 변수 초기화
         sprite.color = Color.white;

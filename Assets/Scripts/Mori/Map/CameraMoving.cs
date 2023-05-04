@@ -35,7 +35,8 @@ public class CameraMoving : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main;   
+        cam = Camera.main;
+        StartCoroutine(StageStart());
     }
 
     // Update is called once per frame
@@ -150,6 +151,24 @@ public class CameraMoving : MonoBehaviour
         yield return null;
 
         camBlack = false;
+    }
+
+    IEnumerator StageStart()
+    {
+        blackImage.gameObject.SetActive(true);
+        Color tempColor = blackImage.color;
+        tempColor.a = 1f;
+
+        while (tempColor.a > 0)
+        {
+            time += Time.deltaTime / fadeSpeed;
+            tempColor.a = Mathf.Lerp(1, 0, time);
+            blackImage.color = tempColor;
+            yield return null;
+        }
+        yield return new WaitForSeconds(1f);
+        blackImage.gameObject.SetActive(false);
+        tempColor.a = 1f;
     }
 
 
