@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
+//using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -94,7 +96,7 @@ public class PlayerWoong : MonoBehaviour
     {
         Vector2 rayPos = new Vector2(this.transform.position.x, this.transform.position.y);
         RaycastHit2D checkGround = Physics2D.Raycast(rayPos, Vector2.down, 0.8f, LayerMask.GetMask("Ground", "PassableGround"));
-        Debug.DrawRay(rayPos, Vector2.down, Color.red, 0.8f);
+        //Debug.DrawRay(rayPos, Vector2.down, Color.red, 0.8f);
 
         HpBar();
         if (playerState != "Die")
@@ -328,10 +330,10 @@ public class PlayerWoong : MonoBehaviour
         playerShiftOn = true;
         playerState = "ShiftGo";
         PlayerAnim("ShiftGo");
-
+        StartCoroutine(BeInvincible(0.5f));
         float speed = playerSpeed;
         playerSpeed = speed * 3;
-
+        
         yield return new WaitForSeconds(.1f);
         rigid.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
 
@@ -384,7 +386,7 @@ public class PlayerWoong : MonoBehaviour
             rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
             jumpCount += 1;
             yield return new WaitForSeconds(0.1f);
-            Debug.Log("1단점프 내려가는 애니메이션 실행");
+           // Debug.Log("1단점프 내려가는 애니메이션 실행");
             PlayerAnim("JumpMiddle");
             yield return new WaitForSeconds(.23f);
             Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);
@@ -427,7 +429,7 @@ public class PlayerWoong : MonoBehaviour
         {
             //PlayerAnim("JumpMiddle");
             jumpCount = 0;
-            Debug.Log("아래로내려갑니다.");
+           // Debug.Log("아래로내려갑니다.");
 
             StartCoroutine(PlayerJumpEnd());
             //PlayerAnim("JumpEnd");
@@ -544,7 +546,7 @@ public class PlayerWoong : MonoBehaviour
     
     public void TakeDamage(float damage,Vector3 pos)
     {
-        Debug.Log(playerHp);
+        //Debug.Log(playerHp);
         float hitAnimTime = 0.2f;
         float knockBackDirection = transform.position.x - pos.x;
         if (knockBackDirection < 0)
@@ -568,13 +570,18 @@ public class PlayerWoong : MonoBehaviour
     private IEnumerator KnockBack(float dir)
     {
         isKnockBack = true;
-
-        if (transform.rotation.y == 0)
+        UnityEngine.Debug.Log("넉백");
+        if (dir==1)
         {
-            transform.Translate(Vector2.left * playerSpeed * Time.deltaTime * dir);
+            UnityEngine.Debug.Log("좌 넉백");
+            //transform.Translate(Vector2.right * playerSpeed *0.2f);
         }
-        else
-            transform.Translate(Vector2.left * playerSpeed * Time.deltaTime * .6f * dir);
+        else if(dir==-1)
+        {
+            UnityEngine.Debug.Log("우 넉백");
+            //transform.Translate(Vector2.left * playerSpeed * .2f );
+        }
+            
 
         yield return new WaitForSeconds(0.2f);
 
@@ -583,7 +590,7 @@ public class PlayerWoong : MonoBehaviour
 
     private IEnumerator Hit(float damage, float AnimTime)
     {
-        Debug.Log("플레이어가 데미지를 입었습니다.");
+       // Debug.Log("플레이어가 데미지를 입었습니다.");
         if (ishited == true)
         {
             playerHp -= damage;
