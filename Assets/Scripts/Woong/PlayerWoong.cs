@@ -54,6 +54,12 @@ public class PlayerWoong : MonoBehaviour
     static public float playerHp;
     static public float playerMaxHp=100;
 
+    //플레이어 패링
+    float parryDuration = 0.5f;
+    float parryCooldown = 1f;
+    bool isParrying = false;
+    bool checkHited = false;
+
     //플레이어 무적
     bool invincibleMode = false;
     //플레이어 피격시 색변경 
@@ -117,9 +123,10 @@ public class PlayerWoong : MonoBehaviour
                     doNextAttack = true;
             }
         }
-        if (playerState != "Attack" && playerState != "Hited" && playerState != "Die")
+        if (playerState != "Attack" && playerState != "Hited" && playerState != "Die")     
         {
             //패링함수
+            Parry();
         }
         if (playerState != "Parrying" && playerState != "Attack" && playerState != "Hited" && playerState != "Die")
         {
@@ -435,6 +442,38 @@ public class PlayerWoong : MonoBehaviour
             //PlayerAnim("JumpEnd");
         }
     }
+    void Parry()
+    {
+        if(Input.GetKeyDown("g")){
+            UnityEngine.Debug.Log("패링시작");
+            playerState = "Parry";
+            PlayerAnim("Parry");
+            if (checkHited)
+            {
+                UnityEngine.Debug.Log("패링성공");
+                //패링성공
+                StartCoroutine(DoParry());
+                PlayerAnim("ParrySuccess");
+
+            }
+            else
+            {
+                //패링실패
+            }
+                
+          
+        }
+    }
+    IEnumerator DoParry()
+    {
+        isParrying = true;
+        yield return new WaitForSeconds(parryDuration);
+
+        checkHited = false;
+        yield return new WaitForSeconds(parryCooldown);
+        isParrying = false;
+
+    }
     IEnumerator PlayerJumpEnd()
     {
 
@@ -480,7 +519,11 @@ public class PlayerWoong : MonoBehaviour
             nowAnimNum = 12;
         else if (playerDoAnim == "ShiftGo")
             nowAnimNum = 13;
-
+        //패링
+        else if (playerDoAnim == "Parry")
+            nowAnimNum = 14;
+        else if (playerDoAnim == "ParrySuccess")
+            nowAnimNum = 15;
 
         if (nowAnimNum != playerAnimNum)
         {
@@ -524,6 +567,12 @@ public class PlayerWoong : MonoBehaviour
             anim.SetTrigger("Hit");
         else if (playerAnimNum == 13)
             anim.SetTrigger("FloorDash");
+        //패링
+        else if (playerAnimNum == 14)
+            anim.SetTrigger("Parry");
+        else if (playerAnimNum == 15)
+            anim.SetTrigger("ParrySuccess");
+
 
 
     }
@@ -543,9 +592,11 @@ public class PlayerWoong : MonoBehaviour
         }
     }*/
     //피격 및 데미지 
-    
+  
     public void TakeDamage(float damage,Vector3 pos)
     {
+        checkHited = true;
+
         //Debug.Log(playerHp);
         float hitAnimTime = 0.2f;
         float knockBackDirection = transform.position.x - pos.x;
@@ -574,12 +625,12 @@ public class PlayerWoong : MonoBehaviour
         if (dir==1)
         {
             UnityEngine.Debug.Log("좌 넉백");
-            //transform.Translate(Vector2.right * playerSpeed *0.2f);
+            transform.Translate(Vector2.right * playerSpeed *0.1f);
         }
         else if(dir==-1)
         {
             UnityEngine.Debug.Log("우 넉백");
-            //transform.Translate(Vector2.left * playerSpeed * .2f );
+            transform.Translate(Vector2.left * playerSpeed * .1f );
         }
             
 
@@ -596,7 +647,7 @@ public class PlayerWoong : MonoBehaviour
             playerHp -= damage;
             float invincibleTime = 0.6f;
             if (playerHp > 0)
-            {
+                 {
                 HitedColor = true;
                 spriteRenderer.color = new Color(1, 1, 1, 0.5f);
                 //spriteRenderer.color = Color.red;
