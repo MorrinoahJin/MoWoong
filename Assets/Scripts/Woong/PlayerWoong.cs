@@ -13,7 +13,8 @@ public class PlayerWoong : MonoBehaviour
 
     [SerializeField]
     private Slider hpBar;
-
+    public Image ui_dashCooldown;
+    public Image ui_parryingCooldown;
     Animator anim;
     [SerializeField]
     float playerSpeed = 5;
@@ -56,8 +57,8 @@ public class PlayerWoong : MonoBehaviour
 
     //플레이어 패링
     float parryDuration = 0.5f;
-    float parryCooldown = 1f;
-    bool isParrying = false;
+    float parryCooldown = 3.0f;
+    bool canParrying = true;
     bool checkHited = false;
 
     //플레이어 무적
@@ -444,35 +445,56 @@ public class PlayerWoong : MonoBehaviour
     }
     void Parry()
     {
-        if(Input.GetKeyDown("g")){
+        if(Input.GetKeyDown("g")&&canParrying){
+            canParrying = false;
             UnityEngine.Debug.Log("패링시작");
             playerState = "Parry";
             PlayerAnim("Parry");
+            StartCoroutine(ParryingCoolDown(3.0f));
             if (checkHited)
-            {
+            {                
                 UnityEngine.Debug.Log("패링성공");
                 //패링성공
-                StartCoroutine(DoParry());
                 PlayerAnim("ParrySuccess");
-
+                StartCoroutine(DoParry());               
             }
             else
             {
                 //패링실패
+                StartCoroutine(ParryFail());             
             }
                 
           
         }
     }
+    //패링 쿨타임을 체크하는 코루틴
+    IEnumerator ParryingCoolDown(float cool)
+    {
+        float currentCool = cool;
+        while (cool > 0f)
+        {
+            currentCool -= Time.deltaTime;
+            ui_parryingCooldown.fillAmount = (currentCool / cool);            
+        }
+        yield return new WaitForSeconds(cool);
+        canParrying = true;
+        //ui_parryingCooldown.fillAmount = 1f;
+    }
     IEnumerator DoParry()
     {
-        isParrying = true;
-        yield return new WaitForSeconds(parryDuration);
-
         checkHited = false;
-        yield return new WaitForSeconds(parryCooldown);
-        isParrying = false;
-
+        yield return new WaitForSeconds(parryDuration);
+       
+        playerState = "idle";
+        PlayerAnim("idle");
+     
+    }
+    IEnumerator ParryFail()
+    {
+        checkHited = false;      
+        yield return new WaitForSeconds(parryDuration);
+        playerState = "idle";
+        PlayerAnim("idle");
     }
     IEnumerator PlayerJumpEnd()
     {
@@ -596,18 +618,21 @@ public class PlayerWoong : MonoBehaviour
     public void TakeDamage(float damage,Vector3 pos)
     {
         checkHited = true;
-
-        //Debug.Log(playerHp);
-        float hitAnimTime = 0.2f;
-        float knockBackDirection = transform.position.x - pos.x;
-        if (knockBackDirection < 0)
-            knockBackDirection = 1;
-        else
-            knockBackDirection = -1;
-        if (!isKnockBack)
-            StartCoroutine(KnockBack(knockBackDirection));
-        if (!invincibleMode)
-            StartCoroutine(Hit(damage, hitAnimTime));
+        if (canParrying)
+        {
+            //Debug.Log(playerHp);
+            float hitAnimTime = 0.2f;
+            float knockBackDirection = transform.position.x - pos.x;
+            if (knockBackDirection < 0)
+                knockBackDirection = 1;
+            else
+                knockBackDirection = -1;
+            if (!isKnockBack)
+                StartCoroutine(KnockBack(knockBackDirection));
+            if (!invincibleMode)
+                StartCoroutine(Hit(damage, hitAnimTime));
+        }
+      
     }
     /* 
     public void TakeDamage(float damage)
