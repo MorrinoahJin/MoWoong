@@ -31,7 +31,8 @@ public class TutorialMapController : MonoBehaviour
         camPos[0] = new Vector3(BossPosX, playerPos.y + 2, -10);
 
         CameraMoveToBoss();
-        TimeController();
+        //if(!PauseMenu.isPause)
+            TimeController();
 
         if (PlayerWoong.playerHp >= 100)
             playerHpZeroCount = 0;
