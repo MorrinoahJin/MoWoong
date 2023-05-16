@@ -1,25 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void StartGame()
     {
         // 게임 시작 버튼 클릭 시 실행되는 코드
         SceneManager.LoadScene("Tutorial woong");
+        Time.timeScale = 1f;
+
     }
     public void QuitGame()
     {

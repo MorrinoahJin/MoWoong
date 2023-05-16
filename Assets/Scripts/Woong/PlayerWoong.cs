@@ -9,8 +9,9 @@ using UnityEngine.UI;
 
 public class PlayerWoong : MonoBehaviour
 {
+    
     private SpriteRenderer spriteRenderer;
-
+    
     [SerializeField]
     private Slider hpBar;
     [SerializeField]
@@ -44,7 +45,10 @@ public class PlayerWoong : MonoBehaviour
     bool chakJi;
     [SerializeField]
     bool isGround = true;
-
+    //소리설정
+    public AudioSource audioSource;
+    public AudioClip atkClip;
+    public AudioClip jumpClip;
     //기본공격 범위 설정
     public GameObject attBoxObj;
     BoxCollider2D attBox;
@@ -100,7 +104,7 @@ public class PlayerWoong : MonoBehaviour
     {
         hpBar.value = (float)playerHp / (float)playerMaxHp;
     }
-
+   
     void Update()
     {
         Vector2 rayPos = new Vector2(this.transform.position.x, this.transform.position.y);
@@ -163,9 +167,12 @@ public class PlayerWoong : MonoBehaviour
 
     void Attack()
     {
-        if (isGround == false && (Input.GetKey("f") || Input.GetMouseButton(0)) && playerState != "Attack")
+        //|| Input.GetMouseButton(0))
+        if (isGround == false && (Input.GetKey("f") && playerState != "Attack"))
+        
             StartCoroutine(PlayerAttackAir());
-        else if (isGround == true && (Input.GetKey("f") || Input.GetMouseButton(0)) && playerState != "Attack")
+        else if (isGround == true && (Input.GetKey("f") && playerState != "Attack"))
+        
             StartCoroutine(PlayerAttack());
     }
 
@@ -202,11 +209,21 @@ public class PlayerWoong : MonoBehaviour
 
         //공격콤보에 따라 다른 애니메이션 실행
         if (attackComboCount == 1)
+        {
             PlayerAnim("Attack1");
+            audioSource.PlayOneShot(atkClip);
+        }
         else if (attackComboCount == 2)
+        {
             PlayerAnim("Attack2");
+            audioSource.PlayOneShot(atkClip);
+        }
         else
+        {
             PlayerAnim("Attack3");
+            audioSource.PlayOneShot(atkClip);
+        }
+           
 
 
 
@@ -369,7 +386,7 @@ public class PlayerWoong : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Input.GetKey(KeyCode.DownArrow))
         {
             isGround = false;
-            playerState = "Jump";
+            playerState = "Jump"; 
             StartCoroutine(DoJumpDown());
             Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, true);
         }
@@ -378,7 +395,6 @@ public class PlayerWoong : MonoBehaviour
         {
             isGround = false;
             playerState = "Jump";
-
             StartCoroutine(DoJump());
             Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, true);
         }
@@ -388,7 +404,7 @@ public class PlayerWoong : MonoBehaviour
     IEnumerator DoJump()
     {
         PlayerAnim("JumpStart");
-
+        audioSource.PlayOneShot(jumpClip);
         yield return new WaitForSeconds(.0f);
 
         if (jumpCount == 0)
@@ -424,7 +440,7 @@ public class PlayerWoong : MonoBehaviour
     IEnumerator DoJumpDown()
     {
         PlayerAnim("JumpMiddle");
-
+        audioSource.PlayOneShot(jumpClip);
         StartCoroutine(PlayerJumpEnd());
         //  ResetJumpCount();
         yield return new WaitForSeconds(.3f);
@@ -479,6 +495,7 @@ public class PlayerWoong : MonoBehaviour
             StartCoroutine(UI_ParryingCoolDown(3.0f));
         }
     }
+    
     IEnumerator UI_ParryingCoolDown(float cool)
     {
         float startTime = Time.time;
@@ -490,6 +507,7 @@ public class PlayerWoong : MonoBehaviour
         }
         UI_Parry.fillAmount = 1f;
     }
+
     /*
     IEnumerator Parrying(float duration)
     {
@@ -617,11 +635,9 @@ public class PlayerWoong : MonoBehaviour
             anim.SetTrigger("ParryingSuccess");
 
 
-
     }
-  
     //피격 및 데미지 
-  
+
     public void TakeDamage(float damage,Vector3 pos)
     {
         checkHited = true;

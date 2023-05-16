@@ -31,7 +31,8 @@ public class TutorialMapController : MonoBehaviour
         camPos[0] = new Vector3(BossPosX, playerPos.y + 2, -10);
 
         CameraMoveToBoss();
-        TimeController();
+        if (!PauseMenu.isPause)
+            TimeController();
 
         if (PlayerWoong.playerHp >= 100)
             playerHpZeroCount = 0;
@@ -58,14 +59,14 @@ public class TutorialMapController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player" && playerInBossStageCount == 0)
+        if (collision.tag == "Player" && playerInBossStageCount == 0)
         {
             playerInBossStageCount += 1;
             bossObj.SetActive(true);
             StartCoroutine(CameraControllAndZoom());
         }
     }
-    
+
     IEnumerator CameraControllAndZoom()
     {
         yield return new WaitForSeconds(.33f);
@@ -83,13 +84,13 @@ public class TutorialMapController : MonoBehaviour
 
     void CameraMoveToBoss()
     {
-        if(camMove)
+        if (camMove)
             cam.transform.position = Vector3.Lerp(cam.transform.position, camPos[0], camSpeed);
         else
             cam.transform.position = Vector3.Lerp(cam.transform.position, camPos[1], camSpeed);
     }
 
-    IEnumerator PlayerDieFX()   
+    IEnumerator PlayerDieFX()
     {
         yield return new WaitForSeconds(.33f);
         CameraMoving.cameraMovingStop = true;
@@ -99,16 +100,16 @@ public class TutorialMapController : MonoBehaviour
         timeControl = false;
         yield return new WaitForSeconds(1.5f);
         CameraMoving.cameraMovingStop = false;
-        CameraMoving.camZoomIn = false; 
+        CameraMoving.camZoomIn = false;
     }
 
-   void TimeController()
-   {
+    void TimeController()
+    {
         if (timeControl)
             Time.timeScale = Mathf.Lerp(Time.timeScale, 0.25f, timeSpeed);
         else
             Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, timeSpeed);
-   }
+    }
 
     IEnumerator PlayerDie()
     {
