@@ -22,6 +22,8 @@ public class PlayerWoong : MonoBehaviour
     [SerializeField]
     float playerSpeed = 5;
     int playerLayer, passableGroundLayer;
+    //유저 컨트롤 제어용 
+    static public bool canControl;
 
     Vector2 atkSize;
         
@@ -34,6 +36,7 @@ public class PlayerWoong : MonoBehaviour
     float moveHorizontal;
 
     //공격 및 공격 콤보
+    bool canAtk;
     public float playerAtkPower = 10;
     int attackComboCount = 0;
     bool doNextAttack, checkAttack;
@@ -103,6 +106,8 @@ public class PlayerWoong : MonoBehaviour
         playerHp = playerMaxHp;
         hpBar.value = (float)playerHp / (float)playerMaxHp;
         atkSize= new Vector2(2f, 1f);
+        canControl = true;
+        canAtk = true;
 
     }
     void HpBar()
@@ -125,13 +130,14 @@ public class PlayerWoong : MonoBehaviour
         }
         if (playerState != "Hited" && playerState != "Die")
         {
-            if (isGround == true) { Attack(); }
+            if (isGround == true) 
+            { Attack(); }
 
             ishited = true;
             //콤보 공격 체크
             if (checkAttack)
             {
-                if ((Input.GetKey("f") || Input.GetMouseButton(0)))
+                if ((Input.GetKey("f") || Input.GetMouseButton(0))&&canControl)
                     doNextAttack = true;
             }
         }
@@ -155,9 +161,9 @@ public class PlayerWoong : MonoBehaviour
             moveHorizontal = Input.GetAxisRaw("Horizontal");
 
             //플레이어 좌우 반전
-            if (moveHorizontal < 0)
+            if (moveHorizontal < 0 && canControl)
                 this.transform.localEulerAngles = new Vector3(0, 0, 0);
-            else if (moveHorizontal > 0)
+            else if (moveHorizontal > 0 && canControl)
                 this.transform.localEulerAngles = new Vector3(0, 180, 0);
         }
         if (playerState != "GoRight" && playerState != "GoLeft" && playerState != "Jump" && playerState != "ShiftGo" && playerState != "Parrying" && playerState != "Attack" && playerState != "Hited" && playerState != "Die")
@@ -174,12 +180,19 @@ public class PlayerWoong : MonoBehaviour
     void Attack()
     {
         //|| Input.GetMouseButton(0))
-        if (isGround == false && (Input.GetKey("f") && playerState != "Attack"))
-        
+        if (isGround == false && (Input.GetKey("f") && playerState != "Attack") && canAtk && canControl)
+        {
             StartCoroutine(PlayerAttackAir());
-        else if (isGround == true && (Input.GetKey("f") && playerState != "Attack"))
-        
+            StartCoroutine(CanAtk());
+        }
+                
+        else if (isGround == true && (Input.GetKey("f") && playerState != "Attack") && canAtk && canControl)
+        {
             StartCoroutine(PlayerAttack());
+            StartCoroutine(CanAtk());
+        }
+        
+          
     }
 
     //애니메이션 이벤트 함수호출
@@ -328,7 +341,7 @@ public class PlayerWoong : MonoBehaviour
                 playerState = "GoLeft";
             }
 
-            if (Input.GetKeyDown("left shift") && !playerShiftOn)
+            if (Input.GetKeyDown("left shift") && !playerShiftOn && canControl)
             {
                 StartCoroutine(ShiftGO());
 
@@ -341,7 +354,7 @@ public class PlayerWoong : MonoBehaviour
                 PlayerAnim("MoveRight");
                 playerState = "GoRight";
             }
-            if (Input.GetKeyDown("left shift") && !playerShiftOn)
+            if (Input.GetKeyDown("left shift") && !playerShiftOn && canControl)
             {
                 StartCoroutine(ShiftGO());
             }
@@ -398,7 +411,7 @@ public class PlayerWoong : MonoBehaviour
             Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, true);
         }
         //위 점프 동작
-        else if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumpCount)
+        else if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumpCount && canControl)
         {
             
             isGround = false;
@@ -474,7 +487,7 @@ public class PlayerWoong : MonoBehaviour
     }
     void Buff_atk()
     {
-        if (Input.GetKeyDown("v") && !isBuff_atk)
+        if (Input.GetKeyDown("v") && !isBuff_atk && canControl )
         {
             isBuff_atk = true;
             StartCoroutine(Buff_atkCoolDown(5.0f));
@@ -509,7 +522,7 @@ public class PlayerWoong : MonoBehaviour
     }
     void Parry()
     {
-        if(Input.GetKey("g")&&canParrying){
+        if(Input.GetKey("g")&&canParrying && canControl){
            
            // UnityEngine.Debug.Log("패링시작");
             playerState = "Parrying";
@@ -524,7 +537,7 @@ public class PlayerWoong : MonoBehaviour
                 StartCoroutine(UI_ParryingCoolDown(3.0f));
             }
         }
-        else if (Input.GetKeyUp("g") && canParrying)
+        else if (Input.GetKeyUp("g") && canParrying && canControl)
         {
             //패링 종료
             canParrying = false;
@@ -667,12 +680,14 @@ public class PlayerWoong : MonoBehaviour
     }
     //피격 및 데미지 
 
-    public void TakeDamage(float damage,Vector3 pos)
+    public void TakeDamage(float damage, Vector3 pos)
     {
         checkHited = true;
-        if (playerState!="Parrying")
-        {           
+        if (playerState != "Parrying")
+        {
             //Debug.Log(playerHp);
+            //공격 제한
+            StartCoroutine(CanAtk());
             float hitAnimTime = 0.2f;
             float knockBackDirection = transform.position.x - pos.x;
             if (knockBackDirection < 0)
@@ -684,8 +699,15 @@ public class PlayerWoong : MonoBehaviour
             if (!invincibleMode)
                 StartCoroutine(Hit(damage, hitAnimTime));
         }
-      
     }
+    private IEnumerator CanAtk()
+    {
+        canAtk = false;
+        yield return new WaitForSeconds(0.2f);
+        canAtk = true;
+    }
+
+
     /* 
     public void TakeDamage(float damage)
     {

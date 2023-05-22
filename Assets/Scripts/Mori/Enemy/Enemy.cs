@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
 
     SpriteRenderer sprite;
     bool canGetDamage; //몹이 데미지를 받을 수 있는 상태인지 판별하는 변수
-    
+       
     string enemyMoveDirection; // left or right
     
     public bool iDontCareHited; //피격모션 유무를 제어하기 위한 변수
