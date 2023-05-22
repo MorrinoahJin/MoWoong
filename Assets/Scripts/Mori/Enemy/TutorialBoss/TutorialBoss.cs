@@ -15,10 +15,10 @@ public enum BossState
 public class TutorialBoss : MonoBehaviour
 {
     SpriteRenderer sprite;
+    [SerializeField]
     BossState currentState;
     Animator anim;
     int doNum, animNum;
-    bool doDie;
     Vector2 attBoxSize;
     public float AttPower, hp;
 
@@ -38,12 +38,7 @@ public class TutorialBoss : MonoBehaviour
 
     void Update()
     {
-        if (hp < 0)
-        {
-            currentState = BossState.Die;
-            if (!doDie)
-                StartCoroutine(Die());
-        }
+
     }
 
     IEnumerator IdleStart()
@@ -54,59 +49,65 @@ public class TutorialBoss : MonoBehaviour
 
     IEnumerator Idle()
     {
-        doNum = Random.Range(1, 7);
-        switch (doNum)
+        if(hp > 0)
         {
-            /*
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-                currentState = BossState.Attack2;
-                break;
-            */
+            doNum = Random.Range(1, 7);
+            switch (doNum)
+            {
+                /*
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                    currentState = BossState.Attack2;
+                    break;
+                */
 
-            case 1:
-            case 2:
-            case 3:
-                currentState = BossState.Attack1;
-                break;
-            case 4:
-                currentState = BossState.SpawnMob;
-                break;
-            case 5:
-            case 6:
-                currentState = BossState.Attack2;
-                break;
+                case 1:
+                case 2:
+                case 3:
+                    currentState = BossState.Attack1;
+                    break;
+                case 4:
+                    currentState = BossState.SpawnMob;
+                    break;
+                case 5:
+                case 6:
+                    currentState = BossState.Attack2;
+                    break;
+            }
+
+            doAnim("Idle");
+            yield return new WaitForSeconds(2f);
+
+            switch (currentState)
+            {
+                case BossState.Idle:
+                    yield return StartCoroutine(Idle());
+                    break;
+                case BossState.Attack1:
+                    yield return StartCoroutine(Attack1());
+                    break;
+                case BossState.Attack2:
+                    yield return StartCoroutine(Attack2());
+                    break;
+                case BossState.Attack3:
+                    yield return StartCoroutine(Attack3());
+                    break;
+                case BossState.SpawnMob:
+                    yield return StartCoroutine(SpawnMob());
+                    break;
+            }
+            yield return StartCoroutine(Idle());
         }
-
-        doAnim("Idle");
-        yield return new WaitForSeconds(2f);
-
-        switch (currentState)
+        else
         {
-            case BossState.Idle:
-                yield return StartCoroutine(Idle());
-                break;
-            case BossState.Attack1:
-                yield return StartCoroutine(Attack1());
-                break;
-            case BossState.Attack2:
-                yield return StartCoroutine(Attack2());
-                break;
-            case BossState.Attack3:
-                yield return StartCoroutine(Attack3());
-                break;
-            case BossState.SpawnMob:
-                yield return StartCoroutine(SpawnMob());
-                break;
-            case BossState.Die:
-                yield return StartCoroutine(Die());
-                break;
+            currentState = BossState.Die;
+            Die();
         }
-        yield return StartCoroutine(Idle());
+        
     }
 
     IEnumerator Attack1()
@@ -123,8 +124,16 @@ public class TutorialBoss : MonoBehaviour
     IEnumerator Attack2()
     {
         Instantiate(Attack2Skill, Attack2SkillPos.transform);
-        yield return new WaitForSeconds(2.5f);
-        yield return StartCoroutine(Idle());
+        yield return new WaitForSeconds(1f);
+        if(hp <= 0)
+        {
+            yield return StartCoroutine(Idle());
+        }
+        else
+        {
+            yield return new WaitForSeconds(1.5f);
+            yield return StartCoroutine(Idle());
+        }
     }
 
     IEnumerator Attack3()
@@ -137,21 +146,27 @@ public class TutorialBoss : MonoBehaviour
     {
         int num = Random.Range(0, 2);
         yield return new WaitForSeconds(1.5f);
-        doAnim("Idle");
-        if(num == 0)
-            Instantiate(miniMob, miniMobPos.transform);
+        if(hp <= 0)
+        {
+            yield return StartCoroutine(Idle());
+        }
         else
-            Instantiate(miniMob, miniMobPos2.transform);
-        yield return new WaitForSeconds(1.5f);
+        {
+            doAnim("Idle");
+            if (num == 0)
+                Instantiate(miniMob, miniMobPos.transform);
+            else
+                Instantiate(miniMob, miniMobPos2.transform);
+            yield return new WaitForSeconds(1.5f);
 
-        yield return StartCoroutine(Idle());
+            yield return StartCoroutine(Idle());
+        }
     }
 
-    IEnumerator Die()
+    void Die()
     {
-        doDie = true;
         doAnim("Die");
-        yield return StartCoroutine(Idle());
+        Destroy(gameObject, 2.5f);
     }
 
     void CheckAttak1()
@@ -214,7 +229,7 @@ public class TutorialBoss : MonoBehaviour
     public void GetDamage(float damage)
     {
         StartCoroutine(ChangeEnemyColor());
-
+        hp -= damage;
     }
 
     IEnumerator ChangeEnemyColor()

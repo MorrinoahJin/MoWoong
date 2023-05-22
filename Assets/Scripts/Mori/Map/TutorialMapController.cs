@@ -43,6 +43,7 @@ public class TutorialMapController : MonoBehaviour
             StartCoroutine(PlayerDieFX());
         }
 
+        //플레이어가 보스스테이지에 있을 경우 죽으면 이벤트 발생, 보스스테이지에 아닐 경우에 죽으면 재시작
         if (PlayerWoong.playerHp <= 0)
         {
             if (playerInBossStageCount == 0 && !playerDie)

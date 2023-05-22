@@ -171,5 +171,9 @@ public class CameraMoving : MonoBehaviour
         tempColor.a = 1f;
     }
 
+    public void camMove(Vector3 position)
+    {
+        transform.position = position;
+    }
 
 }
