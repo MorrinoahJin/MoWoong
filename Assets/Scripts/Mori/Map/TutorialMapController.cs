@@ -18,6 +18,7 @@ public class TutorialMapController : MonoBehaviour
     public GameObject circle, razorBeam;
     //구체 첫번째 움직임, 두번째 움직임
     bool circleMove1, circleMove2, moveCamPlayerDied;
+    public GameObject ui_HP;
 
     // Start is called before the first frame update
     void Start()
@@ -69,11 +70,11 @@ public class TutorialMapController : MonoBehaviour
         //Debug.Log(Time.timeScale);
         if (circleMove1 && !circleMove2)
         {
-            circle.transform.position = Vector3.MoveTowards(circle.transform.position, new Vector3(110, .88f, 0), 2.2f * Time.deltaTime);
+            circle.transform.position = Vector3.MoveTowards(circle.transform.position, new Vector3(110, .66f, 0), 2.2f * Time.deltaTime);
         }
         if(circleMove2)
         {
-            circle.transform.position = Vector3.MoveTowards(circle.transform.position, new Vector3(107, .88f, 0), 1.4f * Time.deltaTime);
+            circle.transform.position = Vector3.MoveTowards(circle.transform.position, new Vector3(107, .66f, 0), 1.4f * Time.deltaTime);
         }
         if(moveCamPlayerDied)
         {
@@ -148,6 +149,7 @@ public class TutorialMapController : MonoBehaviour
     IEnumerator circleMoving()
     {
         //모든 UI삭제
+        ui_HP.SetActive(false);
         moveCamPlayerDied = true;
         yield return new WaitForSeconds(8f);
         circle.SetActive(true);
