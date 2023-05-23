@@ -43,8 +43,8 @@ public class PauseMenu : MonoBehaviour
         if (!isPause)
         {
             isPause = true;
-            Debug.Log("일시정지");            
-            
+            Debug.Log("일시정지");
+            PlayerWoong.canControl = false;
             Time.timeScale = 0f;
             Debug.Log(Time.timeScale);
             pauseMenu.SetActive(true) ;
@@ -54,8 +54,8 @@ public class PauseMenu : MonoBehaviour
         else if (isPause)
         {
             isPause = false;
-            Debug.Log("해제");          
-        
+            Debug.Log("해제");
+            PlayerWoong.canControl = true;
             Time.timeScale = 1f;
             pauseMenu.SetActive(false);
             Option.SetActive(true) ;
