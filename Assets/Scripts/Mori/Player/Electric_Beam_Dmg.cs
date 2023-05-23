@@ -18,10 +18,18 @@ public class Electric_Beam_Dmg : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "TutorialBoss")
+        if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<TutorialBoss>().GetDamage(5500);
-            Debug.Log("asdf");
+            Enemy[] mob = other.GetComponents<Enemy>();
+            foreach (Enemy enemy in mob)
+            {
+                enemy.GetDamage(10000);
+            }
+        }
+
+        if (other.CompareTag("TutorialBoss"))
+        {
+            other.GetComponent<TutorialBoss>().GetDamage(10000);
         }
     }
 }

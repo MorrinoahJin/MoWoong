@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -4515576133434618272, guid: 5e99286c8ee4061469aff4e0777426f0, type: 3}
   m_Color: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.9411765}
   m_FlipX: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   ChaseDistance: 100
   attDistance: 1
-  enemyAtkPower: 10
+  enemyAtkPower: 100
   speed: 1.5
   hp: 30
   attTime: 0.8

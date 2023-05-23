@@ -38,7 +38,6 @@ public class Electric_Beam : MonoBehaviour
 
         yield return new WaitForSeconds(.1f);
         step1.SetActive(false);
-        Destroy(this.gameObject);
         //플레이어 무적해제 코드 넣기
     }
 

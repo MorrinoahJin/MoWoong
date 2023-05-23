@@ -43,24 +43,29 @@ public class CameraMoving : MonoBehaviour
     void Update()
     {
         playerPos = GameObject.FindWithTag("Player").transform.position;
-        if(!mirrorMod)
-            camPosY = playerPos.y + 2;
-        else
-        {
-            camPosY = (playerPos.y * -1) - 2;
-        }
+
         defaultCamPos = new Vector3(playerPos.x, camPosY, -10);
 
-        if (!cameraMovingStop) {
+        if (!cameraMovingStop)
+        {
+            //거울모드일 때 y축 변경
+            if (!mirrorMod)
+                camPosY = playerPos.y + 2;
+            else
+            {
+                camPosY = (playerPos.y * -1) - 2;
+            }
+
+            //기본 - 플레이어 따라다님
             if (justFollowPlayer)
                 justFollowCam();
             else
                 CamPoint();
         }
 
-        CamZoomInOut();
+        //CamZoomInOut();
 
-        CamMirror();
+        //CamMirror();
     }
 
     void CamPoint()
@@ -153,7 +158,7 @@ public class CameraMoving : MonoBehaviour
         camBlack = false;
     }
 
-    IEnumerator StageStart()
+    public IEnumerator StageStart()
     {
         blackImage.gameObject.SetActive(true);
         Color tempColor = blackImage.color;
@@ -171,8 +176,15 @@ public class CameraMoving : MonoBehaviour
         tempColor.a = 1f;
     }
 
-    public void camMove(Vector3 position)
+    public void MoveCamWhenPlayerDied(Vector3 position)
     {
+        cameraMovingStop = true;
+        transform.position = Vector3.MoveTowards(transform.position, position, 2 * Time.deltaTime);
+    }
+
+    public void TeleportCam(Vector3 position)
+    {
+        cameraMovingStop = true;
         transform.position = position;
     }
 

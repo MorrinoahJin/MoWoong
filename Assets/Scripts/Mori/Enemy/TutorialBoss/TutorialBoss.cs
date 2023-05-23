@@ -166,7 +166,6 @@ public class TutorialBoss : MonoBehaviour
     void Die()
     {
         doAnim("Die");
-        Destroy(gameObject, 2.5f);
     }
 
     void CheckAttak1()

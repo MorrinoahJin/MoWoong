@@ -14,9 +14,17 @@ public class TutorialMapController : MonoBehaviour
     Camera cam;
     int playerInBossStageCount, playerHpZeroCount;
 
+    //게임연출에 쓰일 구체와 레이저빔
+    public GameObject circle, razorBeam;
+    //구체 첫번째 움직임, 두번째 움직임
+    bool circleMove1, circleMove2, moveCamPlayerDied;
+
     // Start is called before the first frame update
     void Start()
     {
+        moveCamPlayerDied = false;
+        circle.SetActive(false);
+        razorBeam.SetActive(false);
         CameraMoving.cameraMovingStop = false;
         CameraMoving.camZoomIn = false;
         cam = Camera.main;
@@ -29,10 +37,6 @@ public class TutorialMapController : MonoBehaviour
         playerPos = GameObject.FindWithTag("Player").transform.position;
         camPos[1] = new Vector3(playerPos.x, playerPos.y + 2, -10);
         camPos[0] = new Vector3(BossPosX, playerPos.y + 2, -10);
-
-        CameraMoveToBoss();
-        //if(!PauseMenu.isPause)
-            TimeController();
 
         if (PlayerWoong.playerHp >= 100)
             playerHpZeroCount = 0;
@@ -50,12 +54,32 @@ public class TutorialMapController : MonoBehaviour
             {
                 StartCoroutine(PlayerDie());
             }
-            else
+            else if(playerInBossStageCount >= 1 && !playerDie)
             {
-
+                playerDie = true;
+                StartCoroutine(circleMoving());
             }
         }
+        else
+            CameraMoveToBoss();
+
+        //if(!PauseMenu.isPause)
+        TimeController();
+
         //Debug.Log(Time.timeScale);
+        if (circleMove1 && !circleMove2)
+        {
+            circle.transform.position = Vector3.MoveTowards(circle.transform.position, new Vector3(110, .88f, 0), 2.2f * Time.deltaTime);
+        }
+        if(circleMove2)
+        {
+            circle.transform.position = Vector3.MoveTowards(circle.transform.position, new Vector3(107, .88f, 0), 1.4f * Time.deltaTime);
+        }
+        if(moveCamPlayerDied)
+        {
+            GameObject.Find("Main Camera").GetComponent<CameraMoving>().MoveCamWhenPlayerDied(new Vector3(110, 2, -10));
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -115,17 +139,33 @@ public class TutorialMapController : MonoBehaviour
     IEnumerator PlayerDie()
     {
         playerDie = true;
-        if (playerInBossStageCount == 0)
-        {
-            yield return new WaitForSeconds(3.5f);
-            GameObject.Find("Main Camera").GetComponent<CameraMoving>().StartFadeInOut();
-            yield return new WaitForSeconds(1.5f);
-            SceneManager.LoadScene("Tutorial");
-        }
-        else
-        {
+        yield return new WaitForSeconds(3.5f);
+        GameObject.Find("Main Camera").GetComponent<CameraMoving>().StartFadeInOut();
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene("Tutorial");
+    }
 
-        }
+    IEnumerator circleMoving()
+    {
+        //모든 UI삭제
+        moveCamPlayerDied = true;
+        yield return new WaitForSeconds(8f);
+        circle.SetActive(true);
+        circleMove1 = true;
+        yield return new WaitForSeconds(3.5f);
+        circleMove2 = true;
+        yield return new WaitForSeconds(2.5f);
+        razorBeam.SetActive(true);
+        circle.SetActive(false);
+        yield return new WaitForSeconds(3.5f);
+        circleMove1 = false;
+        circleMove2 = false;
+        circle.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        bossObj.SetActive(false);
+        razorBeam.SetActive(false);
+        moveCamPlayerDied = false;
+        StartCoroutine(GameObject.Find("TutorialManager").GetComponent<TutorialDialogue>().Dialogue());
     }
 
 }
