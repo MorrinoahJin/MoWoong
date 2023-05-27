@@ -20,7 +20,6 @@ public class CameraMoving : MonoBehaviour
     public Image blackImage;
     float fadeSpeed = 1f, time = 0;
 
-
     public Camera cam;
 
     //카메라 줌인
@@ -63,7 +62,7 @@ public class CameraMoving : MonoBehaviour
                 CamPoint();
         }
 
-        //CamZoomInOut();
+        CamZoomInOut();
 
         //CamMirror();
     }
@@ -176,12 +175,14 @@ public class CameraMoving : MonoBehaviour
         tempColor.a = 1f;
     }
 
+    //튜토리얼 스테이지 중 보스룸에서 플레이어가 죽었을 때 카메라 위치 이동
     public void MoveCamWhenPlayerDied(Vector3 position)
     {
         cameraMovingStop = true;
         transform.position = Vector3.MoveTowards(transform.position, position, 2 * Time.deltaTime);
     }
 
+    //카메라 동작을 멈추고 특정 지점까지 카메라 텔레포트
     public void TeleportCam(Vector3 position)
     {
         cameraMovingStop = true;

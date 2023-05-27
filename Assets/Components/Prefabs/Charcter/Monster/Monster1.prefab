@@ -152,7 +152,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   ChaseDistance: 100
   attDistance: 1
-  enemyAtkPower: 100
+  enemyAtkPower: 15
   speed: 1.5
   hp: 30
   attTime: 0.8

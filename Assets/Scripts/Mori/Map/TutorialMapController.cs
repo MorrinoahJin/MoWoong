@@ -70,17 +70,16 @@ public class TutorialMapController : MonoBehaviour
         //Debug.Log(Time.timeScale);
         if (circleMove1 && !circleMove2)
         {
-            circle.transform.position = Vector3.MoveTowards(circle.transform.position, new Vector3(110, .66f, 0), 2.2f * Time.deltaTime);
+            circle.transform.position = Vector3.MoveTowards(circle.transform.position, new Vector3(110, .66f, 0), 3f * Time.deltaTime);
         }
         if(circleMove2)
         {
-            circle.transform.position = Vector3.MoveTowards(circle.transform.position, new Vector3(107, .66f, 0), 1.4f * Time.deltaTime);
+            circle.transform.position = Vector3.MoveTowards(circle.transform.position, new Vector3(107, .66f, 0), 2f * Time.deltaTime);
         }
         if(moveCamPlayerDied)
         {
             GameObject.Find("Main Camera").GetComponent<CameraMoving>().MoveCamWhenPlayerDied(new Vector3(110, 2, -10));
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -154,12 +153,13 @@ public class TutorialMapController : MonoBehaviour
         yield return new WaitForSeconds(8f);
         circle.SetActive(true);
         circleMove1 = true;
-        yield return new WaitForSeconds(3.5f);
-        circleMove2 = true;
         yield return new WaitForSeconds(2.5f);
+        circleMove2 = true;
+        yield return new WaitForSeconds(1.5f);
         razorBeam.SetActive(true);
+        yield return new WaitForSeconds(.5f);
         circle.SetActive(false);
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(3f);
         circleMove1 = false;
         circleMove2 = false;
         circle.SetActive(true);
@@ -169,5 +169,4 @@ public class TutorialMapController : MonoBehaviour
         moveCamPlayerDied = false;
         StartCoroutine(GameObject.Find("TutorialManager").GetComponent<TutorialDialogue>().Dialogue());
     }
-
 }
