@@ -126,6 +126,7 @@ public class PlayerWoong : MonoBehaviour
    
     void Update()
     {
+        
         if (playerHp > playerMaxHp)
         {
             playerHp = playerMaxHp;
@@ -732,7 +733,7 @@ public class PlayerWoong : MonoBehaviour
         checkHited = true;
         if (playerState != "Parrying")
         {
-            //Debug.Log(playerHp);
+            UnityEngine.Debug.Log(playerHp);
             //공격 제한
             StartCoroutine(CanAtk());
             float hitAnimTime = 0.2f;
