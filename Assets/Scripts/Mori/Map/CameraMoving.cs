@@ -20,7 +20,6 @@ public class CameraMoving : MonoBehaviour
     public Image blackImage;
     float fadeSpeed = 1f, time = 0;
 
-
     public Camera cam;
 
     //카메라 줌인
@@ -35,22 +34,28 @@ public class CameraMoving : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main;   
+        cam = Camera.main;
+        StartCoroutine(StageStart());
     }
 
     // Update is called once per frame
     void Update()
     {
         playerPos = GameObject.FindWithTag("Player").transform.position;
-        if(!mirrorMod)
-            camPosY = playerPos.y + 2;
-        else
-        {
-            camPosY = (playerPos.y * -1) - 2;
-        }
+
         defaultCamPos = new Vector3(playerPos.x, camPosY, -10);
 
-        if (!cameraMovingStop) {
+        if (!cameraMovingStop)
+        {
+            //거울모드일 때 y축 변경
+            if (!mirrorMod)
+                camPosY = playerPos.y + 2;
+            else
+            {
+                camPosY = (playerPos.y * -1) - 2;
+            }
+
+            //기본 - 플레이어 따라다님
             if (justFollowPlayer)
                 justFollowCam();
             else
@@ -59,7 +64,7 @@ public class CameraMoving : MonoBehaviour
 
         CamZoomInOut();
 
-        CamMirror();
+        //CamMirror();
     }
 
     void CamPoint()
@@ -152,5 +157,36 @@ public class CameraMoving : MonoBehaviour
         camBlack = false;
     }
 
+    public IEnumerator StageStart()
+    {
+        blackImage.gameObject.SetActive(true);
+        Color tempColor = blackImage.color;
+        tempColor.a = 1f;
+
+        while (tempColor.a > 0)
+        {
+            time += Time.deltaTime / fadeSpeed;
+            tempColor.a = Mathf.Lerp(1, 0, time);
+            blackImage.color = tempColor;
+            yield return null;
+        }
+        yield return new WaitForSeconds(1f);
+        blackImage.gameObject.SetActive(false);
+        tempColor.a = 1f;
+    }
+
+    //튜토리얼 스테이지 중 보스룸에서 플레이어가 죽었을 때 카메라 위치 이동
+    public void MoveCamWhenPlayerDied(Vector3 position)
+    {
+        cameraMovingStop = true;
+        transform.position = Vector3.MoveTowards(transform.position, position, 2 * Time.deltaTime);
+    }
+
+    //카메라 동작을 멈추고 특정 지점까지 카메라 텔레포트
+    public void TeleportCam(Vector3 position)
+    {
+        cameraMovingStop = true;
+        transform.position = position;
+    }
 
 }
