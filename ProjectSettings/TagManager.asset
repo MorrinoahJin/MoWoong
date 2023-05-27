@@ -7,9 +7,6 @@ TagManager:
   - Enemy
   - Wall
   - TutorialBoss
-  - Boss
-  - Box
-  - BonFire
   layers:
   - Default
   - TransparentFX
@@ -21,7 +18,7 @@ TagManager:
   - Player
   - PassableGround
   - Wall
-  - Interaction
+  - 
   - 
   - 
   - 

@@ -11,17 +11,20 @@ public class PlayerWoong : MonoBehaviour
 {
     
     private SpriteRenderer spriteRenderer;
-    private Animator anim;
-    [SerializeField] private Slider hpBar;
-    [SerializeField] private Image UI_Parry;
-    [SerializeField] private Image UI_Buff_atk;
     
-    [SerializeField] float playerSpeed = 5;
+    [SerializeField]
+    private Slider hpBar;
+    [SerializeField]
+    private Image UI_Parry;
+    [SerializeField]
+    private Image UI_Buff_atk;
+    Animator anim;
+    [SerializeField]
+    float playerSpeed = 5;
     int playerLayer, passableGroundLayer;
     //유저 컨트롤 제어용 
     static public bool canControl;
 
-  
     Vector2 atkSize;
         
     //플레이어 상태(점프는 없음)
@@ -40,36 +43,33 @@ public class PlayerWoong : MonoBehaviour
 
     //점프
     Rigidbody2D rigid;
-    [SerializeField] float jumpForce = 21;
+    [SerializeField]
+    float jumpForce = 21;
     public int jumpCount;
     public int maxJumpCount;
     bool chakJi;
-    [SerializeField] bool isGround = true;
+    [SerializeField]
+    bool isGround = true;
     //소리설정
     public AudioSource audioSource;
     public AudioClip atkClip;
     public AudioClip jumpClip;
-   
     //기본공격 범위 설정
     public GameObject attBoxObj;
     BoxCollider2D attBox;
-    
-    //플레이어 휴식
-    GameObject bonFire;
-    bool isFireEnter;
-    bool isRest;
 
     //플레이어 스텟
     //static public float playerHp;
     [SerializeField]
     static public float playerHp;
-    [SerializeField]
     static public float playerMaxHp=100;
 
     //플레이어 패링
   
-    [SerializeField] bool canParrying = true; //패링 시작이 가능한 상태인지 체크(쿨타임 관련)
-    [SerializeField] bool checkHited = false; //적에게 맞았는지 체크
+    [SerializeField]
+    bool canParrying = true; //패링 시작이 가능한 상태인지 체크(쿨타임 관련)
+    [SerializeField]
+    bool checkHited = false; //적에게 맞았는지 체크
     bool ParryingOn = false;  //패링 중인지 체크
 
     //플레이어 무적
@@ -96,26 +96,17 @@ public class PlayerWoong : MonoBehaviour
     }
     void Start()
     {
-        canControl = true;
         // UnityEngine.Debug.Log("Debug message");
         playerLayer = LayerMask.NameToLayer("Player");
         passableGroundLayer = LayerMask.NameToLayer("PassableGround");
-        
-        bonFire = GameObject.FindGameObjectWithTag("BonFire");
-        isFireEnter = false;
-        isRest = false;
-
         playerState = "Idle";
-        
         jumpCount = 0;
         maxJumpCount = 2;
         playerAnimNum = 0;
-        
         playerHp = playerMaxHp;
         hpBar.value = (float)playerHp / (float)playerMaxHp;
-        
         atkSize= new Vector2(2f, 1f);
-        
+        canControl = true;
         canAtk = true;
 
     }
@@ -126,10 +117,6 @@ public class PlayerWoong : MonoBehaviour
    
     void Update()
     {
-        if (playerHp > playerMaxHp)
-        {
-            playerHp = playerMaxHp;
-        }
         Vector2 rayPos = new Vector2(this.transform.position.x, this.transform.position.y);
         RaycastHit2D checkGround = Physics2D.Raycast(rayPos, Vector2.down, 0.8f, LayerMask.GetMask("Ground", "PassableGround"));
         //Debug.DrawRay(rayPos, Vector2.down, Color.red, 0.8f);
@@ -144,11 +131,7 @@ public class PlayerWoong : MonoBehaviour
         if (playerState != "Hited" && playerState != "Die")
         {
             if (isGround == true) 
-            {
-                Sit();
-                Attack();
-                Interation();
-            }
+            { Attack(); }
 
             ishited = true;
             //콤보 공격 체크
@@ -185,19 +168,31 @@ public class PlayerWoong : MonoBehaviour
         }
         if (playerState != "GoRight" && playerState != "GoLeft" && playerState != "Jump" && playerState != "ShiftGo" && playerState != "Parrying" && playerState != "Attack" && playerState != "Hited" && playerState != "Die")
         {
+
             playerState = "Idle";
             PlayerAnim("Idle");
+
+
         }
 
     }
 
     void Attack()
     {
-     if (isGround == true && (Input.GetKey("f") && playerState != "Attack") && canAtk && canControl)
+        //|| Input.GetMouseButton(0))
+        if (isGround == false && (Input.GetKey("f") && playerState != "Attack") && canAtk && canControl)
+        {
+            StartCoroutine(PlayerAttackAir());
+            StartCoroutine(CanAtk());
+        }
+                
+        else if (isGround == true && (Input.GetKey("f") && playerState != "Attack") && canAtk && canControl)
         {
             StartCoroutine(PlayerAttack());
             StartCoroutine(CanAtk());
-        }                
+        }
+        
+          
     }
 
     //애니메이션 이벤트 함수호출
@@ -219,7 +214,6 @@ public class PlayerWoong : MonoBehaviour
                 //공격코드
                 collider.GetComponent<TutorialBoss>().GetDamage(playerAtkPower);
             }
-           
         }
     }
    
@@ -280,7 +274,49 @@ public class PlayerWoong : MonoBehaviour
             playerState = "Idle";
         }
     }
+    IEnumerator PlayerAttackAir()
+    {
+        checkAttack = false;
+        doNextAttack = false;
+        playerState = "Attack";
 
+
+
+        attackComboCount += 1;
+
+        //공격콤보에 따라 다른 애니메이션 실행
+        if (attackComboCount == 1)
+            PlayerAnim("Attack1");
+        else
+            PlayerAnim("Attack2");
+
+        //공격애니메이션 끝나는 시간, 마지막 콤보 이후 콤보카운트 초기화
+        if (attackComboCount == 1)
+            yield return new WaitForSeconds(.4f);
+        else
+        {
+            yield return new WaitForSeconds(.5f);
+            attackComboCount = 0;
+        }
+        yield return new WaitForSeconds(.05f);
+
+
+        //공격키를 입력했는지 확인하고 입력했으면 PlayerAttack함수 실행해서 다음 공격 실행
+        checkAttack = true;
+        yield return new WaitForSeconds(.5f);
+        if (doNextAttack)
+        {
+            StartCoroutine(PlayerAttack());
+            if (attackComboCount == 2)
+                attackComboCount = 0;
+        }
+        else
+        {
+            checkAttack = false;
+            attackComboCount = 0;
+            playerState = "Idle";
+        }
+    }
 
     //플레이어 이동 처리
     void FixedUpdate()
@@ -363,81 +399,6 @@ public class PlayerWoong : MonoBehaviour
 
     }
    
-    void Interation()
-    {
-        Vector2 size = new Vector2(1.0f, 1.0f);
-        Collider2D[] interationCollider = Physics2D.OverlapBoxAll(transform.position, size, 0);
-
-        foreach (Collider2D collider in interationCollider)
-        {
-            /*
-            if (collider.CompareTag("BonFire"))
-            {
-                //공격코드
-                Enemy enemy = collider.GetComponent<Enemy>();
-                enemy.GetDamage(playerAtkPower);
-            }
-            */
-            /*
-            if (collider.CompareTag("Box")&& Input.GetKeyDown("z"))
-            {
-                //공격코드
-                collider.GetComponent<Box>().Open();
-            }
-            */
-        }
-
-    }
-    
-    void Sit()
-    {
-        if (isFireEnter && Input.GetKeyDown("e"))
-        {
-            if (!isRest)
-            {
-                StartCoroutine(RestCool());
-                playerState = "Rest";
-                PlayerAnim("Sit");
-            }
-        }     
-    }
-    IEnumerator RestCool()
-    {
-        isRest = true;
-        yield return new WaitForSeconds(3f);
-        isRest = false;
-    }
-    void Rest()
-    {
-        PlayerAnim("Rest");
-
-    }
-    void hpFill()
-    {
-        UnityEngine.Debug.Log(playerHp);
-        if(playerHp < playerMaxHp) {
-            playerHp += playerMaxHp / 10;
-        }
-     
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject == bonFire)
-        {
-            UnityEngine.Debug.Log("불 접근");
-            isFireEnter = true;
-           
-        }
-    }
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject == bonFire)
-        {
-            UnityEngine.Debug.Log("불 접근X");
-            isFireEnter = false;
-            
-        }
-    }
     void Jump()
     {
         //UnityEngine.Debug.Log(rigid.velocity);
@@ -663,10 +624,6 @@ public class PlayerWoong : MonoBehaviour
             nowAnimNum = 15;
         else if (playerDoAnim == "Buff_atk")
             nowAnimNum = 16;
-        else if (playerDoAnim == "Sit")
-            nowAnimNum = 17;
-        else if (playerDoAnim == "Rest")
-            nowAnimNum = 18;
 
         if (nowAnimNum != playerAnimNum)
         {
@@ -719,10 +676,6 @@ public class PlayerWoong : MonoBehaviour
         else if (playerAnimNum == 16)
             anim.SetTrigger("Buff_atk");
 
-        else if (playerAnimNum == 17)
-            anim.SetTrigger("Sit");
-        else if (playerAnimNum == 18)
-            anim.SetTrigger("Rest");
 
     }
     //피격 및 데미지 
@@ -753,6 +706,17 @@ public class PlayerWoong : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         canAtk = true;
     }
+
+
+    /* 
+    public void TakeDamage(float damage)
+    {
+        Debug.Log(playerHp);
+        float hitAnimTime = 0.2f;
+        if (!invincibleMode)
+            StartCoroutine(Hit(damage, hitAnimTime));
+    }
+    */
 
     private IEnumerator KnockBack(float dir)
     {
@@ -849,6 +813,23 @@ public class PlayerWoong : MonoBehaviour
         enabled = false;
         UnityEngine.Debug.Log("스크립트가 종료되었습니다.");
     }
+    /*
+ void JumpControlloer()
+ {
+     rigid.velocity=new Vector2(rigid.velocity.x,rigid.velocity.y);
+     UnityEngine.Debug.Log(rigid.velocity);
+     if (rigid.velocity.y > 0)
+     {
+         UnityEngine.Debug.Log("점프시작");
+         PlayerAnim("JumpStart");
+     }
+     else if (rigid.velocity.y < 0 )
+     {
+         UnityEngine.Debug.Log("떨어진다잇");
+         PlayerAnim("JumpMiddle");
+     }
+
+ }*/
     void MirrorImage()
     {
         // GameObject PlayerMirror = Instantiate();
