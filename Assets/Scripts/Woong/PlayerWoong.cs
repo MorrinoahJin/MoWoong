@@ -1,21 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
+//using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 public class PlayerWoong : MonoBehaviour
 {
+    
     private SpriteRenderer spriteRenderer;
-
+    
     [SerializeField]
     private Slider hpBar;
-
+    [SerializeField]
+    private Image UI_Parry;
+    [SerializeField]
+    private Image UI_Buff_atk;
     Animator anim;
     [SerializeField]
     float playerSpeed = 5;
     int playerLayer, passableGroundLayer;
+    //유저 컨트롤 제어용 
+    static public bool canControl;
 
     Vector2 atkSize;
         
@@ -28,6 +36,7 @@ public class PlayerWoong : MonoBehaviour
     float moveHorizontal;
 
     //공격 및 공격 콤보
+    bool canAtk;
     public float playerAtkPower = 10;
     int attackComboCount = 0;
     bool doNextAttack, checkAttack;
@@ -41,7 +50,10 @@ public class PlayerWoong : MonoBehaviour
     bool chakJi;
     [SerializeField]
     bool isGround = true;
-
+    //소리설정
+    public AudioSource audioSource;
+    public AudioClip atkClip;
+    public AudioClip jumpClip;
     //기본공격 범위 설정
     public GameObject attBoxObj;
     BoxCollider2D attBox;
@@ -51,6 +63,14 @@ public class PlayerWoong : MonoBehaviour
     [SerializeField]
     static public float playerHp;
     static public float playerMaxHp=100;
+
+    //플레이어 패링
+  
+    [SerializeField]
+    bool canParrying = true; //패링 시작이 가능한 상태인지 체크(쿨타임 관련)
+    [SerializeField]
+    bool checkHited = false; //적에게 맞았는지 체크
+    bool ParryingOn = false;  //패링 중인지 체크
 
     //플레이어 무적
     bool invincibleMode = false;
@@ -62,6 +82,9 @@ public class PlayerWoong : MonoBehaviour
     bool isDead = false;
     bool isDieAnim = false;
     bool ishited = false;
+
+    //플레이어 공 버프
+    bool isBuff_atk = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -83,18 +106,20 @@ public class PlayerWoong : MonoBehaviour
         playerHp = playerMaxHp;
         hpBar.value = (float)playerHp / (float)playerMaxHp;
         atkSize= new Vector2(2f, 1f);
+        canControl = true;
+        canAtk = true;
 
     }
     void HpBar()
     {
         hpBar.value = (float)playerHp / (float)playerMaxHp;
     }
-
+   
     void Update()
     {
         Vector2 rayPos = new Vector2(this.transform.position.x, this.transform.position.y);
         RaycastHit2D checkGround = Physics2D.Raycast(rayPos, Vector2.down, 0.8f, LayerMask.GetMask("Ground", "PassableGround"));
-        Debug.DrawRay(rayPos, Vector2.down, Color.red, 0.8f);
+        //Debug.DrawRay(rayPos, Vector2.down, Color.red, 0.8f);
 
         HpBar();
         if (playerState != "Die")
@@ -105,19 +130,22 @@ public class PlayerWoong : MonoBehaviour
         }
         if (playerState != "Hited" && playerState != "Die")
         {
-            if (isGround == true) { Attack(); }
+            if (isGround == true) 
+            { Attack(); }
 
             ishited = true;
             //콤보 공격 체크
             if (checkAttack)
             {
-                if ((Input.GetKey("f") || Input.GetMouseButton(0)))
+                if ((Input.GetKey("f") || Input.GetMouseButton(0))&&canControl)
                     doNextAttack = true;
             }
         }
-        if (playerState != "Attack" && playerState != "Hited" && playerState != "Die")
+        if (playerState != "Attack" && playerState != "Hited" && playerState != "Die")     
         {
             //패링함수
+            Parry();
+            Buff_atk();
         }
         if (playerState != "Parrying" && playerState != "Attack" && playerState != "Hited" && playerState != "Die")
         {
@@ -133,9 +161,9 @@ public class PlayerWoong : MonoBehaviour
             moveHorizontal = Input.GetAxisRaw("Horizontal");
 
             //플레이어 좌우 반전
-            if (moveHorizontal < 0)
+            if (moveHorizontal < 0 && canControl)
                 this.transform.localEulerAngles = new Vector3(0, 0, 0);
-            else if (moveHorizontal > 0)
+            else if (moveHorizontal > 0 && canControl)
                 this.transform.localEulerAngles = new Vector3(0, 180, 0);
         }
         if (playerState != "GoRight" && playerState != "GoLeft" && playerState != "Jump" && playerState != "ShiftGo" && playerState != "Parrying" && playerState != "Attack" && playerState != "Hited" && playerState != "Die")
@@ -151,10 +179,20 @@ public class PlayerWoong : MonoBehaviour
 
     void Attack()
     {
-        if (isGround == false && (Input.GetKey("f") || Input.GetMouseButton(0)) && playerState != "Attack")
+        //|| Input.GetMouseButton(0))
+        if (isGround == false && (Input.GetKey("f") && playerState != "Attack") && canAtk && canControl)
+        {
             StartCoroutine(PlayerAttackAir());
-        else if (isGround == true && (Input.GetKey("f") || Input.GetMouseButton(0)) && playerState != "Attack")
+            StartCoroutine(CanAtk());
+        }
+                
+        else if (isGround == true && (Input.GetKey("f") && playerState != "Attack") && canAtk && canControl)
+        {
             StartCoroutine(PlayerAttack());
+            StartCoroutine(CanAtk());
+        }
+        
+          
     }
 
     //애니메이션 이벤트 함수호출
@@ -178,6 +216,7 @@ public class PlayerWoong : MonoBehaviour
             }
         }
     }
+   
     IEnumerator PlayerAttack()
     {
         checkAttack = false;
@@ -190,11 +229,21 @@ public class PlayerWoong : MonoBehaviour
 
         //공격콤보에 따라 다른 애니메이션 실행
         if (attackComboCount == 1)
+        {
             PlayerAnim("Attack1");
+            audioSource.PlayOneShot(atkClip);
+        }
         else if (attackComboCount == 2)
+        {
             PlayerAnim("Attack2");
+            audioSource.PlayOneShot(atkClip);
+        }
         else
+        {
             PlayerAnim("Attack3");
+            audioSource.PlayOneShot(atkClip);
+        }
+           
 
 
 
@@ -292,7 +341,7 @@ public class PlayerWoong : MonoBehaviour
                 playerState = "GoLeft";
             }
 
-            if (Input.GetKeyDown("left shift") && !playerShiftOn)
+            if (Input.GetKeyDown("left shift") && !playerShiftOn && canControl)
             {
                 StartCoroutine(ShiftGO());
 
@@ -305,7 +354,7 @@ public class PlayerWoong : MonoBehaviour
                 PlayerAnim("MoveRight");
                 playerState = "GoRight";
             }
-            if (Input.GetKeyDown("left shift") && !playerShiftOn)
+            if (Input.GetKeyDown("left shift") && !playerShiftOn && canControl)
             {
                 StartCoroutine(ShiftGO());
             }
@@ -328,10 +377,10 @@ public class PlayerWoong : MonoBehaviour
         playerShiftOn = true;
         playerState = "ShiftGo";
         PlayerAnim("ShiftGo");
-
+        StartCoroutine(BeInvincible(0.5f));
         float speed = playerSpeed;
         playerSpeed = speed * 3;
-
+        
         yield return new WaitForSeconds(.1f);
         rigid.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
 
@@ -349,7 +398,7 @@ public class PlayerWoong : MonoBehaviour
         playerShiftOn = false;
 
     }
-
+   
     void Jump()
     {
         //UnityEngine.Debug.Log(rigid.velocity);
@@ -357,17 +406,18 @@ public class PlayerWoong : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Input.GetKey(KeyCode.DownArrow))
         {
             isGround = false;
-            playerState = "Jump";
+            playerState = "Jump"; 
             StartCoroutine(DoJumpDown());
             Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, true);
         }
         //위 점프 동작
-        else if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumpCount)
+        else if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumpCount && canControl)
         {
+            
             isGround = false;
             playerState = "Jump";
-
             StartCoroutine(DoJump());
+ 
             Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, true);
         }
 
@@ -376,7 +426,7 @@ public class PlayerWoong : MonoBehaviour
     IEnumerator DoJump()
     {
         PlayerAnim("JumpStart");
-
+        audioSource.PlayOneShot(jumpClip);
         yield return new WaitForSeconds(.0f);
 
         if (jumpCount == 0)
@@ -384,14 +434,11 @@ public class PlayerWoong : MonoBehaviour
             rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
             jumpCount += 1;
             yield return new WaitForSeconds(0.1f);
-            Debug.Log("1단점프 내려가는 애니메이션 실행");
+           // Debug.Log("1단점프 내려가는 애니메이션 실행");
             PlayerAnim("JumpMiddle");
             yield return new WaitForSeconds(.23f);
-            Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);
-           
-
+            Physics2D.IgnoreLayerCollision(playerLayer, passableGroundLayer, false);          
         }
-
         else if (jumpCount != 0)
         {
             rigid.velocity = new Vector2(rigid.velocity.x, jumpForce * 0.66f);
@@ -403,16 +450,14 @@ public class PlayerWoong : MonoBehaviour
             yield return new WaitForSeconds(.13f);
             PlayerAnim("JumpMiddle");
         }
-
-
-
-
     }
     //아래 점프
     IEnumerator DoJumpDown()
     {
-        PlayerAnim("JumpMiddle");
 
+        UnityEngine.Debug.Log("발판 무시");
+        PlayerAnim("JumpMiddle");
+        audioSource.PlayOneShot(jumpClip);
         StartCoroutine(PlayerJumpEnd());
         //  ResetJumpCount();
         yield return new WaitForSeconds(.3f);
@@ -427,12 +472,106 @@ public class PlayerWoong : MonoBehaviour
         {
             //PlayerAnim("JumpMiddle");
             jumpCount = 0;
-            Debug.Log("아래로내려갑니다.");
+           // Debug.Log("아래로내려갑니다.");
 
             StartCoroutine(PlayerJumpEnd());
             //PlayerAnim("JumpEnd");
         }
     }
+   
+    void ConvertIdleAnim()
+    {
+        UnityEngine.Debug.Log("아이들");
+        playerState = "Idle";
+        PlayerAnim("idle");
+    }
+    void Buff_atk()
+    {
+        if (Input.GetKeyDown("v") && !isBuff_atk && canControl )
+        {
+            isBuff_atk = true;
+            StartCoroutine(Buff_atkCoolDown(5.0f));
+            StartCoroutine(UI_Buff_atkCoolDown(8.0f));      
+        }           
+    }
+ 
+    IEnumerator UI_Buff_atkCoolDown(float cool)
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + cool)
+        {
+            float timeLeft = startTime + cool - Time.time;
+            UI_Buff_atk.fillAmount = timeLeft / cool;
+            yield return null;
+        }
+        UI_Buff_atk.fillAmount = 1f;
+    }
+
+    IEnumerator Buff_atkCoolDown(float cool)
+    {
+       
+        playerState = "Buff_atk";
+        PlayerAnim("Buff_atk");
+        playerAtkPower = playerAtkPower * 2;
+        UnityEngine.Debug.Log("공버프 쿨타임");
+        yield return new WaitForSeconds(cool);
+        playerAtkPower = playerAtkPower % 2;
+        UnityEngine.Debug.Log("공버프 쿨 초기화");
+        yield return new WaitForSeconds(3f);
+        isBuff_atk = false;
+    }
+    void Parry()
+    {
+        if(Input.GetKey("g")&&canParrying && canControl){
+           
+           // UnityEngine.Debug.Log("패링시작");
+            playerState = "Parrying";
+            PlayerAnim("Parrying");         
+            if (checkHited == true)
+            {
+                canParrying = false;
+                //UnityEngine.Debug.Log("패링");
+                PlayerAnim("ParryingSuccess");
+                //ConvertIdleAnim();
+                StartCoroutine(ParryingCoolDown(3.0f));
+                StartCoroutine(UI_ParryingCoolDown(3.0f));
+            }
+        }
+        else if (Input.GetKeyUp("g") && canParrying && canControl)
+        {
+            //패링 종료
+            canParrying = false;
+            //UnityEngine.Debug.Log("패링종료");
+            ConvertIdleAnim();
+            StartCoroutine(ParryingCoolDown(3.0f));
+            StartCoroutine(UI_ParryingCoolDown(3.0f));
+        }
+    }
+    
+    IEnumerator UI_ParryingCoolDown(float cool)
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + cool)
+        {
+            float timeLeft = startTime + cool - Time.time;
+            UI_Parry.fillAmount = timeLeft / cool;
+            yield return null;
+        }
+        UI_Parry.fillAmount = 1f;
+    }
+
+    //패링 쿨타임을 체크하는 코루틴
+    IEnumerator ParryingCoolDown(float cool)
+    {
+        UnityEngine.Debug.Log("패링쿨타임");
+        yield return new WaitForSeconds(cool);
+
+        UnityEngine.Debug.Log("패링쿨초기화");
+        canParrying = true;
+        checkHited = false;
+    }
+  
+
     IEnumerator PlayerJumpEnd()
     {
 
@@ -478,7 +617,13 @@ public class PlayerWoong : MonoBehaviour
             nowAnimNum = 12;
         else if (playerDoAnim == "ShiftGo")
             nowAnimNum = 13;
-
+        //패링
+        else if (playerDoAnim == "Parrying")
+            nowAnimNum = 14;
+        else if (playerDoAnim == "ParryingSuccess")
+            nowAnimNum = 15;
+        else if (playerDoAnim == "Buff_atk")
+            nowAnimNum = 16;
 
         if (nowAnimNum != playerAnimNum)
         {
@@ -522,40 +667,47 @@ public class PlayerWoong : MonoBehaviour
             anim.SetTrigger("Hit");
         else if (playerAnimNum == 13)
             anim.SetTrigger("FloorDash");
+        //패링
+        else if (playerAnimNum == 14)
+            anim.SetTrigger("Parrying");
+        else if (playerAnimNum == 15)
+            anim.SetTrigger("ParryingSuccess");
+        //공벞
+        else if (playerAnimNum == 16)
+            anim.SetTrigger("Buff_atk");
 
 
     }
-    /*
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            //적의 공격력 받아오기
-            float damage = enemy.enemyAtkPower;
-            //충돌 시 플레이어 피격 애니메이션 시간
-            float HitAnimTime = 0.2f;
-            if (!invincibleMode)
-                StartCoroutine(Hit(damage,HitAnimTime));              
-            
-        }
-    }*/
     //피격 및 데미지 
-    
-    public void TakeDamage(float damage,Vector3 pos)
+
+    public void TakeDamage(float damage, Vector3 pos)
     {
-        Debug.Log(playerHp);
-        float hitAnimTime = 0.2f;
-        float knockBackDirection = transform.position.x - pos.x;
-        if (knockBackDirection < 0)
-            knockBackDirection = 1;
-        else
-            knockBackDirection = -1;
-        if (!isKnockBack)
-            StartCoroutine(KnockBack(knockBackDirection));
-        if (!invincibleMode)
-            StartCoroutine(Hit(damage, hitAnimTime));
+        checkHited = true;
+        if (playerState != "Parrying")
+        {
+            //Debug.Log(playerHp);
+            //공격 제한
+            StartCoroutine(CanAtk());
+            float hitAnimTime = 0.2f;
+            float knockBackDirection = transform.position.x - pos.x;
+            if (knockBackDirection < 0)
+                knockBackDirection = 1;
+            else
+                knockBackDirection = -1;
+            if (!isKnockBack)
+                StartCoroutine(KnockBack(knockBackDirection));
+            if (!invincibleMode)
+                StartCoroutine(Hit(damage, hitAnimTime));
+        }
     }
+    private IEnumerator CanAtk()
+    {
+        canAtk = false;
+        yield return new WaitForSeconds(0.2f);
+        canAtk = true;
+    }
+
+
     /* 
     public void TakeDamage(float damage)
     {
@@ -565,31 +717,49 @@ public class PlayerWoong : MonoBehaviour
             StartCoroutine(Hit(damage, hitAnimTime));
     }
     */
+
     private IEnumerator KnockBack(float dir)
     {
         isKnockBack = true;
-
-        if (transform.rotation.y == 0)
+        UnityEngine.Debug.Log("넉백");
+        // 플레이어가 오른쪽을 보고 오른쪽에서 공격 받은 경우
+        if (dir==1&& transform.localEulerAngles.y == 0)
         {
-            transform.Translate(Vector2.left * playerSpeed * Time.deltaTime * dir);
+            transform.Translate(Vector2.left * playerSpeed *0.1f);
         }
-        else
-            transform.Translate(Vector2.left * playerSpeed * Time.deltaTime * .6f * dir);
+        // 플레이어가 왼쪽을 보고 오른쪽에서 공격 받은 경우
+        else if (dir == 1 && transform.localEulerAngles.y == 180)
+        {
+            transform.Translate(Vector2.right * playerSpeed * .1f);
+        }
+        // 플레이어가 왼쪽을 보고 왼쪽에서 공격 받은 경우
+        else if (dir == -1 && transform.localEulerAngles.y == 0)
+        {
+            transform.Translate(Vector2.right * playerSpeed * .1f);
+        }
+        // 플레이어가 오른쪽을 보고 왼쪽에서 공격 받은 경우
+        else if (dir==-1 && transform.localEulerAngles.y == 180)
+        {
+            transform.Translate(Vector2.left * playerSpeed * .1f );
+        }
+            
 
         yield return new WaitForSeconds(0.2f);
 
         isKnockBack = false;
     }
 
+   
+
     private IEnumerator Hit(float damage, float AnimTime)
     {
-        Debug.Log("플레이어가 데미지를 입었습니다.");
+       // Debug.Log("플레이어가 데미지를 입었습니다.");
         if (ishited == true)
         {
             playerHp -= damage;
             float invincibleTime = 0.6f;
             if (playerHp > 0)
-            {
+                 {
                 HitedColor = true;
                 spriteRenderer.color = new Color(1, 1, 1, 0.5f);
                 //spriteRenderer.color = Color.red;
