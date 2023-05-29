@@ -25,7 +25,7 @@ public class BonFire : MonoBehaviour
     {
         if (other.gameObject == player)
         {
-            Debug.Log("플레이어 접근");
+            //Debug.Log("플레이어 접근");
             isPlayerEnter = true;
         }
     }
@@ -33,7 +33,7 @@ public class BonFire : MonoBehaviour
     {
         if (other.gameObject == player)
         {
-            Debug.Log("플레이어 접근X");
+            //Debug.Log("플레이어 접근X");
             isPlayerEnter = false;
         }
     }
