@@ -238,7 +238,7 @@ public class PlayerWoong : MonoBehaviour
     {
         if (orb != null)
         {
-            if (Input.GetKeyDown("c") && canControl)
+            if (Input.GetKeyDown("c") && canControl && !Orb.isSkillOn)
             {   //@@@@@@@@@@@@@@@스킬생성@@@@@@@@@@@@@@@@
                 GameObject.Find("Stage1Manager").GetComponent<SkillManager>().RazorBeam();
             }

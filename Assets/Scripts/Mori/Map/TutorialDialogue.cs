@@ -8,6 +8,8 @@ using TMPro;
 public class TutorialDialogue : MonoBehaviour
 {
     public GameObject firstText, secondText, thirdText, fourText, fiveText;
+    bool witchMove;
+    public GameObject witch;
 
     private void Start()
     {
@@ -21,9 +23,10 @@ public class TutorialDialogue : MonoBehaviour
     public IEnumerator Dialogue()
     {
         
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         //대사치는 케릭터가 옴
-
+        witch.SetActive(true);
+        witchMove = true;
         yield return new WaitForSeconds(3f);
         //첫번째 대사
         firstText.SetActive(true);
@@ -57,5 +60,13 @@ public class TutorialDialogue : MonoBehaviour
         //다음씬으로 ㄱㄱ
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene("Stage 1");
+    }
+
+    void Update()
+    {
+        if(witchMove)
+        {
+            witch.transform.position = Vector3.MoveTowards(witch.transform.position, new Vector3(103f, .5f, 0), 1f * Time.deltaTime);
+        }
     }
 }

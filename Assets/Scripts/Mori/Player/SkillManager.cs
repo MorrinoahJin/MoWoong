@@ -30,7 +30,7 @@ public class SkillManager : MonoBehaviour
         }
         else
         {
-            Instantiate(razorbeam, orbPos, Quaternion.identity);
+            Instantiate(razorbeam, orbPos, Quaternion.Euler(new Vector3(0, 180, 0)));
         }
     }
 }
