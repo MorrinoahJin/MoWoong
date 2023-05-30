@@ -134,7 +134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1287776301596937824
 Transform:
   m_ObjectHideFlags: 0
@@ -243,6 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c1d76bb3a86628458665f15256af0e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10000
 --- !u!50 &1287776302017530852
 Rigidbody2D:
   serializedVersion: 4
@@ -336,6 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c1d76bb3a86628458665f15256af0e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 11000
 --- !u!50 &1287776302317519356
 Rigidbody2D:
   serializedVersion: 4

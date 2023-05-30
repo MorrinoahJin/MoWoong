@@ -33,7 +33,8 @@ public class PlayerWoong : MonoBehaviour
     int playerAnimNum;
     //회피
     bool playerShiftOn;
-    float moveHorizontal;
+    [HideInInspector]
+    public float moveHorizontal;
 
     //공격 및 공격 콤보
     bool canAtk;
@@ -183,7 +184,10 @@ public class PlayerWoong : MonoBehaviour
 
 
             //플레이어 이동키 값을 받음
-            if (canControl == true) moveHorizontal = Input.GetAxisRaw("Horizontal");
+            if (canControl == true)
+                moveHorizontal = Input.GetAxisRaw("Horizontal");
+            else
+                moveHorizontal = 0;
 
             //플레이어 좌우 반전
             if (moveHorizontal < 0 )
@@ -236,7 +240,7 @@ public class PlayerWoong : MonoBehaviour
         {
             if (Input.GetKeyDown("c") && canControl)
             {   //@@@@@@@@@@@@@@@스킬생성@@@@@@@@@@@@@@@@
-                orb.GetComponent<Orb>().UseSKill(playerAtkPower);
+                GameObject.Find("Stage1Manager").GetComponent<SkillManager>().RazorBeam();
             }
         }
     }

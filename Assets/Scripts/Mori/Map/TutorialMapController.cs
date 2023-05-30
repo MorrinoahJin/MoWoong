@@ -18,7 +18,8 @@ public class TutorialMapController : MonoBehaviour
     public GameObject circle, razorBeam;
     //구체 첫번째 움직임, 두번째 움직임
     bool circleMove1, circleMove2, moveCamPlayerDied;
-    public GameObject ui_HP;
+    //컷씬에서 사라질 UI
+    public GameObject ui_HP, option_Button;
 
     // Start is called before the first frame update
     void Start()
@@ -95,6 +96,7 @@ public class TutorialMapController : MonoBehaviour
     IEnumerator CameraControllAndZoom()
     {
         yield return new WaitForSeconds(.33f);
+        PlayerWoong.canControl = false;
         //플레이어 이동 불가
         CameraMoving.cameraMovingStop = true;
         CameraMoving.camZoomIn = true;
@@ -105,6 +107,7 @@ public class TutorialMapController : MonoBehaviour
         //플레이어 이동 허용
         CameraMoving.cameraMovingStop = false;
         CameraMoving.camZoomIn = false;
+        PlayerWoong.canControl = true;
     }
 
     void CameraMoveToBoss()
@@ -148,6 +151,7 @@ public class TutorialMapController : MonoBehaviour
     IEnumerator circleMoving()
     {
         //모든 UI삭제
+        option_Button.SetActive(false);
         ui_HP.SetActive(false);
         moveCamPlayerDied = true;
         yield return new WaitForSeconds(8f);

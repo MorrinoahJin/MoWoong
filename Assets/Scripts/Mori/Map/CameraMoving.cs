@@ -36,6 +36,7 @@ public class CameraMoving : MonoBehaviour
     {
         cam = Camera.main;
         StartCoroutine(StageStart());
+        cameraMovingStop = false;
     }
 
     // Update is called once per frame

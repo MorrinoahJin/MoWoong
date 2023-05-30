@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Electric_Beam_Dmg : MonoBehaviour
 {
+
+    public float damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,13 +25,13 @@ public class Electric_Beam_Dmg : MonoBehaviour
             Enemy[] mob = other.GetComponents<Enemy>();
             foreach (Enemy enemy in mob)
             {
-                enemy.GetDamage(10000);
+                enemy.GetDamage(damage);
             }
         }
 
         if (other.CompareTag("TutorialBoss"))
         {
-            other.GetComponent<TutorialBoss>().GetDamage(10000);
+            other.GetComponent<TutorialBoss>().GetDamage(damage);
         }
     }
 }

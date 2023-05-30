@@ -9,6 +9,10 @@ public class Electric_Beam : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
+        step1.SetActive(false);
+        step2.SetActive(false);
+        step3.SetActive(false);
+        step4.SetActive(false);
         StartCoroutine(StartBeam());
     }
 

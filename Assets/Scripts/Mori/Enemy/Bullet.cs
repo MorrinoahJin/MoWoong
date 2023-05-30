@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     public float attPower, speed;
     public float rotateSpeed = 1f; // 회전 속도
     Vector2 targetPos;
+    public bool goUp;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,10 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         rotateSpeed += 15;
-        targetPos = new Vector2(transform.position.x, transform.position.y - 1);
+        if(goUp)
+            targetPos = new Vector2(transform.position.x, transform.position.y + 1);
+        else
+            targetPos = new Vector2(transform.position.x, transform.position.y - 1);
         this.transform.position = Vector2.MoveTowards(this.transform.position, targetPos, speed * Time.deltaTime);
 
         transform.rotation = Quaternion.Euler(0,0,rotateSpeed);

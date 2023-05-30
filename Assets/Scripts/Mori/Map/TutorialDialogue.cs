@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class TutorialDialogue : MonoBehaviour
@@ -53,7 +54,8 @@ public class TutorialDialogue : MonoBehaviour
         yield return new WaitForSeconds(3f);
         fiveText.SetActive(false);
         GameObject.Find("Main Camera").GetComponent<CameraMoving>().StartFadeInOut();
-
-
+        //다음씬으로 ㄱㄱ
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene("Stage 1");
     }
 }

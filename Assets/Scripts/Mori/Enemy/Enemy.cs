@@ -245,7 +245,7 @@ public class Enemy : MonoBehaviour
     IEnumerator EnemyAttack()
     {
         attacking = true;
-        yield return new WaitForSeconds(.33f);
+        yield return new WaitForSeconds(1f);
         if (!IsLongRangeAtt) //근접 공격일 경우, 애니메이션에 따라 데미지를 입히는 시간을 설정
         {
             ChangeAnim(2);
