@@ -11,7 +11,10 @@ public class PlayerWoong : MonoBehaviour
 {
     
     private SpriteRenderer spriteRenderer;
+    private Heal healScript;
     private Animator anim;
+
+    [SerializeField] private GameObject orb;
     [SerializeField] private Slider hpBar;
     [SerializeField] private Image UI_Parry;
     [SerializeField] private Image UI_Buff_atk;
@@ -92,7 +95,7 @@ public class PlayerWoong : MonoBehaviour
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
-
+        healScript = GetComponent<Heal>();
     }
     void Start()
     {
@@ -106,7 +109,7 @@ public class PlayerWoong : MonoBehaviour
         isRest = false;
 
         playerState = "Idle";
-        
+        UI_Parry.fillAmount = 0f;
         jumpCount = 0;
         maxJumpCount = 2;
         playerAnimNum = 0;
@@ -134,7 +137,9 @@ public class PlayerWoong : MonoBehaviour
         Vector2 rayPos = new Vector2(this.transform.position.x, this.transform.position.y);
         RaycastHit2D checkGround = Physics2D.Raycast(rayPos, Vector2.down, 0.8f, LayerMask.GetMask("Ground", "PassableGround"));
         //Debug.DrawRay(rayPos, Vector2.down, Color.red, 0.8f);
-
+        if(playerHp < 0){
+            die();
+        }
         HpBar();
         if (playerState != "Die")
         {
@@ -147,15 +152,17 @@ public class PlayerWoong : MonoBehaviour
             if (isGround == true) 
             {
                 Sit();
-                Attack();
                 Interation();
+                orbControl();
+                if (canAtk==true) Attack();
+                
             }
 
             ishited = true;
             //콤보 공격 체크
             if (checkAttack)
             {
-                if ((Input.GetKey("f") || Input.GetMouseButton(0))&&canControl)
+                if ((Input.GetKeyDown("z") &&canControl))
                     doNextAttack = true;
             }
         }
@@ -176,12 +183,12 @@ public class PlayerWoong : MonoBehaviour
 
 
             //플레이어 이동키 값을 받음
-            moveHorizontal = Input.GetAxisRaw("Horizontal");
+            if (canControl == true) moveHorizontal = Input.GetAxisRaw("Horizontal");
 
             //플레이어 좌우 반전
-            if (moveHorizontal < 0 && canControl)
+            if (moveHorizontal < 0 )
                 this.transform.localEulerAngles = new Vector3(0, 0, 0);
-            else if (moveHorizontal > 0 && canControl)
+            else if (moveHorizontal > 0 )
                 this.transform.localEulerAngles = new Vector3(0, 180, 0);
         }
         if (playerState != "GoRight" && playerState != "GoLeft" && playerState != "Jump" && playerState != "ShiftGo" && playerState != "Parrying" && playerState != "Attack" && playerState != "Hited" && playerState != "Die")
@@ -194,7 +201,7 @@ public class PlayerWoong : MonoBehaviour
 
     void Attack()
     {
-     if (isGround == true && (Input.GetKey("f") && playerState != "Attack") && canAtk && canControl)
+     if (isGround == true && (Input.GetKeyDown("z") && playerState != "Attack") && canAtk && canControl)
         {
             StartCoroutine(PlayerAttack());
             StartCoroutine(CanAtk());
@@ -223,7 +230,16 @@ public class PlayerWoong : MonoBehaviour
            
         }
     }
-   
+    void orbControl()
+    {
+        if (orb != null)
+        {
+            if (Input.GetKeyDown("c") && canControl)
+            {   //@@@@@@@@@@@@@@@스킬생성@@@@@@@@@@@@@@@@
+                orb.GetComponent<Orb>().UseSKill(playerAtkPower);
+            }
+        }
+    }
     IEnumerator PlayerAttack()
     {
         checkAttack = false;
@@ -394,17 +410,34 @@ public class PlayerWoong : MonoBehaviour
     {
         if (isFireEnter && Input.GetKeyDown("e"))
         {
-            if (!isRest)
+          
+            if(isRest)
             {
-                StartCoroutine(RestCool());
+                isRest = false;
+                
+                canControl = true;
+                playerState="Idle";
+                PlayerAnim("Idle");
+                //ConvertIdleAnim(); 
+                healScript.falseHealFX();
+            }
+            else if (!isRest)
+            {
+                isRest = true;
+                canControl = false;
+                //StartCoroutine(RestCool());
                 playerState = "Rest";
                 PlayerAnim("Sit");
+                if (playerState == "Rest")
+                {
+                    healScript.HealFX();
+                }
             }
         }     
     }
     IEnumerator RestCool()
     {
-        isRest = true;
+        //isRest = true;
         yield return new WaitForSeconds(3f);
         isRest = false;
     }
@@ -417,7 +450,7 @@ public class PlayerWoong : MonoBehaviour
     {
         UnityEngine.Debug.Log(playerHp);
         if(playerHp < playerMaxHp) {
-            playerHp += playerMaxHp / 10;
+            playerHp += playerMaxHp / 10;           
         }
      
     }
@@ -425,7 +458,7 @@ public class PlayerWoong : MonoBehaviour
     {
         if (other.gameObject == bonFire)
         {
-            UnityEngine.Debug.Log("불 접근");
+            //UnityEngine.Debug.Log("불 접근");
             isFireEnter = true;
            
         }
@@ -434,7 +467,7 @@ public class PlayerWoong : MonoBehaviour
     {
         if (other.gameObject == bonFire)
         {
-            UnityEngine.Debug.Log("불 접근X");
+            //UnityEngine.Debug.Log("불 접근X");
             isFireEnter = false;
             
         }
@@ -523,7 +556,7 @@ public class PlayerWoong : MonoBehaviour
     {
         UnityEngine.Debug.Log("아이들");
         playerState = "Idle";
-        PlayerAnim("idle");
+        PlayerAnim("Idle");
     }
     void Buff_atk()
     {
@@ -562,11 +595,12 @@ public class PlayerWoong : MonoBehaviour
     }
     void Parry()
     {
-        if(Input.GetKey("g")&&canParrying && canControl){
+        if(Input.GetKey("x")&&canParrying && canControl){
            
            // UnityEngine.Debug.Log("패링시작");
             playerState = "Parrying";
-            PlayerAnim("Parrying");         
+            PlayerAnim("Parrying");  
+            /*
             if (checkHited == true)
             {
                 canParrying = false;
@@ -576,8 +610,9 @@ public class PlayerWoong : MonoBehaviour
                 StartCoroutine(ParryingCoolDown(3.0f));
                 StartCoroutine(UI_ParryingCoolDown(3.0f));
             }
+            */
         }
-        else if (Input.GetKeyUp("g") && canParrying && canControl)
+        else if (Input.GetKeyUp("x") && canParrying && canControl)
         {
             //패링 종료
             canParrying = false;
@@ -587,26 +622,31 @@ public class PlayerWoong : MonoBehaviour
             StartCoroutine(UI_ParryingCoolDown(3.0f));
         }
     }
+    void parryingSuccess()
+    {
+
+    }
     
     IEnumerator UI_ParryingCoolDown(float cool)
     {
+       
         float startTime = Time.time;
         while (Time.time < startTime + cool)
         {
             float timeLeft = startTime + cool - Time.time;
-            UI_Parry.fillAmount = timeLeft / cool;
+            UI_Parry.fillAmount = timeLeft/ cool;
             yield return null;
         }
-        UI_Parry.fillAmount = 1f;
+        UI_Parry.fillAmount = 0f;
     }
 
     //패링 쿨타임을 체크하는 코루틴
     IEnumerator ParryingCoolDown(float cool)
     {
-        UnityEngine.Debug.Log("패링쿨타임");
+        //UnityEngine.Debug.Log("패링쿨타임");
         yield return new WaitForSeconds(cool);
 
-        UnityEngine.Debug.Log("패링쿨초기화");
+       //UnityEngine.Debug.Log("패링쿨초기화");
         canParrying = true;
         checkHited = false;
     }
@@ -731,9 +771,11 @@ public class PlayerWoong : MonoBehaviour
     public void TakeDamage(float damage, Vector3 pos)
     {
         checkHited = true;
-        if (playerState != "Parrying")
+       
+        if (playerState != "Parrying"&&!isDieAnim)
         {
-            UnityEngine.Debug.Log(playerHp);
+            attackComboCount = 0;
+            //UnityEngine.Debug.Log(playerHp);
             //공격 제한
             StartCoroutine(CanAtk());
             float hitAnimTime = 0.2f;
@@ -747,18 +789,28 @@ public class PlayerWoong : MonoBehaviour
             if (!invincibleMode)
                 StartCoroutine(Hit(damage, hitAnimTime));
         }
+        else if (playerState == "Parrying")
+        {
+            attackComboCount = 0;
+            canParrying = false;
+            //UnityEngine.Debug.Log("패링");
+            PlayerAnim("ParryingSuccess");
+            //ConvertIdleAnim();
+            StartCoroutine(ParryingCoolDown(3.0f));
+            StartCoroutine(UI_ParryingCoolDown(3.0f));
+        }
     }
     private IEnumerator CanAtk()
     {
         canAtk = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
         canAtk = true;
     }
 
     private IEnumerator KnockBack(float dir)
     {
         isKnockBack = true;
-        UnityEngine.Debug.Log("넉백");
+        //UnityEngine.Debug.Log("넉백");
         // 플레이어가 오른쪽을 보고 오른쪽에서 공격 받은 경우
         if (dir==1&& transform.localEulerAngles.y == 0)
         {
@@ -796,7 +848,7 @@ public class PlayerWoong : MonoBehaviour
             playerHp -= damage;
             float invincibleTime = 0.6f;
             if (playerHp > 0)
-                 {
+                {
                 HitedColor = true;
                 spriteRenderer.color = new Color(1, 1, 1, 0.5f);
                 //spriteRenderer.color = Color.red;
@@ -832,23 +884,26 @@ public class PlayerWoong : MonoBehaviour
     }
     void die()
     {
+        isKnockBack = true;
+        ishited = false;
         isDieAnim = true;
         playerState = "Die";
         PlayerAnim("Die");
-
-        UnityEngine.Debug.Log("플레이어가 죽었습니다.");
+        canControl = false;
+        //UnityEngine.Debug.Log("플레이어가 죽었습니다.");
+        rigid.constraints = RigidbodyConstraints2D.FreezeAll;
 
 
         //Invoke("StopScript", 2f);
         //rigid.velocity = new Vector2(transform.position.x, 0); //죽으면 y좌표를 고정하게 하기
         //GetComponent<Player>().enabled = false; //플레이어 키입력 제한하기
-        ishited = false;
+      
     }
     void StopScript()
     {
         //플레이어 사망시 스크립트 멈추기
         enabled = false;
-        UnityEngine.Debug.Log("스크립트가 종료되었습니다.");
+        
     }
     void MirrorImage()
     {

@@ -9,7 +9,7 @@ public class SceneController : MonoBehaviour
     public void StartGame()
     {
         // 게임 시작 버튼 클릭 시 실행되는 코드
-        SceneManager.LoadScene("Tutorial woong");
+        SceneManager.LoadScene("Tutorial");
         Time.timeScale = 1f;
 
     }

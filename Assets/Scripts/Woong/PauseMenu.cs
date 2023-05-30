@@ -21,12 +21,25 @@ public class PauseMenu : MonoBehaviour
 
     }
     public void restart()
-    {
-        SceneManager.LoadScene("tutorial woong");
+    {        
+        SceneManager.LoadScene("tutorial");
         if (isPause)
         {
             isPause = false;
-            Debug.Log("해제");
+            //Debug.Log("해제");
+
+            Time.timeScale = 1f;
+            pauseMenu.SetActive(false);
+            Option.SetActive(true);
+        }
+    }
+    public void restart1()
+    {
+        SceneManager.LoadScene("stage 1");
+        if (isPause)
+        {
+            isPause = false;
+            //Debug.Log("해제");
 
             Time.timeScale = 1f;
             pauseMenu.SetActive(false);
@@ -43,7 +56,7 @@ public class PauseMenu : MonoBehaviour
         if (!isPause)
         {
             isPause = true;
-            Debug.Log("일시정지");
+            //Debug.Log("일시정지");
             PlayerWoong.canControl = false;
             Time.timeScale = 0f;
             Debug.Log(Time.timeScale);
@@ -54,7 +67,7 @@ public class PauseMenu : MonoBehaviour
         else if (isPause)
         {
             isPause = false;
-            Debug.Log("해제");
+            //Debug.Log("해제");
             PlayerWoong.canControl = true;
             Time.timeScale = 1f;
             pauseMenu.SetActive(false);
