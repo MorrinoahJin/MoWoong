@@ -241,8 +241,15 @@ public class PlayerWoong : MonoBehaviour
             if (Input.GetKeyDown("c") && canControl && !Orb.isSkillOn)
             {   //@@@@@@@@@@@@@@@스킬생성@@@@@@@@@@@@@@@@
                 GameObject.Find("Stage1Manager").GetComponent<SkillManager>().RazorBeam();
+                Orb.isSkillOn = true;
+                StartCoroutine(OrbSkillOn());
             }
         }
+    }
+    IEnumerator OrbSkillOn()
+    {
+        yield return new WaitForSeconds(4f);
+        Orb.isSkillOn = false;
     }
     IEnumerator PlayerAttack()
     {

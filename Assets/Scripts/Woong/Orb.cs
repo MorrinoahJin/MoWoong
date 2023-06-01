@@ -12,7 +12,7 @@ public class Orb : MonoBehaviour
     public float jumpForce;
     public float teldistance;    
     public LayerMask groundLayer;
-
+    // static public bool orbControl;
     static public bool isSkillOn;
     // Start is called before the first frame update
     void Start()
@@ -48,8 +48,8 @@ public class Orb : MonoBehaviour
                 transform.position = player.position;
             }
         }
-        else
-            transform.position = transform.position;
+        //else
+            //transform.position = transform.position;
     }
 
     float DirectionOrb()
