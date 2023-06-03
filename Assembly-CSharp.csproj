@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Mori\Player\Player.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+    <Compile Include="Assets\Scripts\Mori\Player\Electric_Beam_mini.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\Scripts\Mori\Map\TutorialDialogue.cs" />
     <Compile Include="Assets\Scripts\Mori\Map\Stage1Manager.cs" />
@@ -124,7 +125,7 @@
     <Compile Include="Assets\Scripts\Woong\Heal.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Scripts\Mori\Map\DeadZone.cs" />
-    <Compile Include="Assets\Scripts\Mori\Player\Electric_Beam_mini.cs" />
+    <Compile Include="Assets\Scripts\Mori\Map\BossStage2\WaterCam.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
