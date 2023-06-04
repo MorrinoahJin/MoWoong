@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\Mori\Map\TelePort.cs" />
     <Compile Include="Assets\Scripts\Mori\Player\Electric_Beam.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
+    <Compile Include="Assets\Scripts\Mori\Map\BossStage2\BossStage2MapController.cs" />
     <Compile Include="Assets\Scripts\Woong\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Mori\Enemy\TutorialBoss\TutorialBoss.cs" />
     <Compile Include="Assets\Scripts\Woong\Skill_Electic_Beam.cs" />
@@ -126,7 +127,6 @@
     <Compile Include="Assets\Scripts\Woong\Heal.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Scripts\Mori\Map\DeadZone.cs" />
-    <Compile Include="Assets\Scripts\Mori\Map\BossStage2\BossStage2MapController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
