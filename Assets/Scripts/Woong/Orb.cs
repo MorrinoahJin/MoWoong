@@ -28,11 +28,13 @@ public class Orb : MonoBehaviour
     {
         if (!isSkillOn)
         {
+            //rigid.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
             //오브 이동
             if (Mathf.Abs(transform.position.x - player.position.x) > distance)
             {
                 transform.Translate(new Vector2(-1, 0) * Time.deltaTime * speed);
                 DirectionOrb();
+                /*
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right * -1f, 0.5f, groundLayer);
                 RaycastHit2D hit2 = Physics2D.Raycast(transform.position, new Vector2(1 * DirectionOrb(), 1), 2f, groundLayer);
                 if (player.position.y - transform.position.y <= 0)
@@ -40,20 +42,32 @@ public class Orb : MonoBehaviour
                 if (hit || hit2)
                 {
                     rigid.velocity = Vector2.up * jumpForce;
-                }
+                }*/
             }
+            if(transform.position.y - player.position.y > 0.5)
+            {
+                transform.Translate(new Vector2(0, -1) * Time.deltaTime * speed);
+            }
+            else if(transform.position.y - player.position.y < 0.5)
+                transform.Translate(new Vector2(0, 1) * Time.deltaTime * speed);
+           
             //오브 텔포
             if (Vector2.Distance(player.position, transform.position) > teldistance)
             {
                 transform.position = player.position;
             }
         }
+        else if(isSkillOn)
+        {
+           // rigid.constraints = RigidbodyConstraints2D.FreezePositionY;
+        }
         //else
             //transform.position = transform.position;
     }
 
-    float DirectionOrb()
+    public float DirectionOrb()
     {
+        
         if (transform.position.x - player.position.x < 0)
         {
             transform.eulerAngles = new Vector3(0, 180, 0);

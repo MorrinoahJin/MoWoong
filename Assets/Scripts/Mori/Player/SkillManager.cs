@@ -8,7 +8,7 @@ public class SkillManager : MonoBehaviour
     Vector3 orbPos;
     float player_direction;
     public GameObject razorbeam;
-
+    float direction;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +20,13 @@ public class SkillManager : MonoBehaviour
     {
         orbPos = orb.transform.position;
         player_direction = GameObject.Find("Player").GetComponent<PlayerWoong>().moveHorizontal;
+        direction = orb.GetComponent<Orb>().DirectionOrb();
     }
 
     public void RazorBeam()
     {
-        if(player_direction >= 0)
+        //if(player_direction > 0)
+        if(direction == 1)
         {
             Instantiate(razorbeam, orbPos, Quaternion.identity);
         }
