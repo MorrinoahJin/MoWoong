@@ -23,8 +23,8 @@ public class SkillManager : MonoBehaviour
         skill[0] = razorbeam;
         skill[1] = fireTornado;
         curSkill = skill[0];
-        if(UI_Orb_Electric != null) { UI_Orb_Electric.SetActive(false); }
-        if(UI_Orb_Fire != null) { UI_Orb_Fire.SetActive(true); }
+        if(UI_Orb_Electric != null) { UI_Orb_Electric.SetActive(true); }
+        if(UI_Orb_Fire != null) { UI_Orb_Fire.SetActive(false); }
      
     }
 
