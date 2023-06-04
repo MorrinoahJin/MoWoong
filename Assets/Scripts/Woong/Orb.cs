@@ -44,11 +44,11 @@ public class Orb : MonoBehaviour
                     rigid.velocity = Vector2.up * jumpForce;
                 }*/
             }
-            if(transform.position.y - player.position.y > 0.5)
+            if(transform.position.y - player.position.y > 0.38)
             {
                 transform.Translate(new Vector2(0, -1) * Time.deltaTime * speed);
             }
-            else if(transform.position.y - player.position.y < 0.5)
+            else if(transform.position.y - player.position.y < 0.38)
                 transform.Translate(new Vector2(0, 1) * Time.deltaTime * speed);
            
             //오브 텔포
