@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Orb : MonoBehaviour
 {
+    private Animator anim;
+    static int formNum;
     Transform player;
     Rigidbody2D rigid;
     public float distance;
@@ -12,56 +14,91 @@ public class Orb : MonoBehaviour
     public float jumpForce;
     public float teldistance;    
     public LayerMask groundLayer;
-    // static public bool orbControl;
+    //static public bool orbControl;
     static public bool isSkillOn;
+    static public float orbDirection;
+  
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").transform;
         Physics2D.IgnoreLayerCollision(7, 11);
-
+     
     }
 
     // Update is called once per frame
     void Update()
     {
+        //UnityEngine.Debug.Log(isSkillOn);
         if (!isSkillOn)
         {
-            //오브 이동
+            //오브 좌우 이동
             if (Mathf.Abs(transform.position.x - player.position.x) > distance)
             {
                 transform.Translate(new Vector2(-1, 0) * Time.deltaTime * speed);
                 DirectionOrb();
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right * -1f, 0.5f, groundLayer);
-                RaycastHit2D hit2 = Physics2D.Raycast(transform.position, new Vector2(1 * DirectionOrb(), 1), 2f, groundLayer);
-                if (player.position.y - transform.position.y <= 0)
-                    hit2 = new RaycastHit2D();
-                if (hit || hit2)
-                {
-                    rigid.velocity = Vector2.up * jumpForce;
-                }
+           
             }
+
+            //오브 상하 이동
+            if(transform.position.y - player.position.y > 0.38)
+            {
+                transform.Translate(new Vector2(0, -1) * Time.deltaTime * speed);
+            }
+            else if(transform.position.y - player.position.y < 0.38)
+                transform.Translate(new Vector2(0, 1) * Time.deltaTime * speed);
+           
             //오브 텔포
             if (Vector2.Distance(player.position, transform.position) > teldistance)
             {
                 transform.position = player.position;
             }
         }
-        //else
-            //transform.position = transform.position;
-    }
+        else if(isSkillOn)
+        {
 
-    float DirectionOrb()
+        }
+
+    }
+    public void nowForm(int num)
     {
+        int curnum = 0;
+        if (num== 0)
+            curnum = 0;
+        //이동
+        else if (num == 1)
+            curnum = 1;
+        if (curnum != formNum)
+        {
+            formNum = curnum;
+            formChange();
+        }
+    }
+    void formChange()
+    {
+
+        if (formNum == 0)
+           anim.SetTrigger("Electric");
+        //이동
+        else if (formNum == 1)
+           anim.SetTrigger("Fire");
+       
+    }
+    public float DirectionOrb()
+    {
+        
         if (transform.position.x - player.position.x < 0)
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
+            orbDirection = 1;
             return 1;
         }
         else
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
+            orbDirection = -1;
             return -1;
         }
     }

@@ -10714,6 +10714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orb: {fileID: 1725216130}
   razorbeam: {fileID: 1287776301596937830, guid: b107e7374d9438246b2cf60f97aef761, type: 3}
+  fireTornado: {fileID: 6967480449567128045, guid: a148d7a4d07b2034080e6909b0d3dfe0, type: 3}
 --- !u!1 &1944419935 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5030326127720175750, guid: 10ac4c4e7ae8108438593703eef87294, type: 3}
