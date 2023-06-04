@@ -13,12 +13,14 @@ public class PlayerWoong : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Heal healScript;
     private Animator anim;
-
+  
     [SerializeField] private GameObject orb;
     [SerializeField] private Slider hpBar;
     [SerializeField] private Image UI_Parry;
-    [SerializeField] private Image UI_Buff_atk;
-    
+
+    [SerializeField] private Image UI_Orb;
+
+
     [SerializeField] float playerSpeed = 5;
     int playerLayer, passableGroundLayer;
     //유저 컨트롤 제어용 
@@ -111,6 +113,8 @@ public class PlayerWoong : MonoBehaviour
 
         playerState = "Idle";
         UI_Parry.fillAmount = 0f;
+        if(UI_Orb!=null) { UI_Orb.fillAmount = 0f; }
+       
         jumpCount = 0;
         maxJumpCount = 2;
         playerAnimNum = 0;
@@ -171,7 +175,7 @@ public class PlayerWoong : MonoBehaviour
         {
             //패링함수
             Parry();
-            Buff_atk();
+            //Buff_atk();
         }
         if (playerState != "Parrying" && playerState != "Attack" && playerState != "Hited" && playerState != "Die")
         {
@@ -234,22 +238,41 @@ public class PlayerWoong : MonoBehaviour
            
         }
     }
+
+
     void orbControl()
     {
         if (orb != null)
         {
-            if (Input.GetKeyDown("c") && canControl && !Orb.isSkillOn)
+            if (Input.GetKeyDown("c") && Input.GetKey(KeyCode.DownArrow) && canControl && !Orb.isSkillOn)
+            {
+
+                GameObject.Find("Stage1Manager").GetComponent<SkillManager>().skillChange();
+            }
+            else if (Input.GetKeyDown("c") && canControl && !Orb.isSkillOn)
             {   //@@@@@@@@@@@@@@@스킬생성@@@@@@@@@@@@@@@@
-                GameObject.Find("Stage1Manager").GetComponent<SkillManager>().RazorBeam();
-                Orb.isSkillOn = true;
-                StartCoroutine(OrbSkillOn());
+              
+                //GameObject.Find("Stage1Manager").GetComponent<SkillManager>().RazorBeam();
+                GameObject.Find("Stage1Manager").GetComponent<SkillManager>().skillIndex();
+                StartCoroutine(UI_OrbCoolDown(5f));
+                //Orb.isSkillOn = true;
+                
             }
         }
     }
-    IEnumerator OrbSkillOn()
+    IEnumerator UI_OrbCoolDown(float cool)
     {
-        yield return new WaitForSeconds(4f);
-        Orb.isSkillOn = false;
+        if (UI_Orb != null)
+        {
+            float startTime = Time.time;
+            while (Time.time < startTime + cool)
+            {
+                float timeLeft = startTime + cool - Time.time;
+                UI_Orb.fillAmount = timeLeft / cool;
+                yield return null;
+            }
+            UI_Orb.fillAmount = 0f;
+        }
     }
     IEnumerator PlayerAttack()
     {
@@ -569,6 +592,7 @@ public class PlayerWoong : MonoBehaviour
         playerState = "Idle";
         PlayerAnim("Idle");
     }
+    /*
     void Buff_atk()
     {
         if (Input.GetKeyDown("v") && !isBuff_atk && canControl )
@@ -578,7 +602,8 @@ public class PlayerWoong : MonoBehaviour
             StartCoroutine(UI_Buff_atkCoolDown(8.0f));      
         }           
     }
- 
+    */
+    /*
     IEnumerator UI_Buff_atkCoolDown(float cool)
     {
         float startTime = Time.time;
@@ -590,7 +615,7 @@ public class PlayerWoong : MonoBehaviour
         }
         UI_Buff_atk.fillAmount = 1f;
     }
-
+   
     IEnumerator Buff_atkCoolDown(float cool)
     {
        
@@ -604,6 +629,7 @@ public class PlayerWoong : MonoBehaviour
         yield return new WaitForSeconds(3f);
         isBuff_atk = false;
     }
+     */
     void Parry()
     {
         if(Input.GetKey("x")&&canParrying && canControl){
@@ -637,7 +663,7 @@ public class PlayerWoong : MonoBehaviour
     {
 
     }
-    
+
     IEnumerator UI_ParryingCoolDown(float cool)
     {
        
