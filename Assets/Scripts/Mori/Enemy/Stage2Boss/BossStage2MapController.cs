@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class BossStage2MapController : MonoBehaviour
 {
+    float playerPosY;
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(doUpDownSwitch());
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        playerPosY = GameObject.Find("Player").transform.position.y;
+
+        if (playerPosY <= 0.54)
+            GameObject.Find("Player").GetComponent<PlayerWoong>().jumpCount = 0;
+
     }
 
-    IEnumerator doUpDownSwitch()
-    {
-        yield return new WaitForSeconds(2f);
-        CameraMoving.mirrorMod = true;
-    }
 }

@@ -310,7 +310,7 @@ public class WitchBossManager : MonoBehaviour
     IEnumerator Idle()
     {
         idleState = true;
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(2.5f);
         idleState = false;
         StartCoroutine(Thinking());
     }

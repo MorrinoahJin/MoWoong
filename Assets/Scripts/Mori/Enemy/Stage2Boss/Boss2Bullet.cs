@@ -12,6 +12,8 @@ public class Boss2Bullet : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        Destroy(gameObject, 5f);
     }
 
     // Update is called once per frame
