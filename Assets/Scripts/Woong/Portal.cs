@@ -39,6 +39,6 @@ public class Portal : MonoBehaviour
         yield return new WaitForSeconds(.15f);
         GameObject.Find("Main Camera").GetComponent<CameraMoving>().StartFadeInOut();
         yield return new WaitForSeconds(1.5f);        
-        SceneManager.LoadScene("Boss Stage 1 test");
+        SceneManager.LoadScene("Boss Stage 1");
     }
 }

@@ -43,13 +43,14 @@ public class Orb : MonoBehaviour
             }
 
             //오브 상하 이동
-            if(transform.position.y - player.position.y > 0.38)
+            if(transform.position.y - player.position.y > 0.5)
             {
                 transform.Translate(new Vector2(0, -1) * Time.deltaTime * speed);
             }
-            else if(transform.position.y - player.position.y < 0.38)
+            else if(transform.position.y - player.position.y < 0.3)
                 transform.Translate(new Vector2(0, 1) * Time.deltaTime * speed);
-           
+            else
+                transform.Translate(new Vector2(0, 0) * Time.deltaTime * speed);
             //오브 텔포
             if (Vector2.Distance(player.position, transform.position) > teldistance)
             {

@@ -46,6 +46,19 @@ public class PauseMenu : MonoBehaviour
             Option.SetActive(true);
         }
     }
+    public void restart1Boss()
+    {
+        SceneManager.LoadScene("Boss stage 1");
+        if (isPause)
+        {
+            isPause = false;
+            //Debug.Log("해제");
+
+            Time.timeScale = 1f;
+            pauseMenu.SetActive(false);
+            Option.SetActive(true);
+        }
+    }
     public void gotoMain()
     {
         SceneManager.LoadScene("StartScene");

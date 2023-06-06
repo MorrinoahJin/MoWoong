@@ -70,7 +70,9 @@
     <Compile Include="Assets\Scripts\Mori\Map\TutorialDialogue.cs" />
     <Compile Include="Assets\Scripts\Mori\Map\Stage1Manager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
+    <Compile Include="Assets\Scripts\Mori\Enemy\Stage2Boss\BlackHole.cs" />
     <Compile Include="Assets\Scripts\Mori\Player\PlayerCopy.cs" />
+    <Compile Include="Assets\Scripts\Mori\Enemy\Stage2Boss\WaterCam.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Scripts\Mori\Player\SkillManager.cs" />
     <Compile Include="Assets\Scripts\Mori\Map\Map.cs" />
@@ -81,17 +83,22 @@
     <Compile Include="Assets\Scripts\Woong\Stage1Dialogue.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Scripts\Woong\PlayerMoving.cs" />
+    <Compile Include="Assets\Scripts\Mori\Enemy\Stage2Boss\Boss2Bullet.cs" />
     <Compile Include="Assets\Scripts\Woong\EnemyWoong.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+    <Compile Include="Assets\Scripts\Mori\Enemy\Stage2Boss\WitchBossManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Scripts\Woong\Orb.cs" />
+    <Compile Include="Assets\Scripts\Mori\Enemy\Stage2Boss\Thunder.cs" />
     <Compile Include="Assets\Scripts\Mori\Map\TelePort.cs" />
     <Compile Include="Assets\Scripts\Mori\Player\Electric_Beam.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
+    <Compile Include="Assets\Scripts\Mori\Enemy\Stage2Boss\BossStage2MapController.cs" />
     <Compile Include="Assets\Scripts\Woong\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Mori\Enemy\TutorialBoss\TutorialBoss.cs" />
     <Compile Include="Assets\Scripts\Woong\Skill_Electic_Beam.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
+    <Compile Include="Assets\Scripts\Mori\Enemy\Stage2Boss\Dmg.cs" />
     <Compile Include="Assets\Scripts\Mori\Enemy\Enemy.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\Scripts\Mori\Enemy\CheckAnimTime.cs" />
@@ -129,13 +136,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Scripts\Woong\Portal.cs" />
     <Compile Include="Assets\Scripts\Mori\Map\DeadZone.cs" />
-    <Compile Include="Assets\Scripts\Mori\Enemy\Stage2Boss\BlackHole.cs" />
-    <Compile Include="Assets\Scripts\Mori\Enemy\Stage2Boss\Thunder.cs" />
-    <Compile Include="Assets\Scripts\Mori\Enemy\Stage2Boss\WitchBossManager.cs" />
-    <Compile Include="Assets\Scripts\Mori\Enemy\Stage2Boss\WaterCam.cs" />
-    <Compile Include="Assets\Scripts\Mori\Enemy\Stage2Boss\Boss2Bullet.cs" />
-    <Compile Include="Assets\Scripts\Mori\Enemy\Stage2Boss\Dmg.cs" />
-    <Compile Include="Assets\Scripts\Mori\Enemy\Stage2Boss\BossStage2MapController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
