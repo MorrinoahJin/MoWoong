@@ -33,5 +33,9 @@ public class Electric_Beam_Dmg : MonoBehaviour
         {
             other.GetComponent<TutorialBoss>().GetDamage(damage);
         }
+        if (other.CompareTag("Boss"))
+        {
+            other.GetComponent<WitchBossManager>().GetDamage(damage);
+        }
     }
 }
