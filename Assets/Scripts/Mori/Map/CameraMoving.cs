@@ -12,7 +12,8 @@ public class CameraMoving : MonoBehaviour
     Vector3 playerPos;
     float camPosY;
     //맵오브젝트 좌표를 받아오기 위해 맵 수 만큼 변수 할당
-    public GameObject[] cameraPoint = new GameObject[2];
+    public GameObject mapMiddlePoint;
+    public float mapDistance;
     public bool justFollowPlayer;
 
     //페이드 인아웃
@@ -28,7 +29,7 @@ public class CameraMoving : MonoBehaviour
 
     //카메라 상하좌우 반전
     static public bool mirrorMod;
-    float mirrorSpeed = 0.0125f;
+    float mirrorSpeed = 0.033f;
     float angleY;
 
     // Start is called before the first frame update
@@ -50,10 +51,10 @@ public class CameraMoving : MonoBehaviour
         {
             //거울모드일 때 y축 변경
             if (!mirrorMod)
-                camPosY = playerPos.y + 2;
+                camPosY = playerPos.y + 1.5f;
             else
             {
-                camPosY = (playerPos.y * -1) - 2;
+                camPosY = (playerPos.y * -1) - 1.5f;
             }
 
             //기본 - 플레이어 따라다님
@@ -65,22 +66,22 @@ public class CameraMoving : MonoBehaviour
 
         CamZoomInOut();
 
-        //CamMirror();
+        CamMirror();
     }
 
     void CamPoint()
     {
         //맵 좌표, 플레이어 위치
-        float camX = cameraPoint[Map.mapNum].transform.position.x;
+        float camX = mapMiddlePoint.transform.position.x;
 
         //일정 범위를 넘어가면 카메라가 플레이러를 계속 따라가지 않기 하기 위한 함수
-        if (playerPos.x <= camX - 5)
+        if (playerPos.x <= camX - mapDistance)
         {
-            this.transform.position = new Vector3(camX - 5, camPosY, -10);
+            this.transform.position = new Vector3(camX - mapDistance, camPosY, -10);
         }
-        else if (playerPos.x >= camX + 5)
+        else if (playerPos.x >= camX + mapDistance)
         {
-            this.transform.position = new Vector3(camX + 5, camPosY, -10);
+            this.transform.position = new Vector3(camX + mapDistance, camPosY, -10);
         }
         else
             this.transform.position = new Vector3(playerPos.x, camPosY, -10);

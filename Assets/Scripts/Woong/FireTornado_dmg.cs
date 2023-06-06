@@ -32,5 +32,9 @@ public class FireTornado_dmg : MonoBehaviour
         {
             other.GetComponent<TutorialBoss>().GetDamage(damage);
         }
+        if (other.CompareTag("Boss"))
+        {
+            other.GetComponent<WitchBossManager>().GetDamage(damage);
+        }
     }
 }

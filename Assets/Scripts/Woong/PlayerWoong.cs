@@ -235,7 +235,12 @@ public class PlayerWoong : MonoBehaviour
                 //공격코드
                 collider.GetComponent<TutorialBoss>().GetDamage(playerAtkPower);
             }
-           
+            if (collider.CompareTag("Boss"))
+            {
+                //공격코드
+                collider.GetComponent<WitchBossManager>().GetDamage(playerAtkPower);
+             
+            }
         }
     }
 
@@ -575,7 +580,7 @@ public class PlayerWoong : MonoBehaviour
     //레이를 플레이어 아래로 쏴서 점프를 초기화 해주는 함수
     void CheckGround()
     {
-        if (rigid.velocity.y < 0)
+        if (rigid.velocity.y <= 0)
         {
             //PlayerAnim("JumpMiddle");
             jumpCount = 0;
