@@ -14,7 +14,7 @@ public class WitchBossManager : MonoBehaviour
     public GameObject ThunderSkill, BlackHoleSkill;
 
     [SerializeField]
-    public float hp;
+    static public float hp;
 
     //발사할 탄막 숫자
     int count = 15;
@@ -335,6 +335,7 @@ public class WitchBossManager : MonoBehaviour
         anim.SetTrigger("die");
 
         yield return new WaitForSeconds(3f);
+        
         //Destroy(gameObject);
     }
 

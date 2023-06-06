@@ -27,7 +27,7 @@ public class FireTornado : MonoBehaviour
         if (fireMove)
         {
             //앞으로나아감
-            UnityEngine.Debug.Log("앞으로감");
+            
             this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(100f, 0, 0), Orb.orbDirection*3f * Time.deltaTime);
         }
     }
