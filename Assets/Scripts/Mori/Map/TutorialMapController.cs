@@ -154,7 +154,7 @@ public class TutorialMapController : MonoBehaviour
         option_Button.SetActive(false);
         ui_HP.SetActive(false);
         moveCamPlayerDied = true;
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(5f);
         circle.SetActive(true);
         circleMove1 = true;
         yield return new WaitForSeconds(2.5f);
@@ -163,11 +163,11 @@ public class TutorialMapController : MonoBehaviour
         razorBeam.SetActive(true);
         yield return new WaitForSeconds(.5f);
         circle.SetActive(false);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         circleMove1 = false;
         circleMove2 = false;
         circle.SetActive(true);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
         bossObj.SetActive(false);
         razorBeam.SetActive(false);
         moveCamPlayerDied = false;

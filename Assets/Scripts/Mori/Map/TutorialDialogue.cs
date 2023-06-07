@@ -18,12 +18,12 @@ public class TutorialDialogue : MonoBehaviour
         thirdText.SetActive(false);
         fourText.SetActive(false);
         fiveText.SetActive(false);
-
+        witch.SetActive(false);
     }
     public IEnumerator Dialogue()
     {
         
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0.5f);
         //대사치는 케릭터가 옴
         witch.SetActive(true);
         witchMove = true;
@@ -54,7 +54,7 @@ public class TutorialDialogue : MonoBehaviour
         fourText.SetActive(false);
         //다섯번째 대사와 함께 페이드 아웃
         fiveText.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         fiveText.SetActive(false);
         GameObject.Find("Main Camera").GetComponent<CameraMoving>().StartFadeInOut();
         //다음씬으로 ㄱㄱ

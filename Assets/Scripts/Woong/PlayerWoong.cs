@@ -26,6 +26,8 @@ public class PlayerWoong : MonoBehaviour
     //유저 컨트롤 제어용 
     static public bool canControl;
 
+    //오브
+    static public bool isFire;
   
     Vector2 atkSize;
         
@@ -102,6 +104,7 @@ public class PlayerWoong : MonoBehaviour
     }
     void Start()
     {
+        isFire = false;
         canControl = true;
         // UnityEngine.Debug.Log("Debug message");
         playerLayer = LayerMask.NameToLayer("Player");
@@ -122,7 +125,7 @@ public class PlayerWoong : MonoBehaviour
         playerHp = playerMaxHp;
         hpBar.value = (float)playerHp / (float)playerMaxHp;
         
-        atkSize= new Vector2(2f, 1f);
+        atkSize= new Vector2(1.5f, 1f);
         
         canAtk = true;
 
@@ -142,7 +145,7 @@ public class PlayerWoong : MonoBehaviour
         Vector2 rayPos = new Vector2(this.transform.position.x, this.transform.position.y);
         RaycastHit2D checkGround = Physics2D.Raycast(rayPos, Vector2.down, 0.8f, LayerMask.GetMask("Ground", "PassableGround"));
         //Debug.DrawRay(rayPos, Vector2.down, Color.red, 0.8f);
-        if(playerHp < 0){
+        if(playerHp <= 0){
             die();
         }
         HpBar();
@@ -212,7 +215,7 @@ public class PlayerWoong : MonoBehaviour
      if (isGround == true && (Input.GetKeyDown("z") && playerState != "Attack") && canAtk && canControl)
         {
             StartCoroutine(PlayerAttack());
-            StartCoroutine(CanAtk());
+            
         }                
     }
 
@@ -249,19 +252,15 @@ public class PlayerWoong : MonoBehaviour
     {
         if (orb != null)
         {
-            if (Input.GetKeyDown("c") && Input.GetKey(KeyCode.DownArrow) && canControl && !Orb.isSkillOn)
+            if (Input.GetKeyDown("c") && Input.GetKey(KeyCode.DownArrow) && canControl && !Orb.isSkillOn && isFire)
             {
 
                 GameObject.Find("Stage1Manager").GetComponent<SkillManager>().skillChange();
             }
             else if (Input.GetKeyDown("c") && canControl && !Orb.isSkillOn)
-            {   //@@@@@@@@@@@@@@@스킬생성@@@@@@@@@@@@@@@@
-              
-                //GameObject.Find("Stage1Manager").GetComponent<SkillManager>().RazorBeam();
+            {                           
                 GameObject.Find("Stage1Manager").GetComponent<SkillManager>().skillIndex();
-                StartCoroutine(UI_OrbCoolDown(5f));
-                //Orb.isSkillOn = true;
-                
+                StartCoroutine(UI_OrbCoolDown(5f));         
             }
         }
     }

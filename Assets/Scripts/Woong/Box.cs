@@ -8,6 +8,7 @@ public class Box : MonoBehaviour
     Animator anim;
     bool open;
     bool isPlayerEnter;
+    public GameObject Element_Fire;
     // Start is called before the first frame update
     void Awake()
     {
@@ -29,8 +30,14 @@ public class Box : MonoBehaviour
             Debug.Log("상자열림");
             open = true;
             anim.SetTrigger("Box_Open");
+            StartCoroutine(createItem());
         }
         
+    }
+    IEnumerator createItem()
+    {
+        yield return new WaitForSeconds(1f);
+        Instantiate(Element_Fire, this.transform.position, Quaternion.identity);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

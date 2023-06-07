@@ -11,7 +11,7 @@ public class Orb : MonoBehaviour
     Rigidbody2D rigid;
     public float distance;
     public float speed;
-    public float jumpForce;
+    //public float jumpForce;
     public float teldistance;    
     public LayerMask groundLayer;
     //static public bool orbControl;
