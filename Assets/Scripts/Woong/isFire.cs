@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class isFire : MonoBehaviour
 {
+    
     Transform player;
     float speed=2;
     // Start is called before the first frame update
     void Start()
     {
+       
         player = GameObject.Find("Player").transform;
     }
     private void OnEnable()
@@ -37,6 +39,7 @@ public class isFire : MonoBehaviour
        if (collision.tag == "Player")
         {
             PlayerWoong.isFire = true;
+        
             Destroy(gameObject,.5f);
         }
     }

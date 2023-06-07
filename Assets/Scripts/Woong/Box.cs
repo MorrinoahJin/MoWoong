@@ -9,11 +9,14 @@ public class Box : MonoBehaviour
     bool open;
     bool isPlayerEnter;
     public GameObject Element_Fire;
+    public GameObject Text;
     // Start is called before the first frame update
-    void Awake()
+  
+    private void Start()
     {
         isPlayerEnter = false;
         open = false;
+        Text.SetActive(false);
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
     }
@@ -36,8 +39,10 @@ public class Box : MonoBehaviour
     }
     IEnumerator createItem()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
         Instantiate(Element_Fire, this.transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(.5f);
+        Text.SetActive (true);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
