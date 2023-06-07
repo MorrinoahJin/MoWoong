@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TutorialMapController : MonoBehaviour
 {
+    GameObject bgmChange;
     public GameObject bossObj;
     Vector3[] camPos = new Vector3[2];
     Vector3 playerPos;
@@ -13,7 +14,7 @@ public class TutorialMapController : MonoBehaviour
     public float camSpeed, timeSpeed;
     Camera cam;
     int playerInBossStageCount, playerHpZeroCount;
-
+    AudioClip audio;
     //게임연출에 쓰일 구체와 레이저빔
     public GameObject circle, razorBeam;
     //구체 첫번째 움직임, 두번째 움직임
@@ -31,6 +32,7 @@ public class TutorialMapController : MonoBehaviour
         CameraMoving.camZoomIn = false;
         cam = Camera.main;
         playerInBossStageCount = 0;
+        bgmChange = GameObject.Find("TutorialBGM");
     }
 
     // Update is called once per frame
@@ -89,6 +91,7 @@ public class TutorialMapController : MonoBehaviour
         {
             playerInBossStageCount += 1;
             bossObj.SetActive(true);
+
             StartCoroutine(CameraControllAndZoom());
         }
     }
@@ -96,6 +99,8 @@ public class TutorialMapController : MonoBehaviour
     IEnumerator CameraControllAndZoom()
     {
         yield return new WaitForSeconds(.33f);
+        bgmChange.GetComponent<BGM>().PlayBGM("boss");
+        bgmChange.GetComponent<BGM>().SetVolume(0.2f);
         PlayerWoong.canControl = false;
         //플레이어 이동 불가
         CameraMoving.cameraMovingStop = true;
@@ -150,11 +155,15 @@ public class TutorialMapController : MonoBehaviour
 
     IEnumerator circleMoving()
     {
+
         //모든 UI삭제
         option_Button.SetActive(false);
         ui_HP.SetActive(false);
+     
         moveCamPlayerDied = true;
         yield return new WaitForSeconds(5f);
+        bgmChange.GetComponent<BGM>().PlayBGM("basic");
+        bgmChange.GetComponent<BGM>().SetVolume(0.3f);
         circle.SetActive(true);
         circleMove1 = true;
         yield return new WaitForSeconds(2.5f);

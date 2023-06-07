@@ -41,7 +41,7 @@ public class FireTornado : MonoBehaviour
         step1.SetActive(false);
         step2.SetActive(true);
         fireMove = true;
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(3.0f);
         fireMove = false;
         step2.SetActive(false);
         step3.SetActive(true);

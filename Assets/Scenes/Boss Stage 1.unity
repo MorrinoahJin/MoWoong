@@ -4432,6 +4432,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6002442825654371723, guid: aeb05c4aa569ecd45adf23ace6d542b9, type: 3}
+      propertyPath: m_Volume
+      value: 0.289
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeb05c4aa569ecd45adf23ace6d542b9, type: 3}
 --- !u!114 &793436923 stripped
@@ -8270,7 +8274,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -10016,7 +10020,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance: 1
   speed: 5
-  jumpForce: 5
   teldistance: 3.5
   groundLayer:
     serializedVersion: 2
@@ -11151,6 +11154,10 @@ PrefabInstance:
       propertyPath: center
       value: 
       objectReference: {fileID: 1518424487}
+    - target: {fileID: 8938289169231529765, guid: be34962a90fd51042aea4f5d629daaa8, type: 3}
+      propertyPath: hitSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: bc9966de13fc51f47b6e838dcee25dcc, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be34962a90fd51042aea4f5d629daaa8, type: 3}
 --- !u!1 &1972162749
@@ -12729,13 +12736,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 793436923}
     - target: {fileID: 7420815754456177101, guid: 10ac4c4e7ae8108438593703eef87294, type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9b7bee0c70176584bbc7cb95203bdbb1, type: 3}
+    - target: {fileID: 7420815754456177101, guid: 10ac4c4e7ae8108438593703eef87294, type: 3}
       propertyPath: UI_Parry
       value: 
       objectReference: {fileID: 405663487}
     - target: {fileID: 7420815754456177101, guid: 10ac4c4e7ae8108438593703eef87294, type: 3}
       propertyPath: audioSource
       value: 
-      objectReference: {fileID: 6002442825654371723, guid: aeb05c4aa569ecd45adf23ace6d542b9, type: 3}
+      objectReference: {fileID: 41701156}
+    - target: {fileID: 7420815754456177101, guid: 10ac4c4e7ae8108438593703eef87294, type: 3}
+      propertyPath: parryingClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6f8ee5f759df4f040ac6bc47023fa9ee, type: 3}
     - target: {fileID: 7420815754456177101, guid: 10ac4c4e7ae8108438593703eef87294, type: 3}
       propertyPath: playerAtkPower
       value: 15

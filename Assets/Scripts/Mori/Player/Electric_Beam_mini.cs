@@ -7,11 +7,18 @@ public class Electric_Beam_mini : MonoBehaviour
     public GameObject step3, step4;
 
     // Start is called before the first frame update
+ 
+    private void Start()
+    {
+        //sfx = gameObject.AddComponent<AudioSource>();
+     
+    }
     void OnEnable()
     {
         step3.SetActive(false);
         step4.SetActive(false);
         StartCoroutine(StartBeam());
+      
     }
 
     void Update()
@@ -20,6 +27,7 @@ public class Electric_Beam_mini : MonoBehaviour
     }
     IEnumerator StartBeam()
     {
+       
         Orb.isSkillOn = true;
         //플레이어 무적 코드 넣기
         yield return new WaitForSeconds(.5f);

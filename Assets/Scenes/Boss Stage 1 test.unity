@@ -4635,9 +4635,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d659e15fe8186ce4ba9d899d3a050fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPoint:
-  - {fileID: 0}
-  - {fileID: 0}
+  mapMiddlePoint: {fileID: 0}
+  mapDistance: 0
   justFollowPlayer: 1
   blackImage: {fileID: 1368735589}
   cam: {fileID: 826996942}
@@ -9703,7 +9702,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance: 1
   speed: 5
-  jumpForce: 5
   teldistance: 3.5
   groundLayer:
     serializedVersion: 2
@@ -12083,7 +12081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2698113629369663342, guid: dc3ff66266e7bda46978cae23283fb64, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -18.869995
+      value: -18.869987
       objectReference: {fileID: 0}
     - target: {fileID: 2698113629463383654, guid: dc3ff66266e7bda46978cae23283fb64, type: 3}
       propertyPath: m_Name
@@ -12172,6 +12170,10 @@ PrefabInstance:
     - target: {fileID: 2698113629463383655, guid: dc3ff66266e7bda46978cae23283fb64, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6156244782486186768, guid: dc3ff66266e7bda46978cae23283fb64, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc3ff66266e7bda46978cae23283fb64, type: 3}

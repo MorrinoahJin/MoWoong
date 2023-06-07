@@ -6,7 +6,8 @@ public class WitchBossManager : MonoBehaviour
 {
     //탄막스킬 사용시 중앙으로 가기 위해 맵의 위치를 받아오기 위한 오브젝트
     public GameObject center;
-
+    AudioSource SFX;
+    public AudioClip hitSfx;
     //탄환
     public GameObject Bullet;
 
@@ -40,6 +41,8 @@ public class WitchBossManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SFX = gameObject.AddComponent<AudioSource>();
+        SFX.volume = 0.1f;
         hp = 450;
 
         sprite = GetComponent<SpriteRenderer>();
@@ -344,6 +347,7 @@ public class WitchBossManager : MonoBehaviour
         if (hp >= 0) {
             StartCoroutine(ChangeEnemyColor());
             hp -= damage;
+            SFX.PlayOneShot(hitSfx);
         }
         
     }

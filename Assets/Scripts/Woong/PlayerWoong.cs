@@ -57,7 +57,7 @@ public class PlayerWoong : MonoBehaviour
     //소리설정
     public AudioSource audioSource;
     public AudioClip atkClip;
-    public AudioClip jumpClip;
+    public AudioClip jumpClip,hitClip,parryingClip;
    
     //기본공격 범위 설정
     public GameObject attBoxObj;
@@ -365,7 +365,7 @@ public class PlayerWoong : MonoBehaviour
                 playerState = "GoLeft";
             }
 
-            if (Input.GetKeyDown("left shift") && !playerShiftOn && canControl)
+            if (Input.GetKeyDown("left ctrl") && !playerShiftOn && canControl)
             {
                 StartCoroutine(ShiftGO());
 
@@ -378,7 +378,7 @@ public class PlayerWoong : MonoBehaviour
                 PlayerAnim("MoveRight");
                 playerState = "GoRight";
             }
-            if (Input.GetKeyDown("left shift") && !playerShiftOn && canControl)
+            if (Input.GetKeyDown("left ctrl") && !playerShiftOn && canControl)
             {
                 StartCoroutine(ShiftGO());
             }
@@ -453,7 +453,7 @@ public class PlayerWoong : MonoBehaviour
     {
         if (isFireEnter && Input.GetKeyDown("e"))
         {
-          
+          /*
             if(isRest)
             {
                 isRest = false;
@@ -465,16 +465,16 @@ public class PlayerWoong : MonoBehaviour
                 healScript.falseHealFX();
             }
             else if (!isRest)
-            {
+            {*/
                 isRest = true;
-                canControl = false;
+                //canControl = false;
                 //StartCoroutine(RestCool());
                 playerState = "Rest";
                 PlayerAnim("Sit");
                 if (playerState == "Rest")
                 {
                     healScript.HealFX();
-                }
+               
             }
         }     
     }
@@ -820,6 +820,7 @@ public class PlayerWoong : MonoBehaviour
        
         if (playerState != "Parrying"&&!isDieAnim)
         {
+            audioSource.PlayOneShot(hitClip);
             checkAttack = false;
             doNextAttack = false;
             //attackComboCount = 0;
@@ -843,6 +844,7 @@ public class PlayerWoong : MonoBehaviour
             canParrying = false;
             //UnityEngine.Debug.Log("패링");
             PlayerAnim("ParryingSuccess");
+            audioSource.PlayOneShot(parryingClip);
             //ConvertIdleAnim();
             StartCoroutine(ParryingCoolDown(3.0f));
             StartCoroutine(UI_ParryingCoolDown(3.0f));
