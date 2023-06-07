@@ -44,6 +44,7 @@ public class PlayerWoong : MonoBehaviour
     bool canAtk;
     public float playerAtkPower = 10;
     int attackComboCount = 0;
+    [SerializeField]
     bool doNextAttack, checkAttack;
 
     //점프
@@ -71,12 +72,12 @@ public class PlayerWoong : MonoBehaviour
     //static public float playerHp;
     [SerializeField]
     static public float playerHp;
-    [SerializeField]
+
     static public float playerMaxHp=100;
 
     //플레이어 패링
   
-    [SerializeField] bool canParrying = true; //패링 시작이 가능한 상태인지 체크(쿨타임 관련)
+    bool canParrying = true; //패링 시작이 가능한 상태인지 체크(쿨타임 관련)
     [SerializeField] bool checkHited = false; //적에게 맞았는지 체크
     bool ParryingOn = false;  //패링 중인지 체크
 
@@ -87,8 +88,9 @@ public class PlayerWoong : MonoBehaviour
 
     //플레이어 죽음/피격관련
     bool isKnockBack = false;
-    bool isDead = false;
+
     bool isDieAnim = false;
+    //죽어서 맞을수 있는지 없는지 체크
     bool ishited = false;
 
     //플레이어 공 버프
@@ -153,6 +155,10 @@ public class PlayerWoong : MonoBehaviour
         {
 
             ishited = true;
+            if (checkGround.collider != null && jumpCount != 0)
+            {
+                CheckGround();
+            }
 
         }
         if (playerState != "Hited" && playerState != "Die")
@@ -162,15 +168,13 @@ public class PlayerWoong : MonoBehaviour
                 Sit();
                 Interation();
                 orbControl();
-                if (canAtk==true) Attack();
+                Attack();
                 
-            }
-
-            ishited = true;
+            }      
             //콤보 공격 체크
             if (checkAttack)
             {
-                if ((Input.GetKeyDown("z") &&canControl))
+                if (Input.GetKeyDown("z") )
                     doNextAttack = true;
             }
         }
@@ -184,10 +188,7 @@ public class PlayerWoong : MonoBehaviour
         {
             Jump();
             Move();
-            if (checkGround.collider != null && jumpCount != 0)
-            {
-                CheckGround();
-            }
+           
 
 
             //플레이어 이동키 값을 받음
@@ -224,7 +225,7 @@ public class PlayerWoong : MonoBehaviour
     {
         UnityEngine.Debug.Log("이벤트 공격 호출");
         Collider2D[] EnemyCollider = Physics2D.OverlapBoxAll(attBoxObj.transform.position, atkSize, 0f);
-        
+        audioSource.PlayOneShot(atkClip);
         foreach (Collider2D collider in EnemyCollider)
         {
             if (collider.CompareTag("Enemy"))
@@ -232,17 +233,21 @@ public class PlayerWoong : MonoBehaviour
                 //공격코드
                 Enemy enemy = collider.GetComponent<Enemy>();
                 enemy.GetDamage(playerAtkPower);
+              
+
             }
             if (collider.CompareTag("TutorialBoss"))
             {
                 //공격코드
                 collider.GetComponent<TutorialBoss>().GetDamage(playerAtkPower);
+                
             }
             if (collider.CompareTag("Boss"))
             {
                 //공격코드
                 collider.GetComponent<WitchBossManager>().GetDamage(playerAtkPower);
-             
+                
+
             }
         }
     }
@@ -292,17 +297,17 @@ public class PlayerWoong : MonoBehaviour
         if (attackComboCount == 1)
         {
             PlayerAnim("Attack1");
-            audioSource.PlayOneShot(atkClip);
+            
         }
         else if (attackComboCount == 2)
         {
             PlayerAnim("Attack2");
-            audioSource.PlayOneShot(atkClip);
+          
         }
         else
         {
             PlayerAnim("Attack3");
-            audioSource.PlayOneShot(atkClip);
+            
         }
            
 
@@ -310,12 +315,12 @@ public class PlayerWoong : MonoBehaviour
 
         //공격애니메이션 끝나는 시간, 마지막 콤보 이후 콤보카운트 초기화
         if (attackComboCount == 1)
-            yield return new WaitForSeconds(.4f);
+            yield return new WaitForSeconds(.15f);
         else if (attackComboCount == 2)
-            yield return new WaitForSeconds(.05f);
+            yield return new WaitForSeconds(.1f);
         else
         {
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.2f);
             attackComboCount = 0;
         }
 
@@ -815,7 +820,9 @@ public class PlayerWoong : MonoBehaviour
        
         if (playerState != "Parrying"&&!isDieAnim)
         {
-            attackComboCount = 0;
+            checkAttack = false;
+            doNextAttack = false;
+            //attackComboCount = 0;
             //UnityEngine.Debug.Log(playerHp);
             //공격 제한
             StartCoroutine(CanAtk());
@@ -832,7 +839,7 @@ public class PlayerWoong : MonoBehaviour
         }
         else if (playerState == "Parrying")
         {
-            attackComboCount = 0;
+           // attackComboCount = 0;
             canParrying = false;
             //UnityEngine.Debug.Log("패링");
             PlayerAnim("ParryingSuccess");
