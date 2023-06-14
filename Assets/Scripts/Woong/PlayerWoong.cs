@@ -53,7 +53,7 @@ public class PlayerWoong : MonoBehaviour
     public int jumpCount;
     public int maxJumpCount;
     bool chakJi;
-    [SerializeField] bool isGround = true;
+    [SerializeField] public bool isGround = true;
     //소리설정
     public AudioSource audioSource;
     public AudioClip atkClip;
@@ -111,13 +111,13 @@ public class PlayerWoong : MonoBehaviour
         // UnityEngine.Debug.Log("Debug message");
         playerLayer = LayerMask.NameToLayer("Player");
         passableGroundLayer = LayerMask.NameToLayer("PassableGround");
-        
+
         bonFire = GameObject.FindGameObjectWithTag("BonFire");
         isFireEnter = false;
         isRest = false;
 
         playerState = "Idle";
-        UI_Parry.fillAmount = 0f;
+        if (UI_Parry != null) UI_Parry.fillAmount = 0f; 
         if(UI_Orb!=null) { UI_Orb.fillAmount = 0f; }
        
         jumpCount = 0;
@@ -257,7 +257,7 @@ public class PlayerWoong : MonoBehaviour
     {
         if (orb != null)
         {
-            if (Input.GetKeyDown("c") && Input.GetKey(KeyCode.DownArrow) && canControl && !Orb.isSkillOn && isFire)
+            if (Input.GetKeyDown("c") && Input.GetKey(KeyCode.DownArrow) && canControl && !Orb.isSkillOn )
             {
 
                 GameObject.Find("Stage1Manager").GetComponent<SkillManager>().skillChange();
@@ -582,7 +582,7 @@ public class PlayerWoong : MonoBehaviour
 
 
     //레이를 플레이어 아래로 쏴서 점프를 초기화 해주는 함수
-    void CheckGround()
+    public void CheckGround()
     {
         if (rigid.velocity.y <= 0)
         {

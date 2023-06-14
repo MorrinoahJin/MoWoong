@@ -38,12 +38,14 @@ public class CameraMoving : MonoBehaviour
         cam = Camera.main;
         StartCoroutine(StageStart());
         cameraMovingStop = false;
+        mirrorMod = false;
+        transform.localEulerAngles = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerPos = GameObject.FindWithTag("Player").transform.position;
+        playerPos = GameObject.Find("Player").transform.position;
 
         defaultCamPos = new Vector3(playerPos.x, camPosY, -10);
 

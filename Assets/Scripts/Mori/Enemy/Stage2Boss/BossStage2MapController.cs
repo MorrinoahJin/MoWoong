@@ -12,7 +12,9 @@ public class BossStage2MapController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         GameEnd.SetActive(false);
+        PlayerWoong.isFire=true;
     }
 
     // Update is called once per frame
@@ -21,7 +23,7 @@ public class BossStage2MapController : MonoBehaviour
         playerPosY = GameObject.Find("Player").transform.position.y;
 
         if (playerPosY <= 0.65)
-            GameObject.Find("Player").GetComponent<PlayerWoong>().jumpCount = 0;
+            GameObject.Find("Player").GetComponent<PlayerWoong>().isGround=true;
         if (PlayerWoong.playerHp <= 0)
         {
             SceneManager.LoadScene("Boss Stage 1");
